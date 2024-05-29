@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "473373018108",
+    "project_id": "nusantara-news-app",
+    "storage_bucket": "nusantara-news-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:473373018108:android:a7b92a1e2253b63da29479",
+        "android_client_info": {
+          "package_name": "com.example.nusantara_news_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXDA8gy7PlaPAB8LZ2veOoR1i2IKUNj9Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
