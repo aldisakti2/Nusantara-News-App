@@ -94,11 +94,20 @@ class HomePage extends StatelessWidget {
                   SizedBox(
                     height: 22.78,
                   ),
-                  Text('Info Layanan',
-                      style: kHeading6.copyWith(
-                        color: kPeacoat,
-                        fontWeight: FontWeight.w600,
-                      )),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Info Layanan',
+                          style: kHeading6.copyWith(
+                            fontSize: 17,
+                            fontWeight: FontWeight.bold,
+                            color: kPeacoat,
+                          )),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
                 ],
               ),
             ),
