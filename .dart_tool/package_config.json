@@ -434,7 +434,11 @@
       "languageVersion": "3.3"
     }
   ],
+<<<<<<< HEAD
   "generated": "2024-05-31T12:35:44.283990Z",
+=======
+  "generated": "2024-05-31T07:04:54.764860Z",
+>>>>>>> parent of f0a076d (Update HomePage)
   "generator": "pub",
   "generatorVersion": "3.3.3"
 }
