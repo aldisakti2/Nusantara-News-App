@@ -18,3 +18,4 @@ const Color kTreeGreen = Color(0xFF6ED097);
 const Color kOrange = Color(0xFFF65725);
 const Color kPeacoat = Color(0xFF363853);
 const Color kVeryLightGray = Color(0xFFCBCBCB);
+const Color kDarkBlue = Color(0xFF155A96);
