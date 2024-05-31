@@ -6,10 +6,10 @@ import '../styles/text_style.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
+  static const nameRoute = '/';
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: SingleChildScrollView(
       child: Container(
         color: kBgColor,
         child: Stack(
@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Selamat datang di',
+                            'Nusantara News',
                             style: kBody1.copyWith(
                               color: kMatterhornBlack,
                             ),
@@ -38,7 +38,7 @@ class HomePage extends StatelessWidget {
                             height: 7,
                           ),
                           Text(
-                            'Nusantara News ',
+                            'Aldi Khan Sakti A. ',
                             style: kHeading6.copyWith(
                               color: kBlack,
                             ),
@@ -77,8 +77,23 @@ class HomePage extends StatelessWidget {
                           'assets/icons/optimization.png'),
                     ],
                   ),
+/*
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 319),
+                    constraints: BoxConstraints.expand(height: 56),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(18),
+                      ),
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/search-rectangle.png'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    
+                  ),*/
                   SizedBox(
-                    height: 24,
+                    height: 22.78,
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,253 +109,90 @@ class HomePage extends StatelessWidget {
                   SizedBox(
                     height: 12,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      _infoLayanan(
-                          'assets/images/kabupaten.png', 'Kabupaten', () {}),
-                      SizedBox(width: 11.09),
-                      _infoLayanan(
-                          'assets/images/kecamatan.png', 'Kecamatan', () {}),
-                      SizedBox(width: 11.09),
-                      _infoLayanan(
-                          'assets/images/kelurahan.png', 'Kelurahan', () {}),
-                      SizedBox(width: 11.09),
-                      _infoLayanan(
-                          'assets/images/berita.png', 'Berita Terkini', () {})
-                    ],
-                  ),
-                  SizedBox(
-                    height: 24,
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Berita Terbaru',
-                          style: kHeading6.copyWith(
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                            color: kPeacoat,
-                          )),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  SizedBox(
-                    height: 150,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
+                ],
+              ),
+            ),
+            /*Container(
+                margin: EdgeInsets.only(top: 85),
+                child: DraggableScrollableSheet(
+                    builder: (context, scrollController) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: kWhite,
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(40),
+                      ),
+                    ),
+                    padding: const EdgeInsets.only(
+                      left: 30,
+                      right: 30,
+                      top: 21,
+                    ),
+                    child: Stack(
                       children: [
-                        Card(
-                          child: Container(
-                            width: 290,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16.0),
-                              color: Colors.blue,
-                            ),
-                            child: Row(
-                              children: [
-                                Container(
-                                  width: 72,
-                                  height: 99,
-                                  margin: EdgeInsets.fromLTRB(14, 10, 14, 10),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(16.0),
-                                    color: Colors.blue[300],
+                        Container(
+                          margin: EdgeInsets.only(top: 14 + 4),
+                          child: SingleChildScrollView(
+                              controller: scrollController,
+                              child: Column(
+                                children: [
+                                  Center(
+                                    child: Text(
+                                      'Transaction History',
+                                      style: kHeading6.copyWith(
+                                        color: kPeacoat,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
                                   ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        '20',
-                                        style: kHeading5.copyWith(
-                                            color: kWhite,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        'april',
-                                        style: kHeading5.copyWith(
-                                          color: kWhite,
-                                        ),
-                                      ),
-                                    ],
+                                  SizedBox(
+                                    height: 31,
                                   ),
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Proses pembagian bansos',
-                                        style: kSubtitlemid2.copyWith(
-                                            color: kWhite,
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.normal),
-                                      ),
-                                      SizedBox(height: 2.0),
-                                      Text(
-                                        'Bansos Happy',
-                                        style:
-                                            kHeading6.copyWith(color: kWhite),
-                                      ),
-                                      SizedBox(height: 3.0),
-                                      Text(
-                                        'untuk 700 kepala keluarga',
-                                        style: kCaption.copyWith(
-                                            color: kWhite.withOpacity(0.65)),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
+                                  _transactionList(
+                                      kTreeGreen.withOpacity(0.2),
+                                      'assets/icons/triangle-up.png',
+                                      'Success',
+                                      'February 19, 03:25 PM',
+                                      '+ 100.000'),
+                                  _transactionList(
+                                      kTreeGreen.withOpacity(0.2),
+                                      'assets/icons/triangle-up.png',
+                                      'Success',
+                                      'February 16, 01:25 PM',
+                                      '+ 150.000'),
+                                  _transactionList(
+                                      kOrange.withOpacity(0.2),
+                                      'assets/icons/triangle-down.png',
+                                      'Starbucks Drinks',
+                                      'February 10, 12:25 PM',
+                                      '- 110.000'),
+                                  _transactionList(
+                                      kOrange.withOpacity(0.2),
+                                      'assets/icons/triangle-down.png',
+                                      'Payment #Invest',
+                                      'February 5, 11:05 PM',
+                                      '- 130.000'),
+                                ],
+                              )),
                         ),
-                        Card(
+                        Align(
+                          alignment: Alignment.topCenter,
                           child: Container(
-                            width: 290,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16.0),
-                              color: Colors.yellow[100],
-                            ),
-                            child: Row(
-                              children: [
-                                Container(
-                                  width: 72,
-                                  height: 99,
-                                  margin: EdgeInsets.fromLTRB(14, 10, 14, 10),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(16.0),
-                                    color: Colors.yellow[700],
-                                  ),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        '20',
-                                        style: kHeading5.copyWith(
-                                            color: kWhite,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        'april',
-                                        style: kHeading5.copyWith(
-                                          color: kWhite,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Proses pembagian bansos',
-                                        style: kSubtitlemid2.copyWith(
-                                            color: Colors.yellow[700],
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.normal),
-                                      ),
-                                      SizedBox(height: 2.0),
-                                      Text(
-                                        'Bansos Happy',
-                                        style: kHeading6.copyWith(
-                                            color: Colors.yellow[700]),
-                                      ),
-                                      SizedBox(height: 3.0),
-                                      Text(
-                                        'untuk 700 kepala keluarga',
-                                        style: kCaption.copyWith(
-                                            color: Color.fromARGB(
-                                                    255, 255, 175, 71)
-                                                .withOpacity(0.7)),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
+                            height: 4,
+                            width: 49,
+                            color: kEgyptianBlue.withOpacity(0.1),
                           ),
                         ),
                       ],
                     ),
-                  ),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Update Info Pemerintah',
-                          style: kHeading6.copyWith(
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold,
-                            color: kPeacoat,
-                          )),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  SizedBox(
-                    height: 108,
-                    width: 320,
-                    child: Container(
-                      padding: EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: kWhite,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(16),
-                        ),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Bansos yang didistribusikan hari ini, 25 April 2020",
-                            style: kSubtitlemid3,
-                          ),
-                          SizedBox(
-                            height: 7,
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Image.asset(
-                                "assets/icons/eye.png",
-                                height: 16,
-                                fit: BoxFit.cover,
-                                color: Color(0xFF98A0A2),
-                              ),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Text(
-                                '400',
-                                style:
-                                    kNumber.copyWith(color: Color(0xFF98A0A2)),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+                  );
+                }
+              )
+            ),*/
           ],
         ),
       ),
-    ));
+    );
   }
 
   Widget _transactionList(
@@ -453,114 +305,36 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-        ]),
+        ]
+            /*
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                width: 2,
+              ),
+              Image.asset(
+                icon1,
+                height: 20,
+                width: 20,
+              ),
+              Text(
+                text,
+                style: kSubtitlemid2.copyWith(color: kLightGray),
+              ),
+              SizedBox(
+                width: 128,
+              ),
+              Image.asset(
+                icon2,
+                height: 20,
+                width: 20,
+              ),
+              SizedBox(
+                width: 5,
+              ),
+            ],*/
+            ),
       ),
     );
   }
-}
-
-Widget _infoLayanan(String img, String text, VoidCallback tap) {
-  return GestureDetector(
-    onTap: tap,
-    child: Column(
-      children: [
-        Container(
-          constraints: BoxConstraints.expand(
-            height: 71.41,
-            width: 71.41,
-          ),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(
-              Radius.circular(18),
-            ),
-            image: DecorationImage(
-              image: AssetImage(img),
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 4.5,
-        ),
-        Center(
-          child: Text(
-            text,
-            style: kCaption.copyWith(
-              color: kBlack,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ),
-      ],
-    ),
-  );
-}
-
-Widget _beritaCardList(
-    String date, String category, String title, String subtitle) {
-  return Container(
-    margin: EdgeInsets.only(
-      left: 30,
-      right: 30,
-      top: 20,
-    ),
-    padding: EdgeInsets.fromLTRB(15, 19, 15, 14),
-    constraints: BoxConstraints.expand(height: 150, width: 282),
-    decoration: BoxDecoration(
-      color: kDarkBlue,
-      borderRadius: BorderRadius.all(
-        Radius.circular(15),
-      ),
-      boxShadow: [
-        BoxShadow(
-          color: kGrey,
-          blurRadius: 1,
-          offset: Offset.fromDirection(1, 2),
-        )
-      ],
-    ),
-    child: Row(
-      children: [
-        SizedBox(
-          height: 55,
-          width: 55,
-          child: Container(
-            height: 50,
-          ),
-        ),
-        SizedBox(
-          width: 15,
-        ),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: kSubtitle1,
-              ),
-              SizedBox(
-                height: 12,
-              ),
-              SizedBox(
-                height: 12,
-              ),
-              Text(
-                title,
-                style: kBody2.copyWith(color: kGrey),
-              ),
-              Spacer(),
-              Align(
-                alignment: Alignment.bottomRight,
-                child: Text(
-                  subtitle,
-                  style: kCaption.copyWith(color: kVeryLightGray),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    ),
-  );
 }

@@ -1,9 +1,14 @@
 import 'package:bloc/bloc.dart';
+
 import 'package:meta/meta.dart';
+
 import '../../repositories/aut_repo.dart';
+
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
+  static var nameRoute;
+
   LoginCubit() : super(LoginInitial());
   final _repo = AuthRepo();
 
