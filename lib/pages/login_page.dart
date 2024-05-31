@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nusantara_news_app/bloc/login/login_cubit.dart';
 import 'package:nusantara_news_app/pages/main_page.dart';
 import 'package:nusantara_news_app/styles/colors.dart';
+import 'package:nusantara_news_app/utils/routes.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -67,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 content: Text(state.msg),
                 backgroundColor: Colors.green,
               ));
-            Navigator.pushNamedAndRemoveUntil(context, rHome, (route) => false);
+            Navigator.pushNamedAndRemoveUntil(context, rMain, (route) => false);
           }
         },
         child: Container(
@@ -85,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 15,
               ),
               const Text(
-                "Silahkan masukan e-mail dan password anda",
+                "Silahkan masukan email dan password anda",
                 style: TextStyle(
                   fontSize: 16,
                 ),
@@ -94,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 25,
               ),
               const Text(
-                "e-mail",
+                "Email",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               TextFormField(
@@ -104,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 10,
               ),
               const Text(
-                "password",
+                "Password",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               TextFormField(

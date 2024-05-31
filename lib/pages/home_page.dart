@@ -55,7 +55,7 @@ class HomePage extends StatelessWidget {
                               Radius.circular(10),
                             ),
                             image: DecorationImage(
-                              image: AssetImage('assets/images/user-aldi.png'),
+                              image: AssetImage('assets/icons/profile.png'),
                               fit: BoxFit.cover,
                             ),
                             boxShadow: [

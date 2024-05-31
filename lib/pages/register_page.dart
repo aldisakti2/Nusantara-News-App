@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nusantara_news_app/bloc/register/register_cubit.dart';
 import 'package:nusantara_news_app/pages/main_page.dart';
+import 'package:nusantara_news_app/utils/routes.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -68,7 +69,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 height: 25,
               ),
               Text(
-                "e-mail",
+                "Email",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               TextFormField(
@@ -78,7 +79,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 height: 10,
               ),
               Text(
-                "password",
+                "Password",
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               TextFormField(
