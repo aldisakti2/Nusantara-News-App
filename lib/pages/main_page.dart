@@ -1,13 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:nusantara_news_app/pages/login_page.dart';
 import 'package:nusantara_news_app/styles/colors.dart';
 import 'package:nusantara_news_app/styles/text_style.dart';
 import 'home_page.dart';
 import 'portofolio_page.dart';
 import 'support_page.dart';
 import 'profile_page.dart';
+import 'register_page.dart';
 //import 'other_home_page.dart';
 
+MaterialPageRoute _pageRoute(
+        {required Widget body, required RouteSettings settings}) =>
+    MaterialPageRoute(builder: (_) => body, settings: settings);
+
+Route? generateRoute(RouteSettings settings) {
+  Route? _route;
+  final _args = settings.arguments;
+
+  switch (settings.name) {
+    case rLogin:
+      _route = _pageRoute(body: LoginPage(), settings: settings);
+      break;
+    case rRegister:
+      _route = _pageRoute(body: RegisterScreen(), settings: settings);
+      break;
+    case rHome:
+      _route = _pageRoute(body: HomePage(), settings: settings);
+      break;
+  }
+  return _route;
+}
+
+final NAV_KEY = GlobalKey<NavigatorState>();
+const String rLogin = '/login';
+const String rRegister = '/register';
+const String rHome = '/home';
+
 class MainPage extends StatefulWidget {
+  static var routeName;
+
   const MainPage({Key? key}) : super(key: key);
   static const nameRoute = '/main';
 
@@ -23,6 +54,7 @@ class _MainPageState extends State<MainPage> {
     PortofolioPage(),
     SupportPage(),
     ProfilePage(),
+    LoginPage(),
   ];
 
   void _onItemTapped(int index) {
