@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nusantara_news_app/bloc/login/login_cubit.dart';
-import 'package:nusantara_news_app/pages/login.dart';
 import 'package:nusantara_news_app/styles/colors.dart';
 import 'package:nusantara_news_app/styles/text_style.dart';
-import 'package:nusantara_news_app/pages/login.dart';
 import 'home_page.dart';
 import 'portofolio_page.dart';
 import 'support_page.dart';

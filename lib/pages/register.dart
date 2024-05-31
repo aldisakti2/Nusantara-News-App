@@ -1,14 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-<<<<<<< HEAD:lib/pages/register_page.dart
 import 'package:nusantara_news_app/bloc/register/register_cubit.dart';
-import 'package:nusantara_news_app/pages/main_page.dart';
 import 'package:nusantara_news_app/utils/routes.dart';
-=======
-import '../bloc/register/register_cubit.dart';
-
-import '../utils/routes.dart';
->>>>>>> 002ab33806692c0812a88cf89704cba9e9d5a23b:lib/pages/register.dart
 
 class RegisterScreen extends StatefulWidget {
   static var nameRoute;

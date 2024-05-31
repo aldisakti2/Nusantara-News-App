@@ -10,7 +10,6 @@ import '../styles/colors.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
-  static const nameRoute = '/login';
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -66,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       backgroundColor: Colors.green,
                     ));
                   Navigator.pushNamedAndRemoveUntil(
-                      context, rHome, (route) => false);
+                      context, rMain, (route) => false);
                 }
               },
               child: Column(
@@ -116,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(height: 20),
                         const Text(
-                          "e-mail",
+                          "Email",
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
                         ),
@@ -125,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         const SizedBox(height: 10),
                         const Text(
-                          "password",
+                          "Password",
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.bold),
                         ),
