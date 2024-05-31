@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nusantara_news_app/bloc/login/login_cubit.dart';
 import 'package:nusantara_news_app/bloc/login/login_state.dart';
+import 'package:nusantara_news_app/styles/colors.dart';
 
 class LoginPage extends StatelessWidget {
   static const String nameRoute = '/';
@@ -14,7 +15,7 @@ class LoginPage extends StatelessWidget {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.lightBlueAccent, Colors.cyanAccent],
+            colors: [kBgColor],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),

@@ -10,7 +10,7 @@ class LoginCubit extends Cubit<LoginState> {
       emit(LoginLoading());
       // Simulasikan proses login
       await Future.delayed(const Duration(seconds: 2));
-      // Gantilah ini dengan logika login sebenarnya
+
       if (email == 'nusantara@gmail.com' && password == '12345678') {
         emit(LoginSuccess());
       } else {
