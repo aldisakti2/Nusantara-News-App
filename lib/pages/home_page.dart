@@ -6,6 +6,7 @@ import '../styles/text_style.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
+  static const nameRoute = '/';
   @override
   Widget build(BuildContext context) {
     return SafeArea(
