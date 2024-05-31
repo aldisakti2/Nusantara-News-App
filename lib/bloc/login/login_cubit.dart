@@ -1,20 +1,23 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import '../../repositories/aut_repo.dart';
-part 'login_state.dart';
+import 'package:nusantara_news_app/bloc/login/login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
-  final _repo = AuthRepo();
 
-  void login({required String email, required String password}) async {
-    emit(LoginLoading());
+  void login(String email, String password) async {
     try {
-      await _repo.login(email: email, password: password);
-      emit(LoginSuccess('Login berhasil!'));
+      emit(LoginLoading());
+      // Simulasikan proses login
+      await Future.delayed(const Duration(seconds: 2));
+      // Gantilah ini dengan logika login sebenarnya
+      if (email == 'nusantara@gmail.com' && password == '12345678') {
+        emit(LoginSuccess());
+      } else {
+        emit(LoginFailure(error: 'Invalid email or password'));
+      }
     } catch (e) {
-      print(e);
-      emit(LoginFailure(e.toString()));
+      emit(LoginFailure(error: e.toString()));
     }
   }
 }

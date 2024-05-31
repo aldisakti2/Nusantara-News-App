@@ -1,4 +1,4 @@
-part of 'login_cubit.dart';
+import 'package:meta/meta.dart';
 
 @immutable
 abstract class LoginState {}
@@ -7,14 +7,10 @@ class LoginInitial extends LoginState {}
 
 class LoginLoading extends LoginState {}
 
-class LoginSuccess extends LoginState {
-  final String msg;
-
-  LoginSuccess(this.msg);
-}
+class LoginSuccess extends LoginState {}
 
 class LoginFailure extends LoginState {
-  final String msg;
+  final String error;
 
-  LoginFailure(this.msg);
+  LoginFailure({required this.error});
 }
