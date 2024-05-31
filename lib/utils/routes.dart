@@ -11,7 +11,7 @@ Route? generateRoute(RouteSettings settings) {
   final _args = settings.arguments;
   switch (settings.name) {
     case rLogin:
-      _route = _pageRoute(body: LoginScreen(), settings: settings);
+      _route = _pageRoute(body: LoginPage(), settings: settings);
       break;
     case rRegister:
       _route = _pageRoute(body: RegisterScreen(), settings: settings);

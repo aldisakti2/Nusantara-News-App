@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nusantara_news_app/bloc/register/register_cubit.dart';
 import 'package:nusantara_news_app/utils/routes.dart';
+import 'package:nusantara_news_app/styles/colors.dart';
 
 class RegisterScreen extends StatefulWidget {
-  static var nameRoute;
+  static const String nameRoute = '/register';
 
   const RegisterScreen({Key? key}) : super(key: key);
 
@@ -16,15 +17,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final emailEdc = TextEditingController();
   final passEdc = TextEditingController();
   bool passInvisible = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kBgColor,
+      appBar: AppBar(
+        title: const Text('Nusantara News APP'),
+      ),
       body: BlocListener<RegisterCubit, RegisterState>(
         listener: (context, state) {
           if (state is RegisterLoading) {
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
-              ..showSnackBar(SnackBar(content: Text('Loading..')));
+              ..showSnackBar(const SnackBar(content: Text('Loading..')));
           }
           if (state is RegisterFailure) {
             ScaffoldMessenger.of(context)
@@ -35,7 +41,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ));
           }
           if (state is RegisterSuccess) {
-            // context.read<AuthCubit>().loggedIn();
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(SnackBar(
@@ -46,101 +51,103 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 context, rLogin, (route) => false);
           }
         },
-        child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 30, vertical: 70),
-          child: ListView(
-            children: [
-              Text(
-                "Register",
-                style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xff3D4DE0)),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Text(
-                "Silahkan masukan e-mail dan password anda",
-                style: TextStyle(
-                  fontSize: 16,
+        child: Center(
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 70),
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                const Text(
+                  "Register",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xff3D4DE0)),
                 ),
-              ),
-              SizedBox(
-                height: 25,
-              ),
-              Text(
-                "Email",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              TextFormField(
-                controller: emailEdc,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                "Password",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              TextFormField(
-                controller: passEdc,
-                decoration: InputDecoration(
-                  suffixIcon: IconButton(
-                    icon: Icon(passInvisible
-                        ? Icons.visibility
-                        : Icons.visibility_off),
-                    onPressed: () {
-                      setState(() {
-                        passInvisible =
-                            !passInvisible; // Toggle _isPasswordVisible ketika ikon mata ditekan
-                      });
-                    },
+                const SizedBox(
+                  height: 15,
+                ),
+                const Text(
+                  "Silahkan masukan email dan password anda",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
                   ),
                 ),
-                obscureText:
-                    !passInvisible, // Atur obscureText berdasarkan _isPasswordVisible
-              ),
-              SizedBox(
-                height: 50,
-              ),
-              ElevatedButton(
-                  onPressed: () {
-                    context
-                        .read<RegisterCubit>()
-                        .register(email: emailEdc.text, password: passEdc.text);
-                  },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xff3D4DE0),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10))),
-                  child: Text(
-                    "Register",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24,
-                        color: Colors.white),
-                  )),
-              SizedBox(
-                height: 25,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Sudah punya akun ?"),
-                  TextButton(
+                const SizedBox(
+                  height: 25,
+                ),
+                const Text(
+                  "Email",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                TextFormField(
+                  controller: emailEdc,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text(
+                  "Password",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                TextFormField(
+                  controller: passEdc,
+                  decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      icon: Icon(passInvisible
+                          ? Icons.visibility
+                          : Icons.visibility_off),
                       onPressed: () {
-                        Navigator.pushNamed(context, '/login');
+                        setState(() {
+                          passInvisible = !passInvisible;
+                        });
                       },
-                      child: Text(
-                        "Login",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xff3D4DE0)),
-                      ))
-                ],
-              )
-            ],
+                    ),
+                  ),
+                  obscureText: !passInvisible,
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      context.read<RegisterCubit>().register(
+                          email: emailEdc.text, password: passEdc.text);
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xff3D4DE0),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10))),
+                    child: const Text(
+                      "Register",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                          color: Colors.white),
+                    )),
+                const SizedBox(
+                  height: 25,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Sudah punya akun ?"),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/login');
+                        },
+                        child: const Text(
+                          "Login",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xff3D4DE0)),
+                        ))
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),

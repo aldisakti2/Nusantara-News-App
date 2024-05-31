@@ -13,7 +13,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kBgColor, // Set background color to blue
+      backgroundColor: kBgColor,
       appBar: AppBar(
         title: const Text('Nusantara News APP'),
       ),
@@ -22,7 +22,7 @@ class LoginPage extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: BlocProvider(
             create: (context) => LoginCubit(),
-            child: LoginPage(),
+            child: const LoginScreen(),
           ),
         ),
       ),
@@ -45,6 +45,10 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kBgColor,
+      appBar: AppBar(
+        title: const Text('Nusantara News APP'),
+      ),
       body: BlocListener<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state is LoginLoading) {
@@ -61,7 +65,6 @@ class _LoginScreenState extends State<LoginScreen> {
               ));
           }
           if (state is LoginSuccess) {
-            // context.read<AuthCubit>().loggedIn();
             ScaffoldMessenger.of(context)
               ..hideCurrentSnackBar()
               ..showSnackBar(SnackBar(
@@ -71,97 +74,101 @@ class _LoginScreenState extends State<LoginScreen> {
             Navigator.pushNamedAndRemoveUntil(context, rMain, (route) => false);
           }
         },
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 70),
-          child: ListView(
-            children: [
-              const Text(
-                "Login",
-                style: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                    color: Color(0xff3D4DE0)),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              const Text(
-                "Silahkan masukan email dan password anda",
-                style: TextStyle(
-                  fontSize: 16,
+        child: Center(
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 70),
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                const Text(
+                  "Login",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xff3D4DE0)),
                 ),
-              ),
-              const SizedBox(
-                height: 25,
-              ),
-              const Text(
-                "Email",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              TextFormField(
-                controller: emailEdc,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text(
-                "Password",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              TextFormField(
-                controller: passEdc,
-                decoration: InputDecoration(
-                  suffixIcon: IconButton(
-                    icon: Icon(passInvisible
-                        ? Icons.visibility
-                        : Icons.visibility_off),
-                    onPressed: () {
-                      setState(() {
-                        passInvisible = !passInvisible;
-                      });
-                    },
+                const SizedBox(
+                  height: 15,
+                ),
+                const Text(
+                  "Silahkan masukan email dan password anda",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
                   ),
                 ),
-                obscureText: !passInvisible,
-              ),
-              const SizedBox(
-                height: 50,
-              ),
-              ElevatedButton(
-                  onPressed: () {
-                    context
-                        .read<LoginCubit>()
-                        .login(email: emailEdc.text, password: passEdc.text);
-                  },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xff3D4DE0),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10))),
-                  child: const Text(
-                    "Login",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24,
-                        color: Colors.white),
-                  )),
-              Row(
-                mainAxisAlignment:
-                    MainAxisAlignment.center, // Menengahkan elemen horizontal
-                children: [
-                  const Text("Belum punya akun ?"),
-                  TextButton(
+                const SizedBox(
+                  height: 25,
+                ),
+                const Text(
+                  "Email",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                TextFormField(
+                  controller: emailEdc,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text(
+                  "Password",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                TextFormField(
+                  controller: passEdc,
+                  decoration: InputDecoration(
+                    suffixIcon: IconButton(
+                      icon: Icon(passInvisible
+                          ? Icons.visibility
+                          : Icons.visibility_off),
                       onPressed: () {
-                        Navigator.pushNamed(context, '/register');
+                        setState(() {
+                          passInvisible = !passInvisible;
+                        });
                       },
-                      child: const Text(
-                        "Daftar",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xff3D4DE0)),
-                      ))
-                ],
-              )
-            ],
+                    ),
+                  ),
+                  obscureText: !passInvisible,
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      context
+                          .read<LoginCubit>()
+                          .login(email: emailEdc.text, password: passEdc.text);
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xff3D4DE0),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10))),
+                    child: const Text(
+                      "Login",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                          color: Colors.white),
+                    )),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Belum punya akun ?"),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/register');
+                        },
+                        child: const Text(
+                          "Daftar",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xff3D4DE0)),
+                        ))
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
