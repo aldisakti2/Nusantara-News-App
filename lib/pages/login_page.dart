@@ -29,17 +29,17 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-class LoginForm extends StatefulWidget {
-  const LoginForm({Key? key}) : super(key: key);
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
-  _LoginFormState createState() => _LoginFormState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginFormState extends State<LoginForm> {
-  final TextEditingController emailEdc = TextEditingController();
-  final TextEditingController passEdc = TextEditingController();
-  bool passInvisible = true;
+class _LoginScreenState extends State<LoginScreen> {
+  final emailEdc = TextEditingController();
+  final passEdc = TextEditingController();
+  bool passInvisible = false;
 
   @override
   Widget build(BuildContext context) {
