@@ -55,6 +55,7 @@ class _MainPageState extends State<MainPage> {
     SupportPage(),
     ProfilePage(),
     LoginPage(),
+    RegisterScreen(),
   ];
 
   void _onItemTapped(int index) {

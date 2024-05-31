@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       routes: {
         LoginPage.nameRoute: (context) => LoginPage(),
         MainPage.nameRoute: (context) => const MainPage(),
-        RegisterPage.nameRoute: (context) => const RegisterPage(),
+        RegisterScreen.nameRoute: (context) => const RegisterScreen(),
       },
     );
   }
