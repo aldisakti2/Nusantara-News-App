@@ -83,7 +83,7 @@ class HomePage extends StatelessWidget {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Info Layanan',
+                      Text('Info Perkementrian',
                           style: kHeading6.copyWith(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
