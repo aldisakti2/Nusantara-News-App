@@ -99,13 +99,13 @@ class HomePage extends StatelessWidget {
                     children: [
                       _infoLayanan(
                           'assets/images/kabupaten.png', 'Kabupaten', () {}),
-                      SizedBox(width: 9),
+                      SizedBox(width: 4),
                       _infoLayanan(
                           'assets/images/kecamatan.png', 'Kecamatan', () {}),
-                      SizedBox(width: 9),
+                      SizedBox(width: 4),
                       _infoLayanan(
                           'assets/images/kelurahan.png', 'Kelurahan', () {}),
-                      SizedBox(width: 9),
+                      SizedBox(width: 4),
                       _infoLayanan(
                           'assets/images/berita.png', 'Berita Terkini', () {}),
                     ],
