@@ -57,13 +57,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: ListView(
               shrinkWrap: true,
               children: [
-                const Text(
-                  "Register",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xff3D4DE0)),
+                const SizedBox(height: 30),
+                Center(
+                  child: Image.asset(
+                    'assets/images/Logo.png',
+                    height: 150,
+                  ),
                 ),
                 const SizedBox(
                   height: 15,

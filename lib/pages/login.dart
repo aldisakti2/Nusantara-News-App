@@ -96,16 +96,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        const Text(
-                          "Login",
-                          style: TextStyle(
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                            color: Color(0xff3D4DE0),
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
                         const SizedBox(height: 20),
+                        const SizedBox(height: 30),
+                        Center(
+                          child: Image.asset(
+                            'assets/images/Logo.png',
+                            height: 150,
+                          ),
+                        ),
                         const Text(
                           "Silahkan masukan e-mail dan password anda",
                           style: TextStyle(
