@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nusantara_news_app/bloc/register/register_cubit.dart';
+import 'package:nusantara_news_app/styles/text_style.dart';
 import 'package:nusantara_news_app/utils/routes.dart';
 import 'package:nusantara_news_app/styles/colors.dart';
 
@@ -21,7 +22,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       backgroundColor: kBgColor,
       appBar: AppBar(
-        title: const Text('Nusantara News APP'),
+        title: Text(
+          'Nusantara News',
+          style: kHeading6.copyWith(
+            color: kBlack,
+          ),
+        ),
       ),
       body: BlocListener<RegisterCubit, RegisterState>(
         listener: (context, state) {

@@ -100,7 +100,7 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 24,
+                    height: 40,
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,

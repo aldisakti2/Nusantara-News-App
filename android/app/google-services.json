@@ -12,7 +12,12 @@
           "package_name": "com.example.nusantara_news_app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "473373018108-3875q68988g2sc88oc4gr4k4ur4tspar.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCXDA8gy7PlaPAB8LZ2veOoR1i2IKUNj9Q"
@@ -20,7 +25,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "473373018108-3875q68988g2sc88oc4gr4k4ur4tspar.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "473373018108-q6km93fd313t2qqrq9c095a7c0jqo8h3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.nusantaraNewsApp"
+              }
+            }
+          ]
         }
       }
     }

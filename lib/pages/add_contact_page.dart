@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:nusantara_news_app/main.dart';
 import '../styles/colors.dart';
 import '../styles/text_style.dart';
 
@@ -9,7 +8,6 @@ class AddContactPage extends StatelessWidget {
   static const nameRoute = '/addcontact';
 
   @override
-
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
@@ -46,62 +44,64 @@ class AddContactPage extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  top: 105,
-                  left: 19,
-                  child:       // Figma Flutter Generator Group10Widget - GROUP
-                  Container(
-                      width: 330,
-                      height: 74,
-
-                      child: Stack(
-                          children: <Widget>[
-                            Positioned(
-                                top: 24,
-                                left: 0,
-                                child: Container(
-                                    width: 330,
-                                    height: 50,
-                                    decoration: BoxDecoration(
-                                      borderRadius : BorderRadius.only(
-                                        topLeft: Radius.circular(2),
-                                        topRight: Radius.circular(2),
-                                        bottomLeft: Radius.circular(2),
-                                        bottomRight: Radius.circular(2),
-                                      ),
-                                      color : Color.fromRGBO(249, 249, 249, 1),
-                                      border : Border.all(
-                                        color: Color.fromRGBO(217, 217, 217, 1),
-                                        width: 1,
-                                      ),
-                                    )
-                                )
-                            ),Positioned(
-                                top: 0,
-                                left: 0,
-                                child: Text('Name', textAlign: TextAlign.left, style: TextStyle(
-                                    color: Color.fromRGBO(0, 0, 0, 1),
-                                    fontFamily: 'Roboto',
-                                    fontSize: 16,
-                                    letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                    fontWeight: FontWeight.normal,
-                                    height: 1
-                                ),)
-                            ),Positioned(
-                                top: 39,
-                                left: 10,
-                                child: Text('Enter name', textAlign: TextAlign.left, style: TextStyle(
-                                    color: Color.fromRGBO(158, 158, 158, 1),
-                                    fontFamily: 'Roboto',
-                                    fontSize: 16,
-                                    letterSpacing: 0 /*percentages not used in flutter. defaulting to zero*/,
-                                    fontWeight: FontWeight.normal,
-                                    height: 1
-                                ),)
-                            ),
-                          ]
-                      )
-                  )
-                ),
+                    top: 105,
+                    left: 19,
+                    child: // Figma Flutter Generator Group10Widget - GROUP
+                        Container(
+                            width: 330,
+                            height: 74,
+                            child: Stack(children: <Widget>[
+                              Positioned(
+                                  top: 24,
+                                  left: 0,
+                                  child: Container(
+                                      width: 330,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(2),
+                                          topRight: Radius.circular(2),
+                                          bottomLeft: Radius.circular(2),
+                                          bottomRight: Radius.circular(2),
+                                        ),
+                                        color: Color.fromRGBO(249, 249, 249, 1),
+                                        border: Border.all(
+                                          color:
+                                              Color.fromRGBO(217, 217, 217, 1),
+                                          width: 1,
+                                        ),
+                                      ))),
+                              Positioned(
+                                  top: 0,
+                                  left: 0,
+                                  child: Text(
+                                    'Name',
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(0, 0, 0, 1),
+                                        fontFamily: 'Roboto',
+                                        fontSize: 16,
+                                        letterSpacing:
+                                            0 /*percentages not used in flutter. defaulting to zero*/,
+                                        fontWeight: FontWeight.normal,
+                                        height: 1),
+                                  )),
+                              Positioned(
+                                  top: 39,
+                                  left: 10,
+                                  child: Text(
+                                    'Enter name',
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                        color: Color.fromRGBO(158, 158, 158, 1),
+                                        fontFamily: 'Roboto',
+                                        fontSize: 16,
+                                        letterSpacing:
+                                            0 /*percentages not used in flutter. defaulting to zero*/,
+                                        fontWeight: FontWeight.normal,
+                                        height: 1),
+                                  )),
+                            ]))),
               ],
             ),
           ),

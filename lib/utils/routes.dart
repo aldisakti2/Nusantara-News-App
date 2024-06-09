@@ -10,7 +10,6 @@ MaterialPageRoute _pageRoute(
     MaterialPageRoute(builder: (_) => body, settings: settings);
 Route? generateRoute(RouteSettings settings) {
   Route? _route;
-  final _args = settings.arguments;
   switch (settings.name) {
     case rLogin:
       _route = _pageRoute(body: LoginScreen(), settings: settings);
