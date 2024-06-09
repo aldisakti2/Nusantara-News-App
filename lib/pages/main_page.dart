@@ -5,6 +5,8 @@ import 'home_page.dart';
 import 'portofolio_page.dart';
 import 'support_page.dart';
 import 'profile_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:nusantara_news_app/pages/login_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -14,6 +16,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
+  User? user;
 
   static List<Widget> pages = [
     HomePage(),
@@ -22,10 +25,53 @@ class _MainPageState extends State<MainPage> {
     ProfilePage(),
   ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
+  @override
+  void initState() {
+    super.initState();
+    _checkUserStatus();
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      _checkUserStatus();
     });
+  }
+
+  void _checkUserStatus() {
+    setState(() {
+      user = FirebaseAuth.instance.currentUser;
+    });
+  }
+
+  void _onItemTapped(int index) {
+    if (index == 4) {
+      _handleProfileTap();
+    } else {
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
+  }
+
+  void _handleProfileTap() {
+    if (user == null) {
+      // Navigate to the LoginScreen
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => LoginScreen()),
+      ).then((_) {
+        _checkUserStatus(); // Refresh the user state after returning from the login screen
+      });
+    } else {
+      // Perform logout
+      _signOut();
+    }
+  }
+
+  void _signOut() async {
+    await FirebaseAuth.instance.signOut();
+    // After sign-out, update the user state and stay on the homepage
+    setState(() {
+      _selectedIndex = 0;
+    });
+    _checkUserStatus();
   }
 
   @override
@@ -92,6 +138,19 @@ class _MainPageState extends State<MainPage> {
                   color: _selectedIndex == 3 ? kBlueRibbon : kDarkGray,
                 ),
                 label: 'Notifikasi'),
+            BottomNavigationBarItem(
+              icon: user == null
+                  ? Image.asset(
+                      'assets/icons/profile.png',
+                      width: 24,
+                      color: _selectedIndex == 4 ? kBlueRibbon : kDarkGray,
+                    )
+                  : Icon(
+                      Icons.logout,
+                      color: _selectedIndex == 4 ? kBlueRibbon : kDarkGray,
+                    ),
+              label: user == null ? 'SignIn' : 'LogOut',
+            ),
           ],
         ),
       ),

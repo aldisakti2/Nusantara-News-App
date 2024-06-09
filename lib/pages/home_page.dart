@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import '../styles/colors.dart';
 import '../styles/text_style.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -45,45 +44,25 @@ class HomePage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Container(
-                        constraints: BoxConstraints.expand(
-                          height: 48,
-                          width: 48,
-                        ),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(10),
-                            ),
-                            image: DecorationImage(
-                              image: AssetImage('assets/icons/profile.png'),
-                              fit: BoxFit.cover,
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: kWhite,
-                                blurRadius: 5,
-                                offset: Offset.fromDirection(2),
-                              ),
-                            ]),
-                      ),
                     ],
                   ),
                   SizedBox(
                     height: 24,
                   ),
+                  /*
                   Row(
                     children: [
                       _searchButton('assets/icons/search.png', 'Search...',
                           'assets/icons/optimization.png'),
                     ],
-                  ),
+                  ),*/
                   SizedBox(
                     height: 24,
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Info Perkementrian',
+                      Text('Info Kementerian RI',
                           style: kHeading6.copyWith(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
@@ -98,16 +77,16 @@ class HomePage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       _infoLayanan(
-                          'assets/images/kabupaten.png', 'Kabupaten', () {}),
+                          'assets/images/kemenkeu-logo.png', 'Kemenkeu', () {}),
+                      SizedBox(width: 4),
+                      _infoLayanan('assets/images/kemenaker-logo.png',
+                          'Kemenaker', () {}),
+                      SizedBox(width: 4),
+                      _infoLayanan('assets/images/kemendikbud-logo.png',
+                          'Kemendikbud', () {}),
                       SizedBox(width: 4),
                       _infoLayanan(
-                          'assets/images/kecamatan.png', 'Kecamatan', () {}),
-                      SizedBox(width: 4),
-                      _infoLayanan(
-                          'assets/images/kelurahan.png', 'Kelurahan', () {}),
-                      SizedBox(width: 4),
-                      _infoLayanan(
-                          'assets/images/berita.png', 'Berita Terkini', () {}),
+                          'assets/images/kemenkes-logo.png', 'Kemenkes', () {}),
                     ],
                   ),
                   SizedBox(
@@ -466,8 +445,8 @@ Widget _infoLayanan(String img, String text, VoidCallback tap) {
       children: [
         Container(
           constraints: BoxConstraints.expand(
-            height: 71.41,
-            width: 71.41,
+            height: 72.41,
+            width: 72.41,
           ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(

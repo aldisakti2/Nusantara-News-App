@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
                 child: Text('Something went wrong'),
               );
             } else {
-              return const LoginScreen();
+              return MainPage();
             }
           },
         ),
