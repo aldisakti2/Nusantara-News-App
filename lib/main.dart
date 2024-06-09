@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nusantara_news_app/bloc/login/login_cubit.dart';
 import 'package:nusantara_news_app/bloc/register/register_cubit.dart';
 import 'package:nusantara_news_app/firebase_options.dart';
-import 'package:nusantara_news_app/pages/login_page.dart';
 import 'package:nusantara_news_app/pages/main_page.dart';
 import 'package:nusantara_news_app/utils/routes.dart';
 

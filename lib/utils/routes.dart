@@ -3,7 +3,7 @@ import 'package:nusantara_news_app/pages/add_contact_page.dart';
 import 'package:nusantara_news_app/pages/support_page.dart';
 import '../pages/main_page.dart';
 import '../pages/login_page.dart';
-import '../pages/register.dart';
+import '../pages/register_page.dart';
 
 MaterialPageRoute _pageRoute(
         {required Widget body, required RouteSettings settings}) =>
@@ -13,7 +13,7 @@ Route? generateRoute(RouteSettings settings) {
   final _args = settings.arguments;
   switch (settings.name) {
     case rLogin:
-      _route = _pageRoute(body: LoginPage(), settings: settings);
+      _route = _pageRoute(body: LoginScreen(), settings: settings);
       break;
     case rRegister:
       _route = _pageRoute(body: RegisterScreen(), settings: settings);

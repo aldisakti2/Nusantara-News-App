@@ -5,8 +5,6 @@ import 'package:nusantara_news_app/utils/routes.dart';
 import 'package:nusantara_news_app/styles/colors.dart';
 
 class RegisterScreen extends StatefulWidget {
-  static const String nameRoute = '/register';
-
   const RegisterScreen({Key? key}) : super(key: key);
 
   @override

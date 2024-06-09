@@ -1,34 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nusantara_news_app/bloc/login/login_cubit.dart';
-import 'package:nusantara_news_app/pages/main_page.dart';
 import 'package:nusantara_news_app/styles/colors.dart';
+import 'package:nusantara_news_app/styles/text_style.dart';
 import 'package:nusantara_news_app/utils/routes.dart';
-
-class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
-  static const String nameRoute = '/';
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: kBgColor,
-      appBar: AppBar(
-        title: const Text('Nusantara News APP'),
-      ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: BlocProvider(
-            create: (context) => LoginCubit(),
-            child: const LoginScreen(),
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -47,7 +22,12 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       backgroundColor: kBgColor,
       appBar: AppBar(
-        title: const Text('Nusantara News APP'),
+        title: Text(
+          'Nusantara News',
+          style: kHeading6.copyWith(
+            color: kBlack,
+          ),
+        ),
       ),
       body: BlocListener<LoginCubit, LoginState>(
         listener: (context, state) {
@@ -80,13 +60,12 @@ class _LoginScreenState extends State<LoginScreen> {
             child: ListView(
               shrinkWrap: true,
               children: [
-                const Text(
-                  "Login",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 40,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xff3D4DE0)),
+                const SizedBox(height: 30),
+                Center(
+                  child: Image.asset(
+                    'assets/images/Logo.png',
+                    height: 150,
+                  ),
                 ),
                 const SizedBox(
                   height: 15,
