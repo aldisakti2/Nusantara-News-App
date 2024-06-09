@@ -74,6 +74,12 @@
       "languageVersion": "2.19"
     },
     {
+      "name": "csslib",
+      "rootUri": "file:///C:/Users/aldis/AppData/Local/Pub/Cache/hosted/pub.dev/csslib-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
+    },
+    {
       "name": "cupertino_icons",
       "rootUri": "file:///C:/Users/aldis/AppData/Local/Pub/Cache/hosted/pub.dev/cupertino_icons-1.0.8",
       "packageUri": "lib/",
@@ -204,6 +210,12 @@
       "rootUri": "file:///C:/Users/aldis/AppData/Local/Pub/Cache/hosted/pub.dev/google_sign_in_web-0.12.4",
       "packageUri": "lib/",
       "languageVersion": "3.3"
+    },
+    {
+      "name": "html",
+      "rootUri": "file:///C:/Users/aldis/AppData/Local/Pub/Cache/hosted/pub.dev/html-0.15.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
     },
     {
       "name": "http",
@@ -429,27 +441,27 @@
     },
     {
       "name": "webview_flutter",
-      "rootUri": "file:///C:/Users/aldis/AppData/Local/Pub/Cache/hosted/pub.dev/webview_flutter-4.8.0",
+      "rootUri": "file:///C:/Users/aldis/AppData/Local/Pub/Cache/hosted/pub.dev/webview_flutter-2.8.0",
       "packageUri": "lib/",
-      "languageVersion": "3.2"
+      "languageVersion": "2.14"
     },
     {
       "name": "webview_flutter_android",
-      "rootUri": "file:///C:/Users/aldis/AppData/Local/Pub/Cache/hosted/pub.dev/webview_flutter_android-3.16.3",
+      "rootUri": "file:///C:/Users/aldis/AppData/Local/Pub/Cache/hosted/pub.dev/webview_flutter_android-2.10.4",
       "packageUri": "lib/",
-      "languageVersion": "3.2"
+      "languageVersion": "2.14"
     },
     {
       "name": "webview_flutter_platform_interface",
-      "rootUri": "file:///C:/Users/aldis/AppData/Local/Pub/Cache/hosted/pub.dev/webview_flutter_platform_interface-2.10.0",
+      "rootUri": "file:///C:/Users/aldis/AppData/Local/Pub/Cache/hosted/pub.dev/webview_flutter_platform_interface-1.9.5",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "2.12"
     },
     {
       "name": "webview_flutter_wkwebview",
-      "rootUri": "file:///C:/Users/aldis/AppData/Local/Pub/Cache/hosted/pub.dev/webview_flutter_wkwebview-3.13.1",
+      "rootUri": "file:///C:/Users/aldis/AppData/Local/Pub/Cache/hosted/pub.dev/webview_flutter_wkwebview-2.9.5",
       "packageUri": "lib/",
-      "languageVersion": "3.2"
+      "languageVersion": "2.17"
     },
     {
       "name": "win32",
@@ -476,7 +488,7 @@
       "languageVersion": "3.3"
     }
   ],
-  "generated": "2024-06-09T09:03:47.647022Z",
+  "generated": "2024-06-09T13:33:42.009054Z",
   "generator": "pub",
   "generatorVersion": "3.3.2"
 }

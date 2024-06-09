@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:nusantara_news_app/pages/kementerian/dikbud_page.dart';
+import 'package:nusantara_news_app/pages/kementerian/kesehatan_page.dart';
+import 'package:nusantara_news_app/pages/kementerian/keuangan_page.dart';
+import 'package:nusantara_news_app/pages/kementerian/naker_page.dart';
 import '../styles/colors.dart';
 import '../styles/text_style.dart';
 
@@ -74,28 +78,52 @@ class HomePage extends StatelessWidget {
                     height: 12,
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Flexible(
-                        child: _infoLayanan('assets/images/kemenkeu-logo.png',
-                            'Kemenkeu', () {}),
-                      ),
-                      SizedBox(width: 4),
-                      Flexible(
-                        child: _infoLayanan('assets/images/kemenaker-logo.png',
-                            'Kemenaker', () {}),
+                        child: _infoLayanan(
+                            'assets/images/kemenkeu-logo.png', 'Kemenkeu', () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => KemenkeuPage()),
+                          );
+                        }),
                       ),
                       SizedBox(width: 4),
                       Flexible(
                         child: _infoLayanan(
-                            'assets/images/kemendikbud-logo.png',
-                            'Kemendikbud',
-                            () {}),
+                            'assets/images/kemenaker-logo.png', 'Kemenaker',
+                            () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => KemenakerPage()),
+                          );
+                        }),
                       ),
                       SizedBox(width: 4),
                       Flexible(
-                        child: _infoLayanan('assets/images/kemenkes-logo.png',
-                            'Kemenkes', () {}),
+                        child: _infoLayanan(
+                            'assets/images/kemendikbud-logo.png', 'Kemendikbud',
+                            () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => KemendikbudPage()),
+                          );
+                        }),
+                      ),
+                      SizedBox(width: 4),
+                      Flexible(
+                        child: _infoLayanan(
+                            'assets/images/kemenkes-logo.png', 'Kemenkes', () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => KemenkesPage()),
+                          );
+                        }),
                       ),
                     ],
                   ),
