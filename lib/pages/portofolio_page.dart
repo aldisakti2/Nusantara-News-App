@@ -13,6 +13,7 @@ class PortofolioPage extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
+          SizedBox(height: 40), // Adjust this value to move the header down
           Container(
             padding: EdgeInsets.all(20),
             margin: EdgeInsets.all(20),
@@ -100,6 +101,7 @@ class PortofolioPage extends StatelessWidget {
           SizedBox(height: 20),
           Container(
             margin: EdgeInsets.symmetric(horizontal: 30),
+            width: double.infinity, // Make the button take the full width
             child: ElevatedButton(
               onPressed: () {
                 _submitFeedback(context);
@@ -107,8 +109,15 @@ class PortofolioPage extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: kAquaBlue,
                 padding: EdgeInsets.symmetric(vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
-              child: Text('Kirim'),
+              child: Text(
+                'Kirim',
+                style:
+                    TextStyle(fontSize: 16), // Adjust the font size if needed
+              ),
             ),
           ),
         ],
