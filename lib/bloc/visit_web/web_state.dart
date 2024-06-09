@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:nusantara_news_app/pages/comment.dart';
+import 'package:nusantara_news_app/styles/colors.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewPage extends StatelessWidget {
@@ -18,6 +20,20 @@ class WebViewPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.insert_comment_sharp), // Choose the icon you want
+            color: kBlack, // Set the color of the icon
+            onPressed: () {
+              // Define the action when the icon is pressed
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => CommentScreen()), // Example page
+              );
+            },
+          ),
+        ],
       ),
       body: WebView(
         initialUrl: selectedUrl,
