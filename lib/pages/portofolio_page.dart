@@ -1,190 +1,142 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/percent_indicator.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../styles/colors.dart';
 import '../styles/text_style.dart';
 
 class PortofolioPage extends StatelessWidget {
-  const PortofolioPage({Key? key}) : super(key: key);
+  PortofolioPage({Key? key}) : super(key: key);
+
+  final TextEditingController feedbackController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.only(top: 25),
-            height: 255,
-            width: double.infinity,
+            padding: EdgeInsets.all(20),
+            margin: EdgeInsets.all(20),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.vertical(
-                bottom: Radius.circular(40),
-              ),
-              image: DecorationImage(
-                  image: AssetImage('assets/images/bg-container-2.png'),
-                  fit: BoxFit.cover),
+              color: kGrey.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(15),
+              boxShadow: [
+                BoxShadow(
+                  color: kAquaBlue,
+                  blurRadius: 5,
+                  offset: Offset(0, 3),
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                Text(
+                  'Kritik dan Saran',
+                  style: kHeading6.copyWith(
+                    color: kBlack,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  'Form ini digunakan untuk menampung semua kritik dan saran dari Anda.',
+                  style: kSubtitlemid2.copyWith(
+                    color: kBlack,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  'Form akan diterima oleh admin dan selalu di tampung kritik dan sarannya.',
+                  style: kSubtitlemid2.copyWith(
+                    color: kBlack,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+            padding: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: kWhite,
+              borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
                   color: kGrey,
-                  blurRadius: 5,
-                  offset: Offset.fromDirection(2),
-                )
+                  blurRadius: 1,
+                  offset: Offset(0, 2),
+                ),
               ],
             ),
-            child: SafeArea(
-              child: Column(
-                children: [
-                  Text(
-                    'My Portofolio',
-                    style: kHeading6.copyWith(
-                      color: kWhite,
-                      fontWeight: FontWeight.w600,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  'Ada Kritik dan Saran? Yuk Tuliskan',
+                  style: kHeading6.copyWith(color: kBlack),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 10),
+                TextField(
+                  controller: feedbackController,
+                  maxLines: 5,
+                  keyboardType: TextInputType.multiline,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: kGrey.withOpacity(0.1),
+                    hintText: 'Tulis kritik dan saran Anda di sini...',
+                    hintStyle: kSubtitlemid2.copyWith(color: kGrey),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Text(
-                    'Savings Value',
-                    style: kSubtitlemid2.copyWith(
-                      color: kWhite,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  Text(
-                    'Rp. 12.480.000',
-                    style: kHeading5.copyWith(
-                      color: kWhite,
-                    ),
-                  ),
-                ],
-              ),
+                  style: kSubtitlemid2.copyWith(color: kBlack),
+                ),
+              ],
             ),
           ),
-          _portofolioCardList(
-              'Pension saving funds',
-              'assets/icons/pension.png',
-              0.25,
-              'Rp. 10.430.000 / Rp. 40.000.000',
-              'Last saving February 19'),
-          _portofolioCardList('Camera', 'assets/icons/camera.png', 0.45,
-              'Rp. 2.050.000 / Rp. 4.000.000', 'Last saving February 16'),
-          _portofolioCardList('Camera', 'assets/icons/camera.png', 0.45,
-              'Rp. 2.050.000 / Rp. 4.000.000', 'Last saving February 16'),
+          SizedBox(height: 20),
           Container(
-              margin: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
-              child: TextButton(
-                onPressed: () {},
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.add,
-                      size: 13,
-                      color: kWhite,
-                    ),
-                    Text(
-                      'Add Portofolio',
-                      style: kSubtitlemid2.copyWith(
-                          color: kWhite, fontWeight: FontWeight.w600),
-                    ),
-                  ],
-                ),
-                style: TextButton.styleFrom(
-                  backgroundColor: kBlueRibbon,
-                  padding: EdgeInsets.symmetric(vertical: 15),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(15)),
-                  ),
-                  elevation: 4,
-                ),
-              )),
+            margin: EdgeInsets.symmetric(horizontal: 30),
+            child: ElevatedButton(
+              onPressed: () {
+                _submitFeedback(context);
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: kAquaBlue,
+                padding: EdgeInsets.symmetric(vertical: 15),
+              ),
+              child: Text('Kirim'),
+            ),
+          ),
         ],
       ),
     );
   }
 
-  Widget _portofolioCardList(
-      String title, String icon, double percent, String amount, String time) {
-    return Container(
-      margin: EdgeInsets.only(
-        left: 30,
-        right: 30,
-        top: 20,
-      ),
-      padding: EdgeInsets.fromLTRB(15, 19, 15, 14),
-      constraints: BoxConstraints.expand(
-        height: 130,
-      ),
-      decoration: BoxDecoration(
-        color: kWhite,
-        borderRadius: BorderRadius.all(
-          Radius.circular(15),
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: kGrey,
-            blurRadius: 1,
-            offset: Offset.fromDirection(1, 2),
-          )
-        ],
-      ),
-      child: Row(
-        children: [
-          SizedBox(
-            height: 55,
-            width: 55,
-            child: CircleAvatar(
-              backgroundColor: kTropicalBlue.withOpacity(0.3),
-              child: Image(
-                image: AssetImage(icon),
-                width: 24,
-              ),
-            ),
-          ),
-          SizedBox(
-            width: 15,
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: kSubtitle1,
-                ),
-                SizedBox(
-                  height: 12,
-                ),
-                LinearPercentIndicator(
-                  lineHeight: 4,
-                  padding: EdgeInsets.symmetric(horizontal: 0),
-                  progressColor: kAquaBlue,
-                  backgroundColor: kGrey.withOpacity(0.2),
-                  percent: percent,
-                  barRadius: Radius.circular(10),
-                ),
-                SizedBox(
-                  height: 12,
-                ),
-                Text(
-                  amount,
-                  style: kBody2.copyWith(color: kGrey),
-                ),
-                Spacer(),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: Text(
-                    time,
-                    style: kCaption.copyWith(color: kVeryLightGray),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+  Future<void> _submitFeedback(BuildContext context) async {
+    if (feedbackController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Kritik dan saran tidak boleh kosong')),
+      );
+      return;
+    }
+
+    try {
+      await FirebaseFirestore.instance.collection('feedback').add({
+        'feedback': feedbackController.text,
+        'timestamp': Timestamp.now(),
+      });
+      feedbackController.clear();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Kritik dan saran berhasil dikirim')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Terjadi kesalahan, coba lagi')),
+      );
+    }
   }
 }
