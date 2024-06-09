@@ -76,17 +76,27 @@ class HomePage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      _infoLayanan(
-                          'assets/images/kemenkeu-logo.png', 'Kemenkeu', () {}),
+                      Flexible(
+                        child: _infoLayanan('assets/images/kemenkeu-logo.png',
+                            'Kemenkeu', () {}),
+                      ),
                       SizedBox(width: 4),
-                      _infoLayanan('assets/images/kemenaker-logo.png',
-                          'Kemenaker', () {}),
+                      Flexible(
+                        child: _infoLayanan('assets/images/kemenaker-logo.png',
+                            'Kemenaker', () {}),
+                      ),
                       SizedBox(width: 4),
-                      _infoLayanan('assets/images/kemendikbud-logo.png',
-                          'Kemendikbud', () {}),
+                      Flexible(
+                        child: _infoLayanan(
+                            'assets/images/kemendikbud-logo.png',
+                            'Kemendikbud',
+                            () {}),
+                      ),
                       SizedBox(width: 4),
-                      _infoLayanan(
-                          'assets/images/kemenkes-logo.png', 'Kemenkes', () {}),
+                      Flexible(
+                        child: _infoLayanan('assets/images/kemenkes-logo.png',
+                            'Kemenkes', () {}),
+                      ),
                     ],
                   ),
                   SizedBox(
