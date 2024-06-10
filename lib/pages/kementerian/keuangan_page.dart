@@ -33,7 +33,9 @@ class KemenkeuPage extends StatelessWidget {
                           builder: (context) => WebViewPage(
                               title: 'Kemenkeu',
                               selectedUrl:
-                                  'https://www.kemenkeu.go.id/informasi-publik/publikasi/berita-utama/Menkeu-Waspadai-Perlambatan-Penerimaan-Negara')),
+                                  'https://www.kemenkeu.go.id/informasi-publik/publikasi/berita-utama/Menkeu-Waspadai-Perlambatan-Penerimaan-Negara',
+                              filtering:
+                                  "if (a[i].classList.contains('kem-informasi-publik-publikasi-berita-utama-detail__header') || a[i].classList.contains('kem-o-navbar-mobile') || a[i].classList.contains('kem-data-layanan__content-news-update') || a[i].localName.includes('footer'))")),
                     );
                   })
                 ],

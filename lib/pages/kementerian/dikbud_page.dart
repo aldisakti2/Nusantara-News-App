@@ -34,7 +34,9 @@ class KemendikbudPage extends StatelessWidget {
                           builder: (context) => WebViewPage(
                               title: 'KemendikBud',
                               selectedUrl:
-                                  'https://www.kemdikbud.go.id/main/blog/2024/06/kemendikbudristek-lepas-pelayaran-muhibah-budaya-jalur-rempah-2024')),
+                                  'https://www.kemdikbud.go.id/main/blog/2024/06/kemendikbudristek-lepas-pelayaran-muhibah-budaya-jalur-rempah-2024',
+                              filtering:
+                                  "if (a[i].classList.contains('navbar'))")),
                     );
                   })
                 ],

@@ -7,12 +7,14 @@ import 'package:webview_flutter/webview_flutter.dart';
 class WebViewPage extends StatelessWidget {
   final String title;
   final String selectedUrl;
+  final String filtering;
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
 
   WebViewPage({
     required this.title,
     required this.selectedUrl,
+    required this.filtering,
   });
 
   @override
@@ -46,6 +48,12 @@ class WebViewPage extends StatelessWidget {
             ..hideCurrentSnackBar()
             ..showSnackBar(const SnackBar(content: Text('Loading..')));
         },
+        navigationDelegate: (NavigationRequest request) {
+          if (request.url != selectedUrl) {
+            return NavigationDecision.prevent;
+          }
+          return NavigationDecision.navigate;
+        },
         onPageFinished: (String url) {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
@@ -53,6 +61,15 @@ class WebViewPage extends StatelessWidget {
               content: Text('Success'),
               backgroundColor: Colors.green,
             ));
+          _controller.future.then((controller) {
+            controller.runJavascript("a = document.querySelectorAll('*');"
+                    "for (let i = 0; i < a.length; i++) {" +
+                filtering +
+                "{"
+                    "a[i].style.display = 'none';"
+                    "}"
+                    "};");
+          });
         },
         gestureNavigationEnabled: true,
       ),

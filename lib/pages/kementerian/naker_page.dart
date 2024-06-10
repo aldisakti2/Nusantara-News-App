@@ -33,7 +33,9 @@ class KemenakerPage extends StatelessWidget {
                           builder: (context) => WebViewPage(
                               title: 'Kemenaker',
                               selectedUrl:
-                                  'https://kemnaker.go.id/news/detail/menaker-ida-sebut-kontribusi-delegasi-indonesia-dalam-ilc-luar-biasa')),
+                                  'https://kemnaker.go.id/news/detail/menaker-ida-sebut-kontribusi-delegasi-indonesia-dalam-ilc-luar-biasa',
+                              filtering:
+                                  "if (a[i].classList.contains('news-comment') || a[i].classList.contains('news-related') || a[i].localName.includes('navbar') || a[i].localName.includes('footer'))")),
                     );
                   })
                 ],

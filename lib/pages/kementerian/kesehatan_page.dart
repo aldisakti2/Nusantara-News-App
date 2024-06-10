@@ -34,7 +34,9 @@ class KemenkesPage extends StatelessWidget {
                           builder: (context) => WebViewPage(
                               title: 'Kemenakes',
                               selectedUrl:
-                                  'https://www.kemkes.go.id/id/dua-pesan-menkes-kepada-pimpinan-daerah-untuk-cegah-stunting')),
+                                  'https://www.kemkes.go.id/id/dua-pesan-menkes-kepada-pimpinan-daerah-untuk-cegah-stunting',
+                              filtering:
+                                  "if (a[i].classList.contains('header-bottom') || a[i].classList.contains('col-md-6') || a[i].classList.contains('col-md-4') || a[i].localName.includes('footer'))")),
                     );
                   })
                 ],
