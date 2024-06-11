@@ -1,173 +1,151 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../styles/colors.dart';
 import '../styles/text_style.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  ProfilePage({Key? key}) : super(key: key);
+
+  final TextEditingController feedbackController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    // Figma Flutter Generator NotificationsWidget - FRAME
-    return Container(
-        width: 375,
-        height: 826,
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-                color: Color.fromRGBO(0, 0, 0, 0.25),
-                offset: Offset(40, 30),
-                blurRadius: 70)
-          ],
-          color: Color.fromRGBO(255, 255, 255, 1),
-        ),
-        child: Stack(children: <Widget>[
-          Positioned(
-              top: 53,
-              left: 19,
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          SizedBox(height: 40), // Adjust this value to move the header down
+          Container(
+            padding: EdgeInsets.all(20),
+            margin: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: kGrey.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(15),
+              boxShadow: [
+                BoxShadow(
+                  color: kAquaBlue,
+                  blurRadius: 5,
+                  offset: Offset(0, 3),
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                Text(
+                  'Kritik dan Saran',
+                  style: kHeading6.copyWith(
+                    color: kBlack,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(height: 20),
+                Text(
+                  'Form ini digunakan untuk menampung semua kritik dan saran dari Anda.',
+                  style: kSubtitlemid2.copyWith(
+                    color: kBlack,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 10),
+                Text(
+                  'Form akan diterima oleh admin dan selalu di tampung kritik dan sarannya.',
+                  style: kSubtitlemid2.copyWith(
+                    color: kBlack,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+            padding: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: kWhite,
+              borderRadius: BorderRadius.circular(15),
+              boxShadow: [
+                BoxShadow(
+                  color: kGrey,
+                  blurRadius: 1,
+                  offset: Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  'Ada Kritik dan Saran? Yuk Tuliskan',
+                  style: kHeading6.copyWith(color: kBlack),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(height: 10),
+                TextField(
+                  controller: feedbackController,
+                  maxLines: 5,
+                  keyboardType: TextInputType.multiline,
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: kGrey.withOpacity(0.1),
+                    hintText: 'Tulis kritik dan saran Anda di sini...',
+                    hintStyle: kSubtitlemid2.copyWith(color: kGrey),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  style: kSubtitlemid2.copyWith(color: kBlack),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 20),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 30),
+            width: double.infinity, // Make the button take the full width
+            child: ElevatedButton(
+              onPressed: () {
+                _submitFeedback(context);
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: kAquaBlue,
+                padding: EdgeInsets.symmetric(vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
               child: Text(
-                'Notifikasi',
-                textAlign: TextAlign.left,
-                style: kHeading6.copyWith(
-                  color: kBlack,
-                ),
-              )),
-          Positioned(
-              top: 105,
-              left: 19,
-              child: Container(
-                decoration: BoxDecoration(),
-                padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Container(
-                        width: 319,
-                        height: 100,
-                        child: Stack(children: <Widget>[
-                          Positioned(
-                            top: 0,
-                            left: 0,
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.pushNamed(context, '/support');
-                                print("Button tapped");
-                              },
-                              child: Container(
-                                width: 319,
-                                height: 100,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(24),
-                                    topRight: Radius.circular(24),
-                                    bottomLeft: Radius.circular(24),
-                                    bottomRight: Radius.circular(24),
-                                  ),
-                                  color: Color.fromRGBO(255, 255, 255, 1),
-                                  border: Border.all(
-                                    color: Color.fromRGBO(190, 202, 218, 1),
-                                    width: 1,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                              top: 22,
-                              left: 17,
-                              child: Container(
-                                decoration: BoxDecoration(),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 0, vertical: 0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: <Widget>[
-                                    // Figma Flutter Generator Group127Widget - GROUP
-                                    Container(
-                                        width: 56.727272033691406,
-                                        height: 56,
-                                        child: Stack(children: <Widget>[
-                                          Positioned(
-                                              top: 0,
-                                              left: 0,
-                                              child: Container(
-                                                  width: 56.727272033691406,
-                                                  height: 56,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                      topLeft:
-                                                          Radius.circular(20),
-                                                      topRight:
-                                                          Radius.circular(20),
-                                                      bottomLeft:
-                                                          Radius.circular(20),
-                                                      bottomRight:
-                                                          Radius.circular(20),
-                                                    ),
-                                                    color: Color.fromRGBO(
-                                                        247,
-                                                        56,
-                                                        89,
-                                                        0.15000000596046448),
-                                                  ))),
-                                          Positioned(
-                                              top: 9,
-                                              left: 9,
-                                              child: Container(
-                                                  width: 40,
-                                                  height: 40,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.only(
-                                                      topLeft:
-                                                          Radius.circular(10),
-                                                      topRight:
-                                                          Radius.circular(10),
-                                                      bottomLeft:
-                                                          Radius.circular(10),
-                                                      bottomRight:
-                                                          Radius.circular(10),
-                                                    ),
-                                                    image: DecorationImage(
-                                                      image: AssetImage(
-                                                          'assets/icons/support.png'),
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ))),
-                                        ])),
-                                    SizedBox(width: 16),
-                                    Container(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text(
-                                            'Janggar Pranoto',
-                                            textAlign: TextAlign.left,
-                                            style: kHeading6.copyWith(
-                                              color: kBlack,
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                          SizedBox(height: 5),
-                                          Text(
-                                            'gubernur jawa tengah janggar...',
-                                            textAlign: TextAlign.left,
-                                            style: TextStyle(
-                                              color: Color.fromRGBO(
-                                                  123, 141, 158, 1),
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              )),
-                        ])),
-                  ],
-                ),
-              ))
-        ]));
+                'Kirim',
+                style:
+                TextStyle(fontSize: 16), // Adjust the font size if needed
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _submitFeedback(BuildContext context) async {
+    if (feedbackController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Kritik dan saran tidak boleh kosong')),
+      );
+      return;
+    }
+
+    try {
+      await FirebaseFirestore.instance.collection('feedback').add({
+        'feedback': feedbackController.text,
+        'timestamp': Timestamp.now(),
+      });
+      feedbackController.clear();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Kritik dan saran berhasil dikirim')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Terjadi kesalahan, coba lagi')),
+      );
+    }
   }
 }

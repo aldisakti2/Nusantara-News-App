@@ -22,7 +22,6 @@ class _MainPageState extends State<MainPage> {
   static List<Widget> pages = [
     HomePage(),
     PortofolioPage(),
-    SupportPage(),
     ProfilePage(),
   ];
 
@@ -42,7 +41,7 @@ class _MainPageState extends State<MainPage> {
   }
 
   void _onItemTapped(int index) {
-    if (index == 4) {
+    if (index == 3) {
       _handleProfileTap();
     } else {
       setState(() {
@@ -127,28 +126,21 @@ class _MainPageState extends State<MainPage> {
                 label: 'Bantuan'),
             BottomNavigationBarItem(
                 icon: Image.asset(
-                  'assets/icons/phone.png',
+                  'assets/icons/kritiksaran.png',
                   width: 24,
                   color: _selectedIndex == 2 ? kBlueRibbon : kDarkGray,
                 ),
-                label: 'Kontak'),
-            BottomNavigationBarItem(
-                icon: Image.asset(
-                  'assets/icons/notifications.png',
-                  width: 24,
-                  color: _selectedIndex == 3 ? kBlueRibbon : kDarkGray,
-                ),
-                label: 'Notifikasi'),
+                label: 'Kritik & Saran'),
             BottomNavigationBarItem(
               icon: user == null
                   ? Image.asset(
                       'assets/icons/profile.png',
                       width: 24,
-                      color: _selectedIndex == 4 ? kBlueRibbon : kDarkGray,
+                      color: _selectedIndex == 3 ? kBlueRibbon : kDarkGray,
                     )
                   : Icon(
                       Icons.logout,
-                      color: _selectedIndex == 4 ? kBlueRibbon : kDarkGray,
+                      color: _selectedIndex == 3 ? kBlueRibbon : kDarkGray,
                     ),
               label: user == null ? 'SignIn' : 'LogOut',
             ),

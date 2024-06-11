@@ -10,142 +10,269 @@ class PortofolioPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          SizedBox(height: 40), // Adjust this value to move the header down
-          Container(
-            padding: EdgeInsets.all(20),
-            margin: EdgeInsets.all(20),
+    return Scaffold(
+      body: Center(
+        child: SingleChildScrollView(
+          child: Container(
+            width: 375,
+            height: 800,
             decoration: BoxDecoration(
-              color: kGrey.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
-                  color: kAquaBlue,
-                  blurRadius: 5,
-                  offset: Offset(0, 3),
+                  color: Color.fromRGBO(0, 0, 0, 0.25),
+                  offset: Offset(40, 30),
+                  blurRadius: 70,
                 ),
               ],
+              color: Color.fromRGBO(255, 255, 255, 1),
             ),
-            child: Column(
-              children: [
-                Text(
-                  'Kritik dan Saran',
-                  style: kHeading6.copyWith(
-                    color: kBlack,
-                    fontWeight: FontWeight.w600,
+            child: Stack(
+              children: <Widget>[
+                Positioned(
+                  top: 53,
+                  left: 19,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Text(
+                        'Bantuan',
+                        textAlign: TextAlign.left,
+                        style: kHeading6.copyWith(
+                          color: kBlack,
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                    ],
                   ),
                 ),
-                SizedBox(height: 20),
-                Text(
-                  'Form ini digunakan untuk menampung semua kritik dan saran dari Anda.',
-                  style: kSubtitlemid2.copyWith(
-                    color: kBlack,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 10),
-                Text(
-                  'Form akan diterima oleh admin dan selalu di tampung kritik dan sarannya.',
-                  style: kSubtitlemid2.copyWith(
-                    color: kBlack,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-            padding: EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: kWhite,
-              borderRadius: BorderRadius.circular(15),
-              boxShadow: [
-                BoxShadow(
-                  color: kGrey,
-                  blurRadius: 1,
-                  offset: Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  'Ada Kritik dan Saran? Yuk Tuliskan',
-                  style: kHeading6.copyWith(color: kBlack),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 10),
-                TextField(
-                  controller: feedbackController,
-                  maxLines: 5,
-                  keyboardType: TextInputType.multiline,
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: kGrey.withOpacity(0.1),
-                    hintText: 'Tulis kritik dan saran Anda di sini...',
-                    hintStyle: kSubtitlemid2.copyWith(color: kGrey),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(10),
+                Positioned(
+                  top: 105,
+                  left: 19,
+                  child: Container(
+                    decoration: BoxDecoration(),
+                    padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Container(
+                          width: 319,
+                          height: 800,
+                          child: Stack(
+                            children: <Widget>[
+                              Positioned(
+                                top: 0,
+                                left: 0,
+                                child: Container(
+                                  width: 319,
+                                  height: 300,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(24),
+                                      topRight: Radius.circular(24),
+                                      bottomLeft: Radius.circular(24),
+                                      bottomRight: Radius.circular(24),
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Color.fromRGBO(107, 134, 179, 0.25),
+                                        offset: Offset(0, 2),
+                                        blurRadius: 12,
+                                      ),
+                                    ],
+                                    color: Color.fromRGBO(255, 255, 255, 1),
+                                    border: Border.all(
+                                      color: Color.fromRGBO(190, 202, 218, 1),
+                                      width: 1,
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Align(
+                                          alignment: Alignment.topCenter,
+                                          child: Text(
+                                            'Menu Bantuan Rakyat Jelata',
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(height: 16), // Space between title and description
+                                        Text(
+                                          'Menu ini berisi Informasi lengkap mengenai layanan dan syarat yang dibutuhkan saat mengurus keperluan anda di aplikasi ini, selain itu juga terdapat Informasi mengenai Alamat Kantor Dpr.',
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.grey, // Change description text color to grey
+                                          ),
+                                        ),
+                                        SizedBox(height: 8), // Space between paragraphs
+                                        Text(
+                                          'Caranya:',
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.grey, // Change description text color to grey
+                                          ),
+                                        ),
+                                        Text(
+                                          '1. Klik Pilih Layanan\n'
+                                              '2. Pilih layanan yang anda inginkan\n'
+                                              '3. Lalu akan tertera Informasi lengkap tentang layanan yang anda butuhkan di Nusantara News',
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.grey, // Change description text color to grey
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                top: 326,
+                                left: 0,
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.pushNamed(context, '/chat');
+                                    print("Button tapped");
+                                  },
+                                  child: Container(
+                                    width: 319,
+                                    height: 80,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(24),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Color.fromRGBO(107, 134, 179, 0.25),
+                                          offset: Offset(0, 2),
+                                          blurRadius: 12,
+                                        ),
+                                      ],
+                                      color: Color.fromRGBO(255, 255, 255, 1),
+                                      border: Border.all(
+                                        color: Color.fromRGBO(190, 202, 218, 1),
+                                        width: 1,
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        'Status Laporan',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                top: 426,
+                                left: 0,
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.pushNamed(context, '/chat');
+                                    print("Button tapped");
+                                  },
+                                  child: Container(
+                                    width: 319,
+                                    height: 80,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(24),
+                                        topRight: Radius.circular(24),
+                                        bottomLeft: Radius.circular(24),
+                                        bottomRight: Radius.circular(24),
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Color.fromRGBO(107, 134, 179, 0.25),
+                                          offset: Offset(0, 2),
+                                          blurRadius: 12,
+                                        ),
+                                      ],
+                                      color: Color.fromRGBO(255, 255, 255, 1),
+                                      border: Border.all(
+                                        color: Color.fromRGBO(190, 202, 218, 1),
+                                        width: 1,
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        'Tentang Aplikasi',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                top: 526,
+                                left: 0,
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.pushNamed(context, '/chat');
+                                    print("Button tapped");
+                                  },
+                                  child: Container(
+                                    width: 319,
+                                    height: 80,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(24),
+                                        topRight: Radius.circular(24),
+                                        bottomLeft: Radius.circular(24),
+                                        bottomRight: Radius.circular(24),
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Color.fromRGBO(107, 134, 179, 0.25),
+                                          offset: Offset(0, 2),
+                                          blurRadius: 12,
+                                        ),
+                                      ],
+                                      color: Color.fromRGBO(255, 255, 255, 1),
+                                      border: Border.all(
+                                        color: Color.fromRGBO(190, 202, 218, 1),
+                                        width: 1,
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        'Form Pengaduan',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  style: kSubtitlemid2.copyWith(color: kBlack),
                 ),
               ],
             ),
           ),
-          SizedBox(height: 20),
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 30),
-            width: double.infinity, // Make the button take the full width
-            child: ElevatedButton(
-              onPressed: () {
-                _submitFeedback(context);
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: kAquaBlue,
-                padding: EdgeInsets.symmetric(vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              child: Text(
-                'Kirim',
-                style:
-                    TextStyle(fontSize: 16), // Adjust the font size if needed
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
-
-  Future<void> _submitFeedback(BuildContext context) async {
-    if (feedbackController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Kritik dan saran tidak boleh kosong')),
-      );
-      return;
-    }
-
-    try {
-      await FirebaseFirestore.instance.collection('feedback').add({
-        'feedback': feedbackController.text,
-        'timestamp': Timestamp.now(),
-      });
-      feedbackController.clear();
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Kritik dan saran berhasil dikirim')),
-      );
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Terjadi kesalahan, coba lagi')),
-      );
-    }
-  }
 }
+
