@@ -322,8 +322,7 @@ class _HomePageState extends State<HomePage> {
                           'strong a',
                           'small span',
                           'strong a'),
-                      kementerian_category:
-                          'Kementerian Pendidikan dan Kebudayaan',
+                      filterTag: "if (a[i].classList.contains('navbar'))",
                     ),
                   ],
                 ),
@@ -369,41 +368,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget _UpdateInfoPemerintah(String title, String view) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: kSubtitlemid3,
-        ),
-        SizedBox(
-          height: 7,
-        ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Image.asset(
-              "assets/icons/eye.png",
-              height: 16,
-              fit: BoxFit.cover,
-              color: Color(0xFF98A0A2),
-            ),
-            SizedBox(
-              width: 8,
-            ),
-            Text(
-              view,
-              style: kNumber.copyWith(color: Color(0xFF98A0A2)),
-            ),
-          ],
-        ),
-      ],
     );
   }
 

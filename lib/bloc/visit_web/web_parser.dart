@@ -6,12 +6,12 @@ import 'package:nusantara_news_app/styles/text_style.dart';
 
 class ArticleListWidget extends StatelessWidget {
   final Future<List<Article>> futureArticles;
-  final String kementerian_category;
+  final String filterTag;
 
   const ArticleListWidget({
     Key? key,
     required this.futureArticles,
-    required this.kementerian_category,
+    required this.filterTag,
   }) : super(key: key);
 
   @override
@@ -41,85 +41,12 @@ class ArticleListWidget extends StatelessWidget {
                         builder: (context) => WebViewPage(
                           title: articles[index].title,
                           selectedUrl: articles[index].link,
-                          filtering: "if (a[i].classList.contains('navbar'))",
+                          filtering: filterTag,
                         ),
                       ),
                     );
                   },
-                  child: _UpdateInfoPemerintah(
-                      articles[index], kementerian_category),
-
-                  /*Card(
-                    child: Container(
-                      width: 290,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16.0),
-                        color: Colors.yellow[100],
-                      ),
-                      child: Row(
-                        children: [
-                          
-                          /*
-                          Container(
-                            width: 72,
-                            height: 99,
-                            margin: EdgeInsets.fromLTRB(14, 10, 14, 10),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16.0),
-                              color: Colors.yellow[700],
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  articles[index].date.split(' ')[0],
-                                  style: kHeading5.copyWith(
-                                      color: kWhite,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  articles[index].date.split(' ')[1],
-                                  style: kHeading5.copyWith(
-                                    color: kWhite,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: 
-                            
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  truncateTitle(articles[index].title),
-                                  style: kSubtitlemid2.copyWith(
-                                      color: Colors.yellow[700],
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.normal),
-                                ),
-                                SizedBox(height: 2.0),
-                                Text(
-                                  truncateTitle(articles[index].title),
-                                  style: kHeading6.copyWith(
-                                      color: Colors.yellow[700]),
-                                ),
-                                SizedBox(height: 3.0),
-                                Text(
-                                  articles[index].date,
-                                  style: kCaption.copyWith(
-                                      color: Color.fromARGB(255, 255, 175, 71)
-                                          .withOpacity(0.7)),
-                                ),
-                              ],
-                            ),
-                          ),*/
-                        ],
-                      ),
-                    ),
-                  ),*/
+                  child: _UpdateInfoPemerintah(articles[index]),
                 );
               },
             ),
@@ -129,7 +56,7 @@ class ArticleListWidget extends StatelessWidget {
     );
   }
 
-  Widget _UpdateInfoPemerintah(Article article, String category) {
+  Widget _UpdateInfoPemerintah(Article article) {
     return Container(
       width: 320,
       padding: EdgeInsets.all(16),
