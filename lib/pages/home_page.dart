@@ -323,6 +323,7 @@ class _HomePageState extends State<HomePage> {
                           'small span',
                           'strong a'),
                       filterTag: "if (a[i].classList.contains('navbar'))",
+                      OptionalWeb: "",
                     ),
                   ],
                 ),

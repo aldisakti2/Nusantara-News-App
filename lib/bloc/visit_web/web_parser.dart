@@ -7,11 +7,13 @@ import 'package:nusantara_news_app/styles/text_style.dart';
 class ArticleListWidget extends StatelessWidget {
   final Future<List<Article>> futureArticles;
   final String filterTag;
+  final String OptionalWeb;
 
   const ArticleListWidget({
     Key? key,
     required this.futureArticles,
     required this.filterTag,
+    required this.OptionalWeb,
   }) : super(key: key);
 
   @override
@@ -27,29 +29,25 @@ class ArticleListWidget extends StatelessWidget {
           return Center(child: Text('No articles found.'));
         } else {
           List<Article> articles = snapshot.data!;
-          return SizedBox(
-            height: 350,
-            child: ListView.builder(
-              scrollDirection: Axis.vertical,
-              itemCount: articles.length,
-              itemBuilder: (context, index) {
-                return GestureDetector(
+          return Column(
+            children: [
+              for (var article in articles)
+                GestureDetector(
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => WebViewPage(
-                          title: articles[index].title,
-                          selectedUrl: articles[index].link,
+                          title: article.title,
+                          selectedUrl: OptionalWeb + article.link,
                           filtering: filterTag,
                         ),
                       ),
                     );
                   },
-                  child: _UpdateInfoPemerintah(articles[index]),
-                );
-              },
-            ),
+                  child: _UpdateInfoPemerintah(article),
+                ),
+            ],
           );
         }
       },
