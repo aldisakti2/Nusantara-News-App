@@ -5,7 +5,6 @@ import 'package:nusantara_news_app/pages/home_page.dart';
 import 'package:nusantara_news_app/styles/colors.dart';
 import 'package:nusantara_news_app/styles/text_style.dart';
 import 'package:http/http.dart' as http;
-import 'package:html/parser.dart' as html;
 import 'package:html/parser.dart' as htmlParser;
 
 class KemenkeuPage extends StatelessWidget {
