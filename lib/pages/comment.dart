@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 final _firestore = FirebaseFirestore.instance;
+final _auth = FirebaseAuth.instance;
 
 class CommentScreen extends StatefulWidget {
   const CommentScreen({Key? key}) : super(key: key);
@@ -14,6 +16,23 @@ class _CommentScreenState extends State<CommentScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController titleController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
+  User? loggedInUser;
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
+  }
+
+  void getCurrentUser() {
+    final user = _auth.currentUser;
+    if (user != null) {
+      setState(() {
+        loggedInUser = user;
+      });
+    }
+  }
+
   @override
   void dispose() {
     titleController.dispose();
@@ -65,105 +84,107 @@ class _CommentScreenState extends State<CommentScreen> {
                                         fontWeight: FontWeight.w700,
                                         fontSize: 20.0)),
                               ),
-                              GestureDetector(
-                                  onTap: () {},
-                                  child: PopupMenuButton<String>(
-                                    onSelected: (value) {
-                                      if (value == 'edit') {
-                                        showModalBottomSheet(
-                                            context: context,
-                                            isScrollControlled: true,
-                                            builder: (context) {
-                                              return Padding(
-                                                padding:
-                                                    const EdgeInsets.all(16.0),
-                                                child: Form(
-                                                  key: _formKey,
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: [
-                                                      TextFormField(
-                                                        controller: titleEdc,
-                                                      ),
-                                                      const SizedBox(
-                                                          height: 10.0),
-                                                      SizedBox(
-                                                          height: 300,
-                                                          child: TextFormField(
-                                                            controller: noteEdc,
-                                                            maxLines:
-                                                                null, // Set this
-                                                            expands:
-                                                                true, // and this
-                                                            keyboardType:
-                                                                TextInputType
-                                                                    .multiline,
-                                                          )),
-                                                      Padding(
-                                                          padding: EdgeInsets.only(
-                                                              bottom: MediaQuery
-                                                                      .of(
-                                                                          context)
-                                                                  .viewInsets
-                                                                  .bottom),
-                                                          child: SizedBox(
-                                                              width:
-                                                                  MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width,
-                                                              child:
-                                                                  ElevatedButton(
-                                                                      onPressed:
-                                                                          () async {
-                                                                        if (_formKey
-                                                                            .currentState!
-                                                                            .validate()) {
-                                                                          try {
-                                                                            await _firestore.collection('tasks').doc(document.id).update({
-                                                                              'title': titleEdc.text,
-                                                                              'note': noteEdc.text,
-                                                                              'timestamp': FieldValue.serverTimestamp(),
-                                                                            });
-                                                                            ScaffoldMessenger.of(context).showSnackBar(
-                                                                              const SnackBar(content: Text('Note berhasil diperbarui')),
-                                                                            );
-                                                                            Navigator.pop(context);
-                                                                          } catch (e) {
-                                                                            ScaffoldMessenger.of(context).showSnackBar(
-                                                                              SnackBar(content: Text('$e')),
-                                                                            );
+                              if (loggedInUser != null &&
+                                  loggedInUser!.uid == data['userId'])
+                                GestureDetector(
+                                    onTap: () {},
+                                    child: PopupMenuButton<String>(
+                                      onSelected: (value) {
+                                        if (value == 'edit') {
+                                          showModalBottomSheet(
+                                              context: context,
+                                              isScrollControlled: true,
+                                              builder: (context) {
+                                                return Padding(
+                                                  padding: const EdgeInsets.all(
+                                                      16.0),
+                                                  child: Form(
+                                                    key: _formKey,
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: [
+                                                        TextFormField(
+                                                          controller: titleEdc,
+                                                        ),
+                                                        const SizedBox(
+                                                            height: 10.0),
+                                                        SizedBox(
+                                                            height: 300,
+                                                            child:
+                                                                TextFormField(
+                                                              controller:
+                                                                  noteEdc,
+                                                              maxLines:
+                                                                  null, // Set this
+                                                              expands:
+                                                                  true, // and this
+                                                              keyboardType:
+                                                                  TextInputType
+                                                                      .multiline,
+                                                            )),
+                                                        Padding(
+                                                            padding: EdgeInsets.only(
+                                                                bottom: MediaQuery.of(
+                                                                        context)
+                                                                    .viewInsets
+                                                                    .bottom),
+                                                            child: SizedBox(
+                                                                width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width,
+                                                                child:
+                                                                    ElevatedButton(
+                                                                        onPressed:
+                                                                            () async {
+                                                                          if (_formKey
+                                                                              .currentState!
+                                                                              .validate()) {
+                                                                            try {
+                                                                              await _firestore.collection('tasks').doc(document.id).update({
+                                                                                'title': titleEdc.text,
+                                                                                'note': noteEdc.text,
+                                                                                'timestamp': FieldValue.serverTimestamp(),
+                                                                              });
+                                                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                                                const SnackBar(content: Text('Note berhasil diperbarui')),
+                                                                              );
+                                                                              Navigator.pop(context);
+                                                                            } catch (e) {
+                                                                              ScaffoldMessenger.of(context).showSnackBar(
+                                                                                SnackBar(content: Text('$e')),
+                                                                              );
+                                                                            }
                                                                           }
-                                                                        }
-                                                                      },
-                                                                      child: const Text(
-                                                                          'Save'))))
-                                                    ],
+                                                                        },
+                                                                        child: const Text(
+                                                                            'Save'))))
+                                                      ],
+                                                    ),
                                                   ),
-                                                ),
-                                              );
-                                            });
-                                      } else if (value == 'delete') {
-                                        String documentId = document.id;
-                                        _firestore
-                                            .collection('tasks')
-                                            .doc(documentId)
-                                            .delete();
-                                      }
-                                    },
-                                    itemBuilder: (BuildContext context) => [
-                                      const PopupMenuItem<String>(
-                                        value: 'edit',
-                                        child: Text('Edit'),
-                                      ),
-                                      const PopupMenuItem<String>(
-                                        value: 'delete',
-                                        child: Text('Hapus'),
-                                      ),
-                                    ],
-                                    child: Icon(Icons.more_vert_outlined),
-                                  ))
+                                                );
+                                              });
+                                        } else if (value == 'delete') {
+                                          String documentId = document.id;
+                                          _firestore
+                                              .collection('tasks')
+                                              .doc(documentId)
+                                              .delete();
+                                        }
+                                      },
+                                      itemBuilder: (BuildContext context) => [
+                                        const PopupMenuItem<String>(
+                                          value: 'edit',
+                                          child: Text('Edit'),
+                                        ),
+                                        const PopupMenuItem<String>(
+                                          value: 'delete',
+                                          child: Text('Hapus'),
+                                        ),
+                                      ],
+                                      child: Icon(Icons.more_vert_outlined),
+                                    ))
                             ],
                           ),
                           const SizedBox(height: 10.0),
@@ -183,6 +204,12 @@ class _CommentScreenState extends State<CommentScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          if (loggedInUser == null) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Please login to add a comment')),
+            );
+            return;
+          }
           showModalBottomSheet(
               context: context,
               isScrollControlled: true,
@@ -218,12 +245,12 @@ class _CommentScreenState extends State<CommentScreen> {
                                     onPressed: () async {
                                       if (_formKey.currentState!.validate()) {
                                         try {
-                                          DocumentReference docRef =
-                                              await _firestore
-                                                  .collection('tasks')
-                                                  .add({
+                                          await _firestore
+                                              .collection('tasks')
+                                              .add({
                                             'title': titleController.text,
                                             'note': noteController.text,
+                                            'userId': loggedInUser!.uid,
                                             'timestamp':
                                                 FieldValue.serverTimestamp(),
                                           });

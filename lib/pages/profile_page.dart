@@ -22,7 +22,7 @@ class ProfilePage extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
-                  color: kAquaBlue,
+                  color: Color.fromRGBO(107, 134, 179, 0.25),
                   blurRadius: 5,
                   offset: Offset(0, 3),
                 ),
@@ -60,11 +60,11 @@ class ProfilePage extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
             padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: kWhite,
+              color: Color.fromRGBO(107, 134, 179, 0.25),
               borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
-                  color: kGrey,
+                  color: Color.fromRGBO(107, 134, 179, 0.25),
                   blurRadius: 1,
                   offset: Offset(0, 2),
                 ),
@@ -107,7 +107,7 @@ class ProfilePage extends StatelessWidget {
                 _submitFeedback(context);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: kAquaBlue,
+                backgroundColor: Color.fromRGBO(11, 85, 214, 0.235),
                 padding: EdgeInsets.symmetric(vertical: 15),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -116,7 +116,7 @@ class ProfilePage extends StatelessWidget {
               child: Text(
                 'Kirim',
                 style:
-                TextStyle(fontSize: 16), // Adjust the font size if needed
+                    TextStyle(fontSize: 16), // Adjust the font size if needed
               ),
             ),
           ),
