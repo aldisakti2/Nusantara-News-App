@@ -83,6 +83,7 @@ class _HomePageState extends State<HomePage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
+                        /*
                         Flexible(
                           child: _infoLayanan(
                               'assets/images/kemenkeu-logo.png', 'Kemenkeu',
@@ -94,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                             );
                           }),
                         ),
-                        SizedBox(width: 4),
+                        SizedBox(width: 4),*/
                         Flexible(
                           child: _infoLayanan(
                               'assets/images/kemenaker-logo.png', 'Kemenaker',

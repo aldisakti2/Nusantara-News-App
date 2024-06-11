@@ -1,9 +1,5 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:nusantara_news_app/pages/comment.dart';
-import 'package:nusantara_news_app/styles/colors.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewPage extends StatefulWidget {
   final String title;
@@ -55,42 +51,6 @@ class _WebViewPageState extends State<WebViewPage> {
           ),
           if (isLoading) Center(child: CircularProgressIndicator()),
         ],
-        /*
-      body: WebView(
-        initialUrl: widget.selectedUrl,
-        javascriptMode: JavascriptMode.unrestricted,
-        onWebViewCreated: (WebViewController webViewController) {
-          _controller.complete(webViewController);
-        },
-        onPageStarted: (String url) {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(const SnackBar(content: Text('Loading..')));
-        },
-        navigationDelegate: (NavigationRequest request) {
-          if (request.url != widget.selectedUrl) {
-            return NavigationDecision.prevent;
-          }
-          return NavigationDecision.navigate;
-        },
-        onPageFinished: (String url) {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(SnackBar(
-              content: Text('Success'),
-              backgroundColor: Colors.green,
-            ));
-          _controller.future.then((controller) {
-            controller.runJavascript("a = document.querySelectorAll('*');"
-                    "for (let i = 0; i < a.length; i++) {" +
-                widget.filtering +
-                "{"
-                    "a[i].style.display = 'none';"
-                    "}"
-                    "};");
-          });
-        },
-        gestureNavigationEnabled: true,*/
       ),
     );
   }
