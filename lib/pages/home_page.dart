@@ -13,32 +13,9 @@ import '../styles/text_style.dart';
 class Article {
   final String title;
   final String date;
+  final String link;
 
-  Article({required this.title, required this.date});
-}
-
-Future<List<Article>> fetchArticles(
-    String url, String titleSelector, String dateSelector) async {
-  final response = await http.get(Uri.parse(url));
-
-  if (response.statusCode == 200) {
-    var document = html.parse(response.body);
-
-    var titles = document.querySelectorAll(titleSelector);
-    var dates = document.querySelectorAll(dateSelector);
-
-    List<Article> articles = [];
-
-    for (int i = 0; i < titles.length; i++) {
-      String title = titles[i].text.trim();
-      String date = dates[i].text.trim();
-      articles.add(Article(title: title, date: date));
-    }
-
-    return articles;
-  } else {
-    throw Exception('Failed to load articles');
-  }
+  Article({required this.title, required this.date, required this.link});
 }
 
 class HomePage extends StatefulWidget {
@@ -50,16 +27,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late Future<List<Article>> futureArticles;
-
-  @override
-  void initState() {
-    super.initState();
-    futureArticles = fetchArticles(
-        'https://www.kemdikbud.go.id/main/blog', // Replace with the actual URL
-        'strong a', // Replace with the actual title selector
-        'small' // Replace with the actual date selector
-        );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -353,9 +320,8 @@ class _HomePageState extends State<HomePage> {
                       futureArticles: _fetchData(
                           'https://www.kemdikbud.go.id/main/blog',
                           'strong a',
-                          'small span'),
-                      titleSelector: 'strong a',
-                      dateSelector: 'small span',
+                          'small span',
+                          'strong a'),
                       kementerian_category:
                           'Kementerian Pendidikan dan Kebudayaan',
                     ),
@@ -442,19 +408,29 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<List<Article>> _fetchData(
-      String url, String titleSelector, String dateSelector) async {
+    String url,
+    String titleSelector,
+    String dateSelector,
+    String linkSelector,
+  ) async {
     try {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         final htmlDocument = htmlParser.parse(response.body);
         final titleElements = htmlDocument.querySelectorAll(titleSelector);
         final dateElements = htmlDocument.querySelectorAll(dateSelector);
+        final linkElements = htmlDocument.querySelectorAll(linkSelector);
 
         List<Article> articles = [];
+
         for (int i = 0; i < titleElements.length; i++) {
-          String title = titleElements[i].text;
-          String date = dateElements.length > i ? dateElements[i].text : '';
-          articles.add(Article(title: title, date: date));
+          final title = titleElements[i].text.trim();
+          final date = dateElements.isNotEmpty && i < dateElements.length
+              ? dateElements[i].text.trim()
+              : 'No date found';
+          final link = linkElements[i].attributes['href'] ?? '';
+
+          articles.add(Article(title: title, date: date, link: link));
         }
 
         return articles;
@@ -463,6 +439,22 @@ class _HomePageState extends State<HomePage> {
       }
     } catch (e) {
       throw Exception('Error fetching data: $e');
+    }
+  }
+
+  Widget _berita(Container card, VoidCallback tap) {
+    return GestureDetector(
+      onTap: tap,
+      child: card,
+    );
+  }
+
+  String truncateTitle(String title) {
+    List<String> words = title.split(' ');
+    if (words.length > 4) {
+      return '${words.sublist(0, 5).join(' ')} ...';
+    } else {
+      return title;
     }
   }
 }
