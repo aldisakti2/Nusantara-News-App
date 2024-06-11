@@ -37,6 +37,7 @@ class KemendikbudPage extends StatelessWidget {
                         'small span',
                         'strong a'),
                     filterTag: "if (a[i].classList.contains('navbar'))",
+                    OptionalWeb: "",
                   ),
                 ],
               ),
