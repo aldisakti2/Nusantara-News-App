@@ -2,13 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nusantara_news_app/bloc/login/login_cubit.dart';
-import 'package:nusantara_news_app/pages/home_page.dart';
 import 'package:nusantara_news_app/pages/main_page.dart';
 import 'package:nusantara_news_app/pages/phone_screen_page.dart';
 import 'package:nusantara_news_app/styles/colors.dart';
 import 'package:nusantara_news_app/styles/text_style.dart';
 import 'package:nusantara_news_app/utils/routes.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:nusantara_news_app/controllers/user_controller.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -22,27 +20,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final emailEdc = TextEditingController();
   final passEdc = TextEditingController();
   bool passInvisible = false;
-
-  final GoogleSignIn googleSignIn = GoogleSignIn();
-
-  Future<void> signInWithGoogle() async {
-    try {
-      final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
-      final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount!.authentication;
-
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleSignInAuthentication.accessToken,
-        idToken: googleSignInAuthentication.idToken,
-      );
-
-      final UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
-      final User? user = userCredential.user;
-
-      // Use the user object for further operations or navigate to a new screen.
-    } catch (e) {
-      print(e.toString());
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -166,7 +143,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     GestureDetector(
                       onTap: () async {
                         try {
-                          final user = await UserController.loginWithGoogle();
+                          final userController = UserController(context.read<LoginCubit>());
+                          final user = await userController.loginWithGoogle();
                           if (user != null && mounted) {
                             Navigator.of(context).pushReplacement(MaterialPageRoute(
                                 builder: (context) => const MainPage()));
