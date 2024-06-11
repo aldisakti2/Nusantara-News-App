@@ -22,7 +22,7 @@ class ProfilePage extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
-                  color: Color.fromRGBO(107, 134, 179, 0.25),
+                  color: Color.fromRGBO(200, 173, 244, 0.224),
                   blurRadius: 5,
                   offset: Offset(0, 3),
                 ),
@@ -60,13 +60,13 @@ class ProfilePage extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
             padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: Color.fromRGBO(107, 134, 179, 0.25),
+              color: Color.fromRGBO(77, 140, 248, 0.235),
               borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
-                  color: Color.fromRGBO(107, 134, 179, 0.25),
-                  blurRadius: 1,
-                  offset: Offset(0, 2),
+                  color: Color.fromRGBO(165, 10, 10, 0.239),
+                  offset: Offset(40, 30),
+                  blurRadius: 70,
                 ),
               ],
             ),
@@ -107,7 +107,7 @@ class ProfilePage extends StatelessWidget {
                 _submitFeedback(context);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color.fromRGBO(11, 85, 214, 0.235),
+                backgroundColor: Color.fromRGBO(255, 255, 255, 1),
                 padding: EdgeInsets.symmetric(vertical: 15),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
