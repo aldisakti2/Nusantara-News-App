@@ -1,13 +1,13 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nusantara_news_app/bloc/login/login_cubit.dart';
+import 'package:nusantara_news_app/controllers/user_controller.dart';
 import 'package:nusantara_news_app/pages/main_page.dart';
 import 'package:nusantara_news_app/pages/phone_screen_page.dart';
 import 'package:nusantara_news_app/styles/colors.dart';
 import 'package:nusantara_news_app/styles/text_style.dart';
 import 'package:nusantara_news_app/utils/routes.dart';
-import 'package:nusantara_news_app/controllers/user_controller.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -60,9 +60,10 @@ class _LoginScreenState extends State<LoginScreen> {
         },
         child: Center(
           child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 70),
+            margin: const EdgeInsets.symmetric(horizontal: 30), // Removed vertical margin
             child: ListView(
               shrinkWrap: true,
+              padding: EdgeInsets.zero, // Removed padding
               children: [
                 const SizedBox(height: 10),
                 Center(
@@ -118,22 +119,26 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 50,
                 ),
                 ElevatedButton(
-                    onPressed: () {
-                      context
-                          .read<LoginCubit>()
-                          .login(email: emailEdc.text, password: passEdc.text);
-                    },
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xff3D4DE0),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10))),
-                    child: const Text(
-                      "Login",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
-                          color: Colors.white),
-                    )),
+                  onPressed: () {
+                    context
+                        .read<LoginCubit>()
+                        .login(email: emailEdc.text, password: passEdc.text);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xff3D4DE0),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: const Text(
+                    "Login",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
                 const SizedBox(
                   height: 30.0,
                 ),
@@ -143,24 +148,35 @@ class _LoginScreenState extends State<LoginScreen> {
                     GestureDetector(
                       onTap: () async {
                         try {
-                          final userController = UserController(context.read<LoginCubit>());
-                          final user = await userController.loginWithGoogle();
+                          final userController =
+                          UserController(context.read<LoginCubit>());
+                          final user =
+                          await userController.loginWithGoogle();
                           if (user != null && mounted) {
-                            Navigator.of(context).pushReplacement(MaterialPageRoute(
-                                builder: (context) => const MainPage()));
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) => const MainPage(),
+                              ),
+                            );
                           }
                         } on FirebaseAuthException catch (error) {
                           print(error.message);
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
                               content: Text(
                                 error.message ?? "Something went wrong",
-                              )));
+                              ),
+                            ),
+                          );
                         } catch (error) {
                           print(error);
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
                               content: Text(
                                 error.toString(),
-                              )));
+                              ),
+                            ),
+                          );
                         }
                       },
                       child: const CircleAvatar(
@@ -175,9 +191,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     GestureDetector(
                       onTap: () {
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PhoneAuthScreen()));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PhoneAuthScreen(),
+                          ),
+                        );
                       },
                       child: const CircleAvatar(
                         radius: 20.0,
@@ -195,17 +213,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     const Text("Belum punya akun ?"),
                     TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/register');
-                        },
-                        child: const Text(
-                          "Daftar",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xff3D4DE0)),
-                        ))
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/register');
+                      },
+                      child: const Text(
+                        "Daftar",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xff3D4DE0),
+                        ),
+                      ),
+                    ),
                   ],
-                )
+                ),
               ],
             ),
           ),
