@@ -1,5 +1,6 @@
 // import 'package:camera/camera.dart';
 // import 'package:chatapp/CustomUI/CameraUI.dart';
+/*
 import 'package:chatapp/CustomUI/OwnMessgaeCrad.dart';
 import 'package:chatapp/CustomUI/ReplyCard.dart';
 import 'package:chatapp/Model/ChatModel.dart';
@@ -458,3 +459,4 @@ class _IndividualPageState extends State<IndividualPage> {
         });
   }
 }
+*/
