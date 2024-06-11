@@ -31,12 +31,14 @@ class ArticleListWidget extends StatelessWidget {
         } else {
           List<Article> articles = snapshot.data!;
           return SizedBox(
-            height: 200,
+            height: 208,
+            width: 320,
             child: ListView.builder(
-              scrollDirection: Axis.horizontal,
+              scrollDirection: Axis.vertical,
               itemCount: articles.length,
               itemBuilder: (context, index) {
-                return _buildArticleCard(articles[index], kementerian_category);
+                return _UpdateInfoPemerintah(
+                    articles[index], kementerian_category);
               },
             ),
           );
@@ -109,6 +111,54 @@ class ArticleListWidget extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _UpdateInfoPemerintah(Article article, String category) {
+    return SizedBox(
+      width: 320,
+      child: Container(
+        padding: EdgeInsets.all(16),
+        margin: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: kWhite,
+          borderRadius: BorderRadius.all(
+            Radius.circular(16),
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              truncateTitle(article.title),
+              style: kSubtitlemid3,
+            ),
+            SizedBox(
+              height: 7,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Image.asset(
+                  "assets/icons/eye.png",
+                  height: 16,
+                  fit: BoxFit.cover,
+                  color: Color(0xFF98A0A2),
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Text(
+                  article.date,
+                  style: kNumber.copyWith(color: Color(0xFF98A0A2)),
+                ),
+              ],
             ),
           ],
         ),

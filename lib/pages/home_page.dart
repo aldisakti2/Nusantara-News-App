@@ -178,16 +178,160 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                     SizedBox(height: 5),
-                    ArticleListWidget(
-                      futureArticles: _fetchData(
-                          'https://www.kemdikbud.go.id/main/blog',
-                          'strong a',
-                          'small span'),
-                      titleSelector: 'strong a',
-                      dateSelector: 'small span',
-                      kementerian_category:
-                          'Kementerian Pendidikan dan Kebudayaan',
-                    ),
+                    SizedBox(
+                        height: 150,
+                        child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: [
+                              Card(
+                                child: Container(
+                                  width: 290,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(16.0),
+                                    color: Colors.blue,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 72,
+                                        height: 99,
+                                        margin:
+                                            EdgeInsets.fromLTRB(14, 10, 14, 10),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(16.0),
+                                          color: Colors.blue[300],
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              '20',
+                                              style: kHeading5.copyWith(
+                                                  color: kWhite,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            Text(
+                                              'april',
+                                              style: kHeading5.copyWith(
+                                                color: kWhite,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Proses pembagian bansos',
+                                              style: kSubtitlemid2.copyWith(
+                                                  color: kWhite,
+                                                  fontSize: 10,
+                                                  fontWeight:
+                                                      FontWeight.normal),
+                                            ),
+                                            SizedBox(height: 2.0),
+                                            Text(
+                                              'Bansos Happy',
+                                              style: kHeading6.copyWith(
+                                                  color: kWhite),
+                                            ),
+                                            SizedBox(height: 3.0),
+                                            Text(
+                                              'untuk 700 kepala keluarga',
+                                              style: kCaption.copyWith(
+                                                  color:
+                                                      kWhite.withOpacity(0.65)),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Card(
+                                  child: Container(
+                                      width: 290,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(16.0),
+                                        color: Colors.yellow[100],
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            width: 72,
+                                            height: 99,
+                                            margin: EdgeInsets.fromLTRB(
+                                                14, 10, 14, 10),
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(16.0),
+                                              color: Colors.yellow[700],
+                                            ),
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  '20',
+                                                  style: kHeading5.copyWith(
+                                                      color: kWhite,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                Text(
+                                                  'april',
+                                                  style: kHeading5.copyWith(
+                                                    color: kWhite,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  'Proses pembagian bansos',
+                                                  style: kSubtitlemid2.copyWith(
+                                                      color: Colors.yellow[700],
+                                                      fontSize: 10,
+                                                      fontWeight:
+                                                          FontWeight.normal),
+                                                ),
+                                                SizedBox(height: 2.0),
+                                                Text(
+                                                  'Bansos Happy',
+                                                  style: kHeading6.copyWith(
+                                                      color:
+                                                          Colors.yellow[700]),
+                                                ),
+                                                SizedBox(height: 3.0),
+                                                Text(
+                                                  'untuk 700 kepala keluarga',
+                                                  style: kCaption.copyWith(
+                                                      color: Color.fromARGB(
+                                                              255, 255, 175, 71)
+                                                          .withOpacity(0.7)),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ))),
+                            ])),
                     SizedBox(
                       height: 25,
                     ),
@@ -205,51 +349,15 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(
                       height: 5,
                     ),
-                    SizedBox(
-                      height: 108,
-                      width: 320,
-                      child: Container(
-                        padding: EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: kWhite,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(16),
-                          ),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Bansos yang didistribusikan hari ini, 25 April 2020",
-                              style: kSubtitlemid3,
-                            ),
-                            SizedBox(
-                              height: 7,
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Image.asset(
-                                  "assets/icons/eye.png",
-                                  height: 16,
-                                  fit: BoxFit.cover,
-                                  color: Color(0xFF98A0A2),
-                                ),
-                                SizedBox(
-                                  width: 8,
-                                ),
-                                Text(
-                                  '400',
-                                  style: kNumber.copyWith(
-                                      color: Color(0xFF98A0A2)),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
+                    ArticleListWidget(
+                      futureArticles: _fetchData(
+                          'https://www.kemdikbud.go.id/main/blog',
+                          'strong a',
+                          'small span'),
+                      titleSelector: 'strong a',
+                      dateSelector: 'small span',
+                      kementerian_category:
+                          'Kementerian Pendidikan dan Kebudayaan',
                     ),
                   ],
                 ),
@@ -295,6 +403,41 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _UpdateInfoPemerintah(String title, String view) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: kSubtitlemid3,
+        ),
+        SizedBox(
+          height: 7,
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Image.asset(
+              "assets/icons/eye.png",
+              height: 16,
+              fit: BoxFit.cover,
+              color: Color(0xFF98A0A2),
+            ),
+            SizedBox(
+              width: 8,
+            ),
+            Text(
+              view,
+              style: kNumber.copyWith(color: Color(0xFF98A0A2)),
+            ),
+          ],
+        ),
+      ],
     );
   }
 
