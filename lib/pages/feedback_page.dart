@@ -3,8 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../styles/colors.dart';
 import '../styles/text_style.dart';
 
-class ProfilePage extends StatelessWidget {
-  ProfilePage({Key? key}) : super(key: key);
+class FeedbackPage extends StatelessWidget {
+  FeedbackPage({Key? key}) : super(key: key);
 
   final TextEditingController feedbackController = TextEditingController();
 
@@ -115,8 +115,7 @@ class ProfilePage extends StatelessWidget {
               ),
               child: Text(
                 'Kirim',
-                style:
-                    TextStyle(fontSize: 16), // Adjust the font size if needed
+                style: kSubtitle1.copyWith(color: kBlack),
               ),
             ),
           ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nusantara_news_app/pages/add_contact_page.dart';
 import 'package:nusantara_news_app/pages/support_page.dart';
+import 'package:nusantara_news_app/pages/feedback_page.dart';
 import '../pages/main_page.dart';
 import '../pages/login_page.dart';
 import '../pages/register_page.dart';
@@ -20,11 +20,11 @@ Route? generateRoute(RouteSettings settings) {
     case rMain:
       _route = _pageRoute(body: MainPage(), settings: settings);
       break;
+    case rFeedback:
+      _route = _pageRoute(body: FeedbackPage(), settings: settings);
+      break;
     case rSupport:
       _route = _pageRoute(body: SupportPage(), settings: settings);
-      break;
-    case rAddContact:
-      _route = _pageRoute(body: AddContactPage(), settings: settings);
       break;
   }
   return _route;
@@ -34,5 +34,5 @@ final NAV_KEY = GlobalKey<NavigatorState>();
 const String rLogin = '/login';
 const String rRegister = '/register';
 const String rMain = '/main';
+const String rFeedback = '/feedback';
 const String rSupport = '/support';
-const String rAddContact = '/addcontact';

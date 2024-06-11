@@ -83,19 +83,6 @@ class _HomePageState extends State<HomePage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        /*
-                        Flexible(
-                          child: _infoLayanan(
-                              'assets/images/kemenkeu-logo.png', 'Kemenkeu',
-                              () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => KemenkeuPage()),
-                            );
-                          }),
-                        ),
-                        SizedBox(width: 4),*/
                         Flexible(
                           child: _infoLayanan(
                               'assets/images/kemenaker-logo.png', 'Kemenaker',
@@ -316,6 +303,16 @@ class _HomePageState extends State<HomePage> {
                     ),
                     SizedBox(
                       height: 5,
+                    ),
+                    ArticleListWidget(
+                      futureArticles: _fetchData(
+                          'https://kemnaker.go.id/news/latest/all',
+                          'div h5',
+                          'div.news-date',
+                          'a[href ^= "/news/detail"]'),
+                      filterTag:
+                          "if (a[i].classList.contains('news-comment') || a[i].classList.contains('news-related') || a[i].localName.includes('navbar') || a[i].localName.includes('footer'))",
+                      OptionalWeb: "https://kemnaker.go.id",
                     ),
                     ArticleListWidget(
                       futureArticles: _fetchData(

@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:nusantara_news_app/styles/colors.dart';
 import 'package:nusantara_news_app/styles/text_style.dart';
 import 'home_page.dart';
-import 'portofolio_page.dart';
 import 'support_page.dart';
-import 'profile_page.dart';
+import 'feedback_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:nusantara_news_app/pages/login_page.dart';
 
@@ -21,8 +20,8 @@ class _MainPageState extends State<MainPage> {
 
   static List<Widget> pages = [
     HomePage(),
-    PortofolioPage(),
-    ProfilePage(),
+    SupportPage(),
+    FeedbackPage(),
   ];
 
   @override

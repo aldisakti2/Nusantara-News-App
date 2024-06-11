@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../styles/colors.dart';
 import '../styles/text_style.dart';
 
 class SupportPage extends StatelessWidget {
-  const SupportPage({Key? key}) : super(key: key);
+  SupportPage({Key? key}) : super(key: key);
+
+  final TextEditingController feedbackController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +15,7 @@ class SupportPage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Container(
             width: 375,
-            height: 826,
+            height: 800,
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
@@ -32,33 +35,13 @@ class SupportPage extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       Text(
-                        'Inbox',
+                        'Bantuan',
                         textAlign: TextAlign.left,
                         style: kHeading6.copyWith(
                           color: kBlack,
                         ),
                       ),
                       SizedBox(width: 10),
-                      GestureDetector(
-                        onTap: () {
-                          print("Add button tapped");
-                          Navigator.pushNamed(context, '/addcontact');
-                          print("Button tapped");
-                        },
-                        child: Container(
-                          width: 24,
-                          height: 24,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.blue, // Background color of the button
-                          ),
-                          child: Icon(
-                            Icons.add,
-                            color: Colors.white, // Icon color
-                            size: 16, // Icon size
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -73,11 +56,134 @@ class SupportPage extends StatelessWidget {
                       children: <Widget>[
                         Container(
                           width: 319,
-                          height: 100,
+                          height: 800,
                           child: Stack(
                             children: <Widget>[
                               Positioned(
                                 top: 0,
+                                left: 0,
+                                child: Container(
+                                  width: 319,
+                                  height: 300,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(24),
+                                      topRight: Radius.circular(24),
+                                      bottomLeft: Radius.circular(24),
+                                      bottomRight: Radius.circular(24),
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color:
+                                            Color.fromRGBO(107, 134, 179, 0.25),
+                                        offset: Offset(0, 2),
+                                        blurRadius: 12,
+                                      ),
+                                    ],
+                                    color: Color.fromRGBO(255, 255, 255, 1),
+                                    border: Border.all(
+                                      color: Color.fromRGBO(190, 202, 218, 1),
+                                      width: 1,
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Align(
+                                          alignment: Alignment.topCenter,
+                                          child: Text(
+                                            'Menu Bantuan Rakyat Jelata',
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                            height:
+                                                16), // Space between title and description
+                                        Text(
+                                          'Menu ini berisi Informasi lengkap mengenai layanan dan syarat yang dibutuhkan saat mengurus keperluan anda di aplikasi ini, selain itu juga terdapat Informasi mengenai Alamat Kantor Dpr.',
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors
+                                                .grey, // Change description text color to grey
+                                          ),
+                                        ),
+                                        SizedBox(
+                                            height:
+                                                8), // Space between paragraphs
+                                        Text(
+                                          'Caranya:',
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors
+                                                .grey, // Change description text color to grey
+                                          ),
+                                        ),
+                                        Text(
+                                          '1. Klik Pilih Layanan\n'
+                                          '2. Pilih layanan yang anda inginkan\n'
+                                          '3. Lalu akan tertera Informasi lengkap tentang layanan yang anda butuhkan di Nusantara News',
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors
+                                                .grey, // Change description text color to grey
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                top: 326,
+                                left: 0,
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.pushNamed(context, '/chat');
+                                    print("Button tapped");
+                                  },
+                                  child: Container(
+                                    width: 319,
+                                    height: 80,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(24),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Color.fromRGBO(
+                                              107, 134, 179, 0.25),
+                                          offset: Offset(0, 2),
+                                          blurRadius: 12,
+                                        ),
+                                      ],
+                                      color: Color.fromRGBO(255, 255, 255, 1),
+                                      border: Border.all(
+                                        color: Color.fromRGBO(190, 202, 218, 1),
+                                        width: 1,
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        'Status Laporan',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                top: 426,
                                 left: 0,
                                 child: InkWell(
                                   onTap: () {
@@ -96,7 +202,8 @@ class SupportPage extends StatelessWidget {
                                       ),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Color.fromRGBO(107, 134, 179, 0.25),
+                                          color: Color.fromRGBO(
+                                              107, 134, 179, 0.25),
                                           offset: Offset(0, 2),
                                           blurRadius: 12,
                                         ),
@@ -107,73 +214,61 @@ class SupportPage extends StatelessWidget {
                                         width: 1,
                                       ),
                                     ),
+                                    child: Center(
+                                      child: Text(
+                                        'Tentang Aplikasi',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
                               Positioned(
-                                top: 12,
-                                left: 12,
-                                child: Container(
-                                  decoration: BoxDecoration(),
-                                  padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: <Widget>[
-                                      Container(
-                                        width: 56.727272033691406,
-                                        height: 56,
-                                        child: Stack(
-                                          children: <Widget>[
-                                            Positioned(
-                                              top: 0,
-                                              left: 0,
-                                              child: Container(
-                                                width: 56.727272033691406,
-                                                height: 56,
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.only(
-                                                    topLeft: Radius.circular(20),
-                                                    topRight: Radius.circular(20),
-                                                    bottomLeft: Radius.circular(20),
-                                                    bottomRight: Radius.circular(20),
-                                                  ),
-                                                  image: DecorationImage(
-                                                    image: AssetImage('assets/images/user-aldi.png'),
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                  color: Color.fromRGBO(107, 134, 179, 0.25),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
+                                top: 526,
+                                left: 0,
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.pushNamed(context, '/chat');
+                                    print("Button tapped");
+                                  },
+                                  child: Container(
+                                    width: 319,
+                                    height: 80,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(24),
+                                        topRight: Radius.circular(24),
+                                        bottomLeft: Radius.circular(24),
+                                        bottomRight: Radius.circular(24),
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Color.fromRGBO(
+                                              107, 134, 179, 0.25),
+                                          offset: Offset(0, 2),
+                                          blurRadius: 12,
+                                        ),
+                                      ],
+                                      color: Color.fromRGBO(255, 255, 255, 1),
+                                      border: Border.all(
+                                        color: Color.fromRGBO(190, 202, 218, 1),
+                                        width: 1,
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        'Form Pengaduan',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
                                         ),
                                       ),
-                                      SizedBox(width: 16),
-                                      Container(
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: <Widget>[
-                                            Text(
-                                              'Kepala Suku',
-                                              textAlign: TextAlign.left,
-                                              style: kHeading6.copyWith(
-                                                color: kBlack,
-                                                fontSize: 14,
-                                              ),
-                                            ),
-                                            SizedBox(height: 5),
-                                            Text(
-                                              '+6218182221',
-                                              textAlign: TextAlign.left,
-                                              style: TextStyle(
-                                                color: Color.fromRGBO(123, 141, 158, 1),
-                                                fontSize: 14,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
+                                    ),
                                   ),
                                 ),
                               ),
@@ -192,4 +287,3 @@ class SupportPage extends StatelessWidget {
     );
   }
 }
-
