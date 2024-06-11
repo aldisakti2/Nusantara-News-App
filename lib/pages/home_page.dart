@@ -325,6 +325,16 @@ class _HomePageState extends State<HomePage> {
                       filterTag: "if (a[i].classList.contains('navbar'))",
                       OptionalWeb: "",
                     ),
+                    ArticleListWidget(
+                      futureArticles: _fetchData(
+                          'https://www.kemkes.go.id/id/category/artikel-kesehatan',
+                          'div h4',
+                          'time em',
+                          'a.link'),
+                      filterTag:
+                          "if (a[i].classList.contains('header-bottom') || a[i].classList.contains('col-md-6') || a[i].classList.contains('col-md-4') || a[i].localName.includes('footer'))",
+                      OptionalWeb: "https://www.kemkes.go.id",
+                    ),
                   ],
                 ),
               ),
@@ -372,41 +382,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Future<List<Article>> _fetchData(
-    String url,
-    String titleSelector,
-    String dateSelector,
-    String linkSelector,
-  ) async {
-    try {
-      final response = await http.get(Uri.parse(url));
-      if (response.statusCode == 200) {
-        final htmlDocument = htmlParser.parse(response.body);
-        final titleElements = htmlDocument.querySelectorAll(titleSelector);
-        final dateElements = htmlDocument.querySelectorAll(dateSelector);
-        final linkElements = htmlDocument.querySelectorAll(linkSelector);
-
-        List<Article> articles = [];
-
-        for (int i = 0; i < titleElements.length; i++) {
-          final title = titleElements[i].text.trim();
-          final date = dateElements.isNotEmpty && i < dateElements.length
-              ? dateElements[i].text.trim()
-              : 'No date found';
-          final link = linkElements[i].attributes['href'] ?? '';
-
-          articles.add(Article(title: title, date: date, link: link));
-        }
-
-        return articles;
-      } else {
-        throw Exception('Failed to load page');
-      }
-    } catch (e) {
-      throw Exception('Error fetching data: $e');
-    }
-  }
-
   Widget _berita(Container card, VoidCallback tap) {
     return GestureDetector(
       onTap: tap,
@@ -421,5 +396,40 @@ class _HomePageState extends State<HomePage> {
     } else {
       return title;
     }
+  }
+}
+
+Future<List<Article>> _fetchData(
+  String url,
+  String titleSelector,
+  String dateSelector,
+  String linkSelector,
+) async {
+  try {
+    final response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      final htmlDocument = htmlParser.parse(response.body);
+      final titleElements = htmlDocument.querySelectorAll(titleSelector);
+      final dateElements = htmlDocument.querySelectorAll(dateSelector);
+      final linkElements = htmlDocument.querySelectorAll(linkSelector);
+
+      List<Article> articles = [];
+
+      for (int i = 0; i < titleElements.length; i++) {
+        final title = titleElements[i].text.trim();
+        final date = dateElements.isNotEmpty && i < dateElements.length
+            ? dateElements[i].text.trim()
+            : 'No date found';
+        final link = linkElements[i].attributes['href'] ?? '';
+
+        articles.add(Article(title: title, date: date, link: link));
+      }
+
+      return articles;
+    } else {
+      throw Exception('Failed to load page');
+    }
+  } catch (e) {
+    throw Exception('Error fetching data: $e');
   }
 }
