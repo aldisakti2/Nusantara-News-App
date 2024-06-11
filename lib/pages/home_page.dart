@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:html/parser.dart' as html;
 import 'package:html/parser.dart' as htmlParser;
 import 'package:nusantara_news_app/bloc/visit_web/web_parser.dart';
+import 'package:nusantara_news_app/bloc/visit_web/web_state.dart';
 import 'package:nusantara_news_app/pages/kementerian/dikbud_page.dart';
 import 'package:nusantara_news_app/pages/kementerian/kesehatan_page.dart';
 import 'package:nusantara_news_app/pages/kementerian/keuangan_page.dart';
@@ -138,154 +139,96 @@ class _HomePageState extends State<HomePage> {
                         child: ListView(
                             scrollDirection: Axis.horizontal,
                             children: [
-                              Card(
-                                child: Container(
-                                  width: 290,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(16.0),
-                                    color: Colors.blue,
-                                  ),
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        width: 72,
-                                        height: 99,
-                                        margin:
-                                            EdgeInsets.fromLTRB(14, 10, 14, 10),
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(16.0),
-                                          color: Colors.blue[300],
-                                        ),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              '20',
-                                              style: kHeading5.copyWith(
-                                                  color: kWhite,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            Text(
-                                              'april',
-                                              style: kHeading5.copyWith(
-                                                color: kWhite,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Proses pembagian bansos',
-                                              style: kSubtitlemid2.copyWith(
-                                                  color: kWhite,
-                                                  fontSize: 10,
-                                                  fontWeight:
-                                                      FontWeight.normal),
-                                            ),
-                                            SizedBox(height: 2.0),
-                                            Text(
-                                              'Bansos Happy',
-                                              style: kHeading6.copyWith(
-                                                  color: kWhite),
-                                            ),
-                                            SizedBox(height: 3.0),
-                                            Text(
-                                              'untuk 700 kepala keluarga',
-                                              style: kCaption.copyWith(
-                                                  color:
-                                                      kWhite.withOpacity(0.65)),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Card(
-                                  child: Container(
-                                      width: 290,
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(16.0),
-                                        color: Colors.yellow[100],
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Container(
-                                            width: 72,
-                                            height: 99,
-                                            margin: EdgeInsets.fromLTRB(
-                                                14, 10, 14, 10),
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(16.0),
-                                              color: Colors.yellow[700],
-                                            ),
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Text(
-                                                  '20',
-                                                  style: kHeading5.copyWith(
-                                                      color: kWhite,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                Text(
-                                                  'april',
-                                                  style: kHeading5.copyWith(
-                                                    color: kWhite,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'Proses pembagian bansos',
-                                                  style: kSubtitlemid2.copyWith(
-                                                      color: Colors.yellow[700],
-                                                      fontSize: 10,
-                                                      fontWeight:
-                                                          FontWeight.normal),
-                                                ),
-                                                SizedBox(height: 2.0),
-                                                Text(
-                                                  'Bansos Happy',
-                                                  style: kHeading6.copyWith(
-                                                      color:
-                                                          Colors.yellow[700]),
-                                                ),
-                                                SizedBox(height: 3.0),
-                                                Text(
-                                                  'untuk 700 kepala keluarga',
-                                                  style: kCaption.copyWith(
-                                                      color: Color.fromARGB(
-                                                              255, 255, 175, 71)
-                                                          .withOpacity(0.7)),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ))),
+                              _berita(
+                                  _cardBeritaTerbaru(
+                                      Colors.blue,
+                                      Colors.blue.shade300,
+                                      'Pelayaran Muhibah Budaya ...',
+                                      'Kementerian Pendidikan dan Kebudayaan RI',
+                                      '11 Juni'), () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => WebViewPage(
+                                          title: 'Kemendikbud',
+                                          selectedUrl:
+                                              'https://www.kemdikbud.go.id/main/blog/2024/06/pelayaran-muhibah-budaya-jalur-rempah-2024-singgah-di-belitung-timur',
+                                          filtering:
+                                              "if (a[i].classList.contains('navbar'))")),
+                                );
+                              }),
+                              _berita(
+                                  _cardBeritaTerbaru(
+                                      Colors.green,
+                                      Colors.green.shade300,
+                                      'Makna Program ADEM Bagi Generasi ...',
+                                      'Kementerian Pendidikan dan Kebudayaan RI',
+                                      '11 Juni'), () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => WebViewPage(
+                                          title: 'Kemendikbud',
+                                          selectedUrl:
+                                              'https://www.kemdikbud.go.id/main/blog/2024/06/makna-program-adem-bagi-generasi-muda-yang-berasal-dari-wilayah-pelosok',
+                                          filtering:
+                                              "if (a[i].classList.contains('navbar'))")),
+                                );
+                              }),
+                              _berita(
+                                  _cardBeritaTerbaru(
+                                      Colors.orange,
+                                      Colors.orange.shade300,
+                                      'Kemendikbudristek dan Universitas Al-Azhar ...',
+                                      'Kementerian Pendidikan dan Kebudayaan RI',
+                                      '11 Juni'), () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => WebViewPage(
+                                          title: 'Kemendikbud',
+                                          selectedUrl:
+                                              'https://www.kemdikbud.go.id/main/blog/2024/06/kemendikbudristek-dan-universitas-alazhar-kairo-perluas-jalinan-kerja-sama-bidang-kesehatan',
+                                          filtering:
+                                              "if (a[i].classList.contains('navbar'))")),
+                                );
+                              }),
+                              _berita(
+                                  _cardBeritaTerbaru(
+                                      Colors.red,
+                                      Colors.red.shade300,
+                                      'Berbudaya Asyik, Bermain Angklung di ...',
+                                      'Kementerian Pendidikan dan Kebudayaan RI',
+                                      '11 Juni'), () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => WebViewPage(
+                                          title: 'Kemendikbud',
+                                          selectedUrl:
+                                              'https://www.kemdikbud.go.id/main/blog/2024/06/berbudaya-asyik-bermain-angklung-di-global-gathering-dan-festival-indonesia-week',
+                                          filtering:
+                                              "if (a[i].classList.contains('navbar'))")),
+                                );
+                              }),
+                              _berita(
+                                  _cardBeritaTerbaru(
+                                      Colors.purple,
+                                      Colors.purple.shade300,
+                                      'Program Magang Budaya Jadi Sarana ...',
+                                      'Kementerian Pendidikan dan Kebudayaan RI',
+                                      '11 Juni'), () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => WebViewPage(
+                                          title: 'Kemendikbud',
+                                          selectedUrl:
+                                              'https://www.kemdikbud.go.id/main/blog/2024/06/program-magang-budaya-jadi-sarana-tumbuhkan-kecintaan-akan-indonesia-di-korea-selatan',
+                                          filtering:
+                                              "if (a[i].classList.contains('navbar'))")),
+                                );
+                              }),
                             ])),
                     SizedBox(
                       height: 25,
@@ -380,10 +323,72 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _berita(Container card, VoidCallback tap) {
+  Widget _berita(Widget card, VoidCallback tap) {
     return GestureDetector(
       onTap: tap,
       child: card,
+    );
+  }
+
+  Widget _cardBeritaTerbaru(
+      Color color1, Color color2, String title, String ministry, String date) {
+    return Card(
+      child: Container(
+        width: 500,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.0),
+          color: color1, //Colors.blue,
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 72,
+              height: 99,
+              margin: EdgeInsets.fromLTRB(14, 10, 14, 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(16.0),
+                color: color2,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    date,
+                    style: kHeading5.copyWith(
+                        color: kWhite, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    ministry,
+                    style: kSubtitlemid2.copyWith(
+                        color: kWhite,
+                        fontSize: 10,
+                        fontWeight: FontWeight.normal),
+                  ),
+                  SizedBox(height: 2.0),
+                  Text(
+                    title,
+                    style: kHeading6.copyWith(color: kWhite),
+                  ),
+                  SizedBox(height: 3.0),
+                  Text(
+                    date + ' 2024',
+                    style: kCaption.copyWith(color: kWhite.withOpacity(0.65)),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 

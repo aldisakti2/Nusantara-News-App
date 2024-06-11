@@ -40,33 +40,6 @@ class OnBoardingPage extends StatelessWidget {
                 ),
               ),
             ),
-            // Align the text button near the bottom center
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 100), // Adjust the bottom padding as needed
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Color.fromRGBO(162, 154, 154, 1),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  child: Text(
-                    'Let’s Get Started',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'NunitoSans',
-                      fontSize: 18,
-                      letterSpacing: 0,
-                      fontWeight: FontWeight.normal,
-                      height: 1.5,
-                      decoration: TextDecoration.none,
-                    ),
-                  ),
-                ),
-              ),
-            ),
           ],
         ),
       ),
