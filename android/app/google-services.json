@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "473373018108-m296m276vcb9t36fhbdg9b4nf9s5ngo9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.nusantara_news_app",
+            "certificate_hash": "619825f7dbdec7e599222d890a01cf4a657f2543"
+          }
+        },
+        {
           "client_id": "473373018108-3875q68988g2sc88oc4gr4k4ur4tspar.apps.googleusercontent.com",
           "client_type": 3
         }
