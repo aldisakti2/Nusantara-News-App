@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nusantara_news_app/bloc/visit_web/web_parser.dart';
-import 'package:nusantara_news_app/bloc/visit_web/web_state.dart';
 import 'package:nusantara_news_app/pages/home_page.dart';
 import 'package:nusantara_news_app/styles/colors.dart';
 import 'package:nusantara_news_app/styles/text_style.dart';
 import 'package:http/http.dart' as http;
-import 'package:html/parser.dart' as html;
 import 'package:html/parser.dart' as htmlParser;
 
 class KemenkesPage extends StatelessWidget {

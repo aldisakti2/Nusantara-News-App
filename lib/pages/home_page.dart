@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:html/parser.dart' as html;
+//import 'package:html/parser.dart' as html;
 import 'package:html/parser.dart' as htmlParser;
 import 'package:nusantara_news_app/bloc/visit_web/web_parser.dart';
 import 'package:nusantara_news_app/bloc/visit_web/web_state.dart';
 import 'package:nusantara_news_app/pages/kementerian/dikbud_page.dart';
 import 'package:nusantara_news_app/pages/kementerian/kesehatan_page.dart';
-import 'package:nusantara_news_app/pages/kementerian/keuangan_page.dart';
+//import 'package:nusantara_news_app/pages/kementerian/keuangan_page.dart';
 import 'package:nusantara_news_app/pages/kementerian/naker_page.dart';
 import '../styles/colors.dart';
 import '../styles/text_style.dart';
@@ -145,7 +145,8 @@ class _HomePageState extends State<HomePage> {
                                       Colors.blue.shade300,
                                       'Pelayaran Muhibah Budaya ...',
                                       'Kementerian Pendidikan dan Kebudayaan RI',
-                                      '11 Juni'), () {
+                                      '11 Juni',
+                                      'Dilihat 69 kali'), () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -163,7 +164,8 @@ class _HomePageState extends State<HomePage> {
                                       Colors.green.shade300,
                                       'Makna Program ADEM Bagi Generasi ...',
                                       'Kementerian Pendidikan dan Kebudayaan RI',
-                                      '11 Juni'), () {
+                                      '11 Juni',
+                                      'Dilihat 35 kali'), () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -181,7 +183,8 @@ class _HomePageState extends State<HomePage> {
                                       Colors.orange.shade300,
                                       'Kemendikbudristek dan Universitas Al-Azhar ...',
                                       'Kementerian Pendidikan dan Kebudayaan RI',
-                                      '11 Juni'), () {
+                                      '11 Juni',
+                                      'Dilihat 72 kali'), () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -199,7 +202,8 @@ class _HomePageState extends State<HomePage> {
                                       Colors.red.shade300,
                                       'Berbudaya Asyik, Bermain Angklung di ...',
                                       'Kementerian Pendidikan dan Kebudayaan RI',
-                                      '11 Juni'), () {
+                                      '11 Juni',
+                                      'Dilihat 45 kali'), () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -217,7 +221,8 @@ class _HomePageState extends State<HomePage> {
                                       Colors.purple.shade300,
                                       'Program Magang Budaya Jadi Sarana ...',
                                       'Kementerian Pendidikan dan Kebudayaan RI',
-                                      '11 Juni'), () {
+                                      '11 Juni',
+                                      'Dilihat 49 kali'), () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -330,11 +335,11 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _cardBeritaTerbaru(
-      Color color1, Color color2, String title, String ministry, String date) {
+  Widget _cardBeritaTerbaru(Color color1, Color color2, String title,
+      String ministry, String date, String view) {
     return Card(
       child: Container(
-        width: 500,
+        width: 400,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
           color: color1, //Colors.blue,
@@ -379,9 +384,24 @@ class _HomePageState extends State<HomePage> {
                     style: kHeading6.copyWith(color: kWhite),
                   ),
                   SizedBox(height: 3.0),
-                  Text(
-                    date + ' 2024',
-                    style: kCaption.copyWith(color: kWhite.withOpacity(0.65)),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Image.asset(
+                        "assets/icons/eye.png",
+                        height: 16,
+                        fit: BoxFit.cover,
+                        color: kWhite.withOpacity(0.7),
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Text(
+                        view,
+                        style: kNumber.copyWith(color: kWhite.withOpacity(0.7)),
+                      ),
+                    ],
                   ),
                 ],
               ),

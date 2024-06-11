@@ -45,7 +45,7 @@ class ArticleListWidget extends StatelessWidget {
                       ),
                     );
                   },
-                  child: _UpdateInfoPemerintah(article),
+                  child: _WebCard(article),
                 ),
             ],
           );
@@ -54,7 +54,7 @@ class ArticleListWidget extends StatelessWidget {
     );
   }
 
-  Widget _UpdateInfoPemerintah(Article article) {
+  Widget _WebCard(Article article) {
     return Container(
       width: 320,
       padding: EdgeInsets.all(16),
