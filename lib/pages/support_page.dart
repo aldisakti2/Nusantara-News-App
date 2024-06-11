@@ -4,7 +4,6 @@ import '../styles/text_style.dart';
 
 class SupportPage extends StatelessWidget {
   const SupportPage({Key? key}) : super(key: key);
-  static const nameRoute = '/support';
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +32,7 @@ class SupportPage extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       Text(
-                        'Kontak',
+                        'Inbox',
                         textAlign: TextAlign.left,
                         style: kHeading6.copyWith(
                           color: kBlack,
