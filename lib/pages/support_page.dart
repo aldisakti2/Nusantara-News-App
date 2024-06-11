@@ -231,7 +231,7 @@ class SupportPage extends StatelessWidget {
                                 left: 0,
                                 child: InkWell(
                                   onTap: () {
-                                    Navigator.pushNamed(context, '/chat');
+                                    Navigator.pushNamed(context, '/report');
                                     print("Button tapped");
                                   },
                                   child: Container(

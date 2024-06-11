@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:nusantara_news_app/pages/support_page.dart';
+import 'package:nusantara_news_app/pages/report_page.dart';
 import 'package:nusantara_news_app/pages/feedback_page.dart';
+import 'package:nusantara_news_app/pages/support_page.dart';
 import '../pages/main_page.dart';
 import '../pages/login_page.dart';
 import '../pages/register_page.dart';
 
 MaterialPageRoute _pageRoute(
-        {required Widget body, required RouteSettings settings}) =>
+    {required Widget body, required RouteSettings settings}) =>
     MaterialPageRoute(builder: (_) => body, settings: settings);
 Route? generateRoute(RouteSettings settings) {
   Route? _route;
@@ -26,6 +27,9 @@ Route? generateRoute(RouteSettings settings) {
     case rSupport:
       _route = _pageRoute(body: SupportPage(), settings: settings);
       break;
+    case rReport:
+      _route = _pageRoute(body: ReportPage(), settings: settings);
+      break;
   }
   return _route;
 }
@@ -36,3 +40,4 @@ const String rRegister = '/register';
 const String rMain = '/main';
 const String rFeedback = '/feedback';
 const String rSupport = '/support';
+const String rReport = '/report';
