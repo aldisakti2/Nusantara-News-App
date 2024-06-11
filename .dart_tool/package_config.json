@@ -129,7 +129,7 @@
     },
     {
       "name": "firebase_core_web",
-      "rootUri": "file:///C:/Users/sulta/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_core_web-2.17.0",
+      "rootUri": "file:///C:/Users/sulta/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_core_web-2.17.1",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -141,7 +141,7 @@
     },
     {
       "name": "flutter_bloc",
-      "rootUri": "file:///C:/Users/sulta/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_bloc-8.1.5",
+      "rootUri": "file:///C:/Users/sulta/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_bloc-8.1.6",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -189,9 +189,9 @@
     },
     {
       "name": "google_sign_in_android",
-      "rootUri": "file:///C:/Users/sulta/AppData/Local/Pub/Cache/hosted/pub.dev/google_sign_in_android-6.1.23",
+      "rootUri": "file:///C:/Users/sulta/AppData/Local/Pub/Cache/hosted/pub.dev/google_sign_in_android-6.1.24",
       "packageUri": "lib/",
-      "languageVersion": "3.2"
+      "languageVersion": "3.4"
     },
     {
       "name": "google_sign_in_ios",
@@ -297,9 +297,9 @@
     },
     {
       "name": "path_provider_android",
-      "rootUri": "file:///C:/Users/sulta/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_android-2.2.4",
+      "rootUri": "file:///C:/Users/sulta/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_android-2.2.5",
       "packageUri": "lib/",
-      "languageVersion": "3.2"
+      "languageVersion": "3.4"
     },
     {
       "name": "path_provider_foundation",
@@ -339,9 +339,9 @@
     },
     {
       "name": "platform",
-      "rootUri": "file:///C:/Users/sulta/AppData/Local/Pub/Cache/hosted/pub.dev/platform-3.1.4",
+      "rootUri": "file:///C:/Users/sulta/AppData/Local/Pub/Cache/hosted/pub.dev/platform-3.1.5",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.2"
     },
     {
       "name": "plugin_platform_interface",
@@ -465,9 +465,9 @@
     },
     {
       "name": "win32",
-      "rootUri": "file:///C:/Users/sulta/AppData/Local/Pub/Cache/hosted/pub.dev/win32-5.5.0",
+      "rootUri": "file:///C:/Users/sulta/AppData/Local/Pub/Cache/hosted/pub.dev/win32-5.5.1",
       "packageUri": "lib/",
-      "languageVersion": "3.3"
+      "languageVersion": "3.4"
     },
     {
       "name": "xdg_directories",
@@ -488,7 +488,7 @@
       "languageVersion": "3.3"
     }
   ],
-  "generated": "2024-06-10T06:06:45.547328Z",
+  "generated": "2024-06-11T05:21:53.384812Z",
   "generator": "pub",
   "generatorVersion": "3.4.1",
   "flutterRoot": "file:///D:/flutter",
