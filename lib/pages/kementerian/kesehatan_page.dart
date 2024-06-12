@@ -12,6 +12,7 @@ class KemenkesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: kBgColor,
         appBar: AppBar(
           title: Text(
             'Kemenakes News',
@@ -20,12 +21,14 @@ class KemenkesPage extends StatelessWidget {
           leading: BackButton(
             color: kBlack,
           ),
+          backgroundColor: kBgColor,
         ),
         body: SafeArea(
           child: SingleChildScrollView(
             child: Container(
               alignment: Alignment.topLeft,
               margin: EdgeInsets.only(top: 20, left: 30, right: 30),
+              color: kBgColor,
               child: Stack(
                 children: [
                   ArticleListWidget(
