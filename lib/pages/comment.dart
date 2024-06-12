@@ -36,9 +36,10 @@ class _CommentScreenState extends State<CommentScreen> {
 
   String getCensoredEmail(String email) {
     List<String> parts = email.split('@');
-    if (parts[0].length > 5) {
-      parts[0] = parts[0].substring(0, 5) + '*****';
-    }
+    parts[0] = parts[0].substring(0, parts[0].length ~/ 2) +
+        ('*' *
+            (parts[0].length -
+                (parts[0].length ~/ 2))); //parts[0].substring(0, 5) + '*****';
     return parts.join('@');
   }
 
