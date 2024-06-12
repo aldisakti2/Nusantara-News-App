@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:nusantara_news_app/styles/colors.dart';
+import 'package:nusantara_news_app/styles/text_style.dart';
 
 final _firestore = FirebaseFirestore.instance;
 final _auth = FirebaseAuth.instance;
@@ -14,8 +16,7 @@ class CommentScreen extends StatefulWidget {
 
 class _CommentScreenState extends State<CommentScreen> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController titleController = TextEditingController();
-  final TextEditingController noteController = TextEditingController();
+  final TextEditingController commentController = TextEditingController();
   User? loggedInUser;
 
   @override
@@ -33,10 +34,17 @@ class _CommentScreenState extends State<CommentScreen> {
     }
   }
 
+  String getCensoredEmail(String email) {
+    List<String> parts = email.split('@');
+    if (parts[0].length > 5) {
+      parts[0] = parts[0].substring(0, 5) + '*****';
+    }
+    return parts.join('@');
+  }
+
   @override
   void dispose() {
-    titleController.dispose();
-    noteController.dispose();
+    commentController.dispose();
     super.dispose();
   }
 
@@ -44,12 +52,12 @@ class _CommentScreenState extends State<CommentScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text('Note'),
-        actions: [],
+        leading: BackButton(),
+        title: const Text('News Comment', textAlign: TextAlign.center),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: _firestore.collection('tasks').orderBy('timestamp').snapshots(),
+        stream:
+            _firestore.collection('comment').orderBy('timestamp').snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const CircularProgressIndicator();
@@ -60,14 +68,19 @@ class _CommentScreenState extends State<CommentScreen> {
               children: snapshot.data!.docs.map((DocumentSnapshot document) {
                 Map<String, dynamic> data =
                     document.data()! as Map<String, dynamic>;
-                final titleEdc =
-                    TextEditingController(text: data['title'].toString());
-                final noteEdc =
-                    TextEditingController(text: data['note'].toString());
+                final emailEdc =
+                    TextEditingController(text: data['email'].toString());
+                final commentEdc =
+                    TextEditingController(text: data['comment'].toString());
+                bool isOwnComment =
+                    loggedInUser != null && loggedInUser!.uid == data['userId'];
+
                 return SizedBox(
                   height: 170.0,
                   width: MediaQuery.of(context).size.width,
                   child: Card(
+                    color:
+                        isOwnComment ? Colors.lightBlue.shade50 : Colors.white,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
@@ -78,14 +91,13 @@ class _CommentScreenState extends State<CommentScreen> {
                             children: [
                               SizedBox(
                                 width: MediaQuery.of(context).size.width * 0.7,
-                                child: Text(data['title'],
+                                child: Text(data['email'],
                                     maxLines: 1,
                                     style: const TextStyle(
                                         fontWeight: FontWeight.w700,
                                         fontSize: 20.0)),
                               ),
-                              if (loggedInUser != null &&
-                                  loggedInUser!.uid == data['userId'])
+                              if (isOwnComment)
                                 GestureDetector(
                                     onTap: () {},
                                     child: PopupMenuButton<String>(
@@ -105,7 +117,7 @@ class _CommentScreenState extends State<CommentScreen> {
                                                           MainAxisSize.min,
                                                       children: [
                                                         TextFormField(
-                                                          controller: titleEdc,
+                                                          controller: emailEdc,
                                                         ),
                                                         const SizedBox(
                                                             height: 10.0),
@@ -114,7 +126,7 @@ class _CommentScreenState extends State<CommentScreen> {
                                                             child:
                                                                 TextFormField(
                                                               controller:
-                                                                  noteEdc,
+                                                                  commentEdc,
                                                               maxLines:
                                                                   null, // Set this
                                                               expands:
@@ -142,13 +154,18 @@ class _CommentScreenState extends State<CommentScreen> {
                                                                               .currentState!
                                                                               .validate()) {
                                                                             try {
-                                                                              await _firestore.collection('tasks').doc(document.id).update({
-                                                                                'title': titleEdc.text,
-                                                                                'note': noteEdc.text,
+                                                                              await _firestore.collection('comment').doc(document.id).update({
+                                                                                'email': emailEdc.text,
+                                                                                'comment': commentEdc.text,
                                                                                 'timestamp': FieldValue.serverTimestamp(),
                                                                               });
                                                                               ScaffoldMessenger.of(context).showSnackBar(
-                                                                                const SnackBar(content: Text('Note berhasil diperbarui')),
+                                                                                SnackBar(
+                                                                                    backgroundColor: Colors.green,
+                                                                                    content: Text(
+                                                                                      'Comment Update Successfull...',
+                                                                                      style: kSubtitlemid3.copyWith(color: kWhite),
+                                                                                    )),
                                                                               );
                                                                               Navigator.pop(context);
                                                                             } catch (e) {
@@ -168,7 +185,7 @@ class _CommentScreenState extends State<CommentScreen> {
                                         } else if (value == 'delete') {
                                           String documentId = document.id;
                                           _firestore
-                                              .collection('tasks')
+                                              .collection('comment')
                                               .doc(documentId)
                                               .delete();
                                         }
@@ -188,7 +205,7 @@ class _CommentScreenState extends State<CommentScreen> {
                             ],
                           ),
                           const SizedBox(height: 10.0),
-                          Text(data['note'],
+                          Text(data['comment'],
                               textAlign: TextAlign.justify,
                               maxLines: 5,
                               style: const TextStyle(fontSize: 17.0)),
@@ -222,19 +239,24 @@ class _CommentScreenState extends State<CommentScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         TextFormField(
-                            controller: titleController,
-                            decoration:
-                                const InputDecoration(hintText: 'Title')),
+                          controller: TextEditingController(
+                              text: getCensoredEmail(loggedInUser!.email!)),
+                          readOnly: true,
+                          decoration: const InputDecoration(
+                            hintText: 'Email',
+                          ),
+                        ),
                         const SizedBox(height: 10.0),
                         SizedBox(
                             height: 300,
                             child: TextFormField(
-                                controller: noteController,
+                                controller: commentController,
                                 maxLines: null, // Set this
                                 expands: true, // and this
                                 keyboardType: TextInputType.multiline,
                                 decoration: const InputDecoration(
-                                    hintText: 'Write a note', filled: true))),
+                                    hintText: 'Write a comment',
+                                    filled: true))),
                         Padding(
                             padding: EdgeInsets.only(
                                 bottom:
@@ -246,19 +268,25 @@ class _CommentScreenState extends State<CommentScreen> {
                                       if (_formKey.currentState!.validate()) {
                                         try {
                                           await _firestore
-                                              .collection('tasks')
+                                              .collection('comment')
                                               .add({
-                                            'title': titleController.text,
-                                            'note': noteController.text,
+                                            'email': getCensoredEmail(
+                                                loggedInUser!.email!),
+                                            'comment': commentController.text,
                                             'userId': loggedInUser!.uid,
                                             'timestamp':
                                                 FieldValue.serverTimestamp(),
                                           });
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(
-                                            const SnackBar(
-                                                content:
-                                                    Text('Note ditambahkan')),
+                                            SnackBar(
+                                              backgroundColor: Colors.green,
+                                              content: Text(
+                                                'Comment Successfully Added',
+                                                style: kSubtitlemid3.copyWith(
+                                                    color: kWhite),
+                                              ),
+                                            ),
                                           );
                                           Navigator.pop(context);
                                         } catch (e) {
