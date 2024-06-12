@@ -31,7 +31,8 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     super.initState();
     _checkUserStatus();
-    _authSubscription = FirebaseAuth.instance.authStateChanges().listen((User? user) {
+    _authSubscription =
+        FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if (mounted) {
         _checkUserStatus();
       }
@@ -142,7 +143,7 @@ class _MainPageState extends State<MainPage> {
                 label: 'Bantuan'),
             BottomNavigationBarItem(
                 icon: Image.asset(
-                  'assets/icons/kritiksaran.png',
+                  'assets/icons/report.png',
                   width: 24,
                   color: _selectedIndex == 2 ? kBlueRibbon : kDarkGray,
                 ),
@@ -150,14 +151,14 @@ class _MainPageState extends State<MainPage> {
             BottomNavigationBarItem(
               icon: user == null
                   ? Image.asset(
-                'assets/icons/profile.png',
-                width: 24,
-                color: _selectedIndex == 3 ? kBlueRibbon : kDarkGray,
-              )
+                      'assets/icons/profile.png',
+                      width: 24,
+                      color: _selectedIndex == 3 ? kBlueRibbon : kDarkGray,
+                    )
                   : Icon(
-                Icons.logout,
-                color: _selectedIndex == 3 ? kBlueRibbon : kDarkGray,
-              ),
+                      Icons.logout,
+                      color: _selectedIndex == 3 ? kBlueRibbon : kDarkGray,
+                    ),
               label: user == null ? 'SignIn' : 'LogOut',
             ),
           ],
