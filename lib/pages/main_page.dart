@@ -39,7 +39,7 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
-  void _onItemTapped(int index) {
+  Future<void> _onItemTapped(int index) async {
     if (index == 3) {
       _handleProfileTap();
     } else {
