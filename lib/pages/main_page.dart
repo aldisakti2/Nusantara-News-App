@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:nusantara_news_app/styles/colors.dart';
 import 'package:nusantara_news_app/styles/text_style.dart';
@@ -17,6 +19,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int _selectedIndex = 0;
   User? user;
+  late final StreamSubscription<User?> _authSubscription;
 
   static List<Widget> pages = [
     HomePage(),
@@ -28,15 +31,25 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     super.initState();
     _checkUserStatus();
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {
-      _checkUserStatus();
+    _authSubscription = FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (mounted) {
+        _checkUserStatus();
+      }
     });
   }
 
+  @override
+  void dispose() {
+    _authSubscription.cancel();
+    super.dispose();
+  }
+
   void _checkUserStatus() {
-    setState(() {
-      user = FirebaseAuth.instance.currentUser;
-    });
+    if (mounted) {
+      setState(() {
+        user = FirebaseAuth.instance.currentUser;
+      });
+    }
   }
 
   void _onItemTapped(int index) {
@@ -56,7 +69,9 @@ class _MainPageState extends State<MainPage> {
         context,
         MaterialPageRoute(builder: (context) => LoginScreen()),
       ).then((_) {
-        _checkUserStatus(); // Refresh the user state after returning from the login screen
+        if (mounted) {
+          _checkUserStatus(); // Refresh the user state after returning from the login screen
+        }
       });
     } else {
       // Perform logout
@@ -67,10 +82,12 @@ class _MainPageState extends State<MainPage> {
   void _signOut() async {
     await FirebaseAuth.instance.signOut();
     // After sign-out, update the user state and stay on the homepage
-    setState(() {
-      _selectedIndex = 0;
-    });
-    _checkUserStatus();
+    if (mounted) {
+      setState(() {
+        _selectedIndex = 0;
+      });
+      _checkUserStatus();
+    }
   }
 
   @override
@@ -133,14 +150,14 @@ class _MainPageState extends State<MainPage> {
             BottomNavigationBarItem(
               icon: user == null
                   ? Image.asset(
-                      'assets/icons/profile.png',
-                      width: 24,
-                      color: _selectedIndex == 3 ? kBlueRibbon : kDarkGray,
-                    )
+                'assets/icons/profile.png',
+                width: 24,
+                color: _selectedIndex == 3 ? kBlueRibbon : kDarkGray,
+              )
                   : Icon(
-                      Icons.logout,
-                      color: _selectedIndex == 3 ? kBlueRibbon : kDarkGray,
-                    ),
+                Icons.logout,
+                color: _selectedIndex == 3 ? kBlueRibbon : kDarkGray,
+              ),
               label: user == null ? 'SignIn' : 'LogOut',
             ),
           ],
