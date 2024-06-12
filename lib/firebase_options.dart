@@ -17,29 +17,17 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -59,4 +47,47 @@ class DefaultFirebaseOptions {
     projectId: 'nusantara-news-app',
     storageBucket: 'nusantara-news-app.appspot.com',
   );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyDwFNtfwPmW3EQ4-aQX0OPyaD38t-i-1WA',
+    appId: '1:473373018108:web:d31beeeac3abb0eca29479',
+    messagingSenderId: '473373018108',
+    projectId: 'nusantara-news-app',
+    authDomain: 'nusantara-news-app.firebaseapp.com',
+    storageBucket: 'nusantara-news-app.appspot.com',
+    measurementId: 'G-KRRRVQ7ZND',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyBV5lewiHhgGPjJjoIzIRitRkSXpNzvyGk',
+    appId: '1:473373018108:ios:e381bec57dc2599ba29479',
+    messagingSenderId: '473373018108',
+    projectId: 'nusantara-news-app',
+    storageBucket: 'nusantara-news-app.appspot.com',
+    androidClientId: '473373018108-m296m276vcb9t36fhbdg9b4nf9s5ngo9.apps.googleusercontent.com',
+    iosClientId: '473373018108-q6km93fd313t2qqrq9c095a7c0jqo8h3.apps.googleusercontent.com',
+    iosBundleId: 'com.example.nusantaraNewsApp',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyBV5lewiHhgGPjJjoIzIRitRkSXpNzvyGk',
+    appId: '1:473373018108:ios:e381bec57dc2599ba29479',
+    messagingSenderId: '473373018108',
+    projectId: 'nusantara-news-app',
+    storageBucket: 'nusantara-news-app.appspot.com',
+    androidClientId: '473373018108-m296m276vcb9t36fhbdg9b4nf9s5ngo9.apps.googleusercontent.com',
+    iosClientId: '473373018108-q6km93fd313t2qqrq9c095a7c0jqo8h3.apps.googleusercontent.com',
+    iosBundleId: 'com.example.nusantaraNewsApp',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyDwFNtfwPmW3EQ4-aQX0OPyaD38t-i-1WA',
+    appId: '1:473373018108:web:c9315b3aa6c240f8a29479',
+    messagingSenderId: '473373018108',
+    projectId: 'nusantara-news-app',
+    authDomain: 'nusantara-news-app.firebaseapp.com',
+    storageBucket: 'nusantara-news-app.appspot.com',
+    measurementId: 'G-0EY78REKK8',
+  );
+
 }
