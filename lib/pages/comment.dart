@@ -223,7 +223,10 @@ class _CommentScreenState extends State<CommentScreen> {
         onPressed: () {
           if (loggedInUser == null) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Please login to add a comment')),
+              SnackBar(
+                  backgroundColor: Colors.red,
+                  content: Text('Please login to add a comment',
+                      style: kSubtitlemid2.copyWith(color: kWhite))),
             );
             return;
           }

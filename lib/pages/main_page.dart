@@ -103,7 +103,7 @@ class _MainPageState extends State<MainPage> {
   Widget _customBottomNav() {
     return Container(
       height: 90,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           color: kWhite,
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(15),
@@ -115,7 +115,7 @@ class _MainPageState extends State<MainPage> {
             )
           ]),
       child: ClipRRect(
-        borderRadius: BorderRadius.vertical(
+        borderRadius: const BorderRadius.vertical(
           top: Radius.circular(15),
         ),
         child: BottomNavigationBar(
