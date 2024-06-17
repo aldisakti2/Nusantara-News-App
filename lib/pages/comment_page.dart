@@ -59,7 +59,9 @@ class _CommentScreenSection extends State<CommentSection> {
     return Scaffold(
       appBar: AppBar(
         leading: BackButton(),
-        title: const Text('News Comment', textAlign: TextAlign.center),
+        title: Text('News Comment',
+            style: kHeading6.copyWith(color: kBlack),
+            textAlign: TextAlign.center),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: _firestore
@@ -186,8 +188,15 @@ class _CommentScreenSection extends State<CommentSection> {
                                                                             }
                                                                           }
                                                                         },
-                                                                        child: const Text(
-                                                                            'Save'))))
+                                                                        child:
+                                                                            Text(
+                                                                          'Save',
+                                                                          style:
+                                                                              kSubtitlemid3.copyWith(
+                                                                            color:
+                                                                                kBlueRibbon,
+                                                                          ),
+                                                                        ))))
                                                       ],
                                                     ),
                                                   ),
@@ -233,12 +242,14 @@ class _CommentScreenSection extends State<CommentSection> {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Color.fromARGB(255, 95, 179, 218),
+        foregroundColor: kWhite,
         onPressed: () {
           if (loggedInUser == null) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                   backgroundColor: Colors.red,
-                  content: Text('Please login to add a comment',
+                  content: Text('Please Login First To Add Comment',
                       style: kSubtitlemid2.copyWith(color: kWhite))),
             );
             return;
@@ -275,8 +286,8 @@ class _CommentScreenSection extends State<CommentSection> {
                                     filled: true))),
                         Padding(
                             padding: EdgeInsets.only(
-                                bottom:
-                                    MediaQuery.of(context).viewInsets.bottom),
+                              bottom: MediaQuery.of(context).viewInsets.bottom,
+                            ),
                             child: SizedBox(
                                 width: MediaQuery.of(context).size.width,
                                 child: ElevatedButton(
@@ -315,7 +326,12 @@ class _CommentScreenSection extends State<CommentSection> {
                                         }
                                       }
                                     },
-                                    child: const Text('Save'))))
+                                    child: Text(
+                                      'Save',
+                                      style: kSubtitlemid3.copyWith(
+                                        color: kBlueRibbon,
+                                      ),
+                                    ))))
                       ],
                     ),
                   ),

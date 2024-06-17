@@ -9,11 +9,11 @@ class ArticleListWidget extends StatelessWidget {
   final String optionalWeb;
 
   const ArticleListWidget({
-    Key? key,
+    super.key,
     required this.futureArticles,
     required this.filterTag,
     required this.optionalWeb,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class ArticleListWidget extends StatelessWidget {
         } else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return Center(child: Text('No articles found.'));
+          return const Center(child: Text('No articles found.'));
         } else {
           List<Web_Article> articles = snapshot.data!;
           saveArticles(articles); // Save articles to Firestore
@@ -61,9 +61,9 @@ class ArticleListWidget extends StatelessWidget {
   Widget _WebCard(Web_Article article) {
     return Container(
       width: 320,
-      padding: EdgeInsets.all(16),
-      margin: EdgeInsets.all(8),
-      decoration: BoxDecoration(
+      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.all(8),
+      decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(
           Radius.circular(16),
@@ -75,26 +75,26 @@ class ArticleListWidget extends StatelessWidget {
         children: [
           Text(
             truncateTitle(article.title),
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
-          SizedBox(
+          const SizedBox(
             height: 7,
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Icon(
+              const Icon(
                 Icons.remove_red_eye,
                 size: 16,
                 color: Color(0xFF98A0A2),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 8,
               ),
               Text(
                 article.date,
-                style: TextStyle(color: Color(0xFF98A0A2)),
+                style: const TextStyle(color: Color(0xFF98A0A2)),
               ),
             ],
           ),
