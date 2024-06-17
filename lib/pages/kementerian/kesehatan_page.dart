@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nusantara_news_app/bloc/visit_web/web_parser.dart';
-import 'package:nusantara_news_app/pages/home_page.dart';
 import 'package:nusantara_news_app/styles/colors.dart';
 import 'package:nusantara_news_app/styles/text_style.dart';
-import 'package:http/http.dart' as http;
-import 'package:html/parser.dart' as htmlParser;
+import 'package:nusantara_news_app/models/web_articles.dart';
 
 class KemenkesPage extends StatelessWidget {
   const KemenkesPage({Key? key}) : super(key: key);
@@ -32,14 +30,15 @@ class KemenkesPage extends StatelessWidget {
               child: Stack(
                 children: [
                   ArticleListWidget(
-                    futureArticles: _fetchData(
+                    futureArticles: fetchData(
                         'https://www.kemkes.go.id/id/category/artikel-kesehatan',
                         'div h4',
                         'time em',
-                        'a.link'),
+                        'a.link',
+                        'Kemenkes'),
                     filterTag:
                         "if (a[i].classList.contains('header-bottom') || a[i].classList.contains('col-md-6') || a[i].classList.contains('col-md-4') || a[i].localName.includes('footer'))",
-                    OptionalWeb: "https://www.kemkes.go.id",
+                    optionalWeb: "https://www.kemkes.go.id",
                   ),
                 ],
               ),
@@ -94,40 +93,5 @@ class KemenkesPage extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Future<List<Article>> _fetchData(
-    String url,
-    String titleSelector,
-    String dateSelector,
-    String linkSelector,
-  ) async {
-    try {
-      final response = await http.get(Uri.parse(url));
-      if (response.statusCode == 200) {
-        final htmlDocument = htmlParser.parse(response.body);
-        final titleElements = htmlDocument.querySelectorAll(titleSelector);
-        final dateElements = htmlDocument.querySelectorAll(dateSelector);
-        final linkElements = htmlDocument.querySelectorAll(linkSelector);
-
-        List<Article> articles = [];
-
-        for (int i = 0; i < titleElements.length; i++) {
-          final title = titleElements[i].text.trim();
-          final date = dateElements.isNotEmpty && i < dateElements.length
-              ? dateElements[i].text.trim()
-              : 'No date found';
-          final link = linkElements[i].attributes['href'] ?? '';
-
-          articles.add(Article(title: title, date: date, link: link));
-        }
-
-        return articles;
-      } else {
-        throw Exception('Failed to load page');
-      }
-    } catch (e) {
-      throw Exception('Error fetching data: $e');
-    }
   }
 }

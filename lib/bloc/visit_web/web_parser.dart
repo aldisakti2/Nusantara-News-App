@@ -1,24 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:nusantara_news_app/bloc/visit_web/web_state.dart';
-import 'package:nusantara_news_app/pages/home_page.dart';
-import 'package:nusantara_news_app/styles/colors.dart';
-import 'package:nusantara_news_app/styles/text_style.dart';
+import 'package:nusantara_news_app/models/web_articles.dart';
 
 class ArticleListWidget extends StatelessWidget {
-  final Future<List<Article>> futureArticles;
+  final Future<List<Web_Article>> futureArticles;
   final String filterTag;
-  final String OptionalWeb;
+  final String optionalWeb;
 
   const ArticleListWidget({
     Key? key,
     required this.futureArticles,
     required this.filterTag,
-    required this.OptionalWeb,
+    required this.optionalWeb,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Article>>(
+    return FutureBuilder<List<Web_Article>>(
       future: futureArticles,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -28,7 +26,8 @@ class ArticleListWidget extends StatelessWidget {
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
           return Center(child: Text('No articles found.'));
         } else {
-          List<Article> articles = snapshot.data!;
+          List<Web_Article> articles = snapshot.data!;
+          saveArticles(articles); // Save articles to Firestore
           return Column(
             children: [
               for (var article in articles)
@@ -39,8 +38,9 @@ class ArticleListWidget extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (context) => WebViewPage(
                           title: article.title,
-                          selectedUrl: OptionalWeb + article.link,
+                          selectedUrl: optionalWeb + article.link,
                           filtering: filterTag,
+                          category: article.category,
                         ),
                       ),
                     );
@@ -54,13 +54,13 @@ class ArticleListWidget extends StatelessWidget {
     );
   }
 
-  Widget _WebCard(Article article) {
+  Widget _WebCard(Web_Article article) {
     return Container(
       width: 320,
       padding: EdgeInsets.all(16),
       margin: EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: kWhite,
+        color: Colors.white,
         borderRadius: BorderRadius.all(
           Radius.circular(16),
         ),
@@ -71,7 +71,7 @@ class ArticleListWidget extends StatelessWidget {
         children: [
           Text(
             truncateTitle(article.title),
-            style: kSubtitlemid3,
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
           SizedBox(
             height: 7,
@@ -80,10 +80,9 @@ class ArticleListWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Image.asset(
-                "assets/icons/eye.png",
-                height: 16,
-                fit: BoxFit.cover,
+              Icon(
+                Icons.remove_red_eye,
+                size: 16,
                 color: Color(0xFF98A0A2),
               ),
               SizedBox(
@@ -91,7 +90,7 @@ class ArticleListWidget extends StatelessWidget {
               ),
               Text(
                 article.date,
-                style: kNumber.copyWith(color: Color(0xFF98A0A2)),
+                style: TextStyle(color: Color(0xFF98A0A2)),
               ),
             ],
           ),

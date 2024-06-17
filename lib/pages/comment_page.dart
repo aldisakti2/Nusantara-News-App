@@ -7,14 +7,21 @@ import 'package:nusantara_news_app/styles/text_style.dart';
 final _firestore = FirebaseFirestore.instance;
 final _auth = FirebaseAuth.instance;
 
-class CommentScreen extends StatefulWidget {
-  const CommentScreen({Key? key}) : super(key: key);
+class CommentSection extends StatefulWidget {
+  final String category;
+  final String title;
+
+  const CommentSection({
+    Key? key,
+    required this.category,
+    required this.title,
+  }) : super(key: key);
 
   @override
-  State<CommentScreen> createState() => _CommentScreenState();
+  State<CommentSection> createState() => _CommentScreenSection();
 }
 
-class _CommentScreenState extends State<CommentScreen> {
+class _CommentScreenSection extends State<CommentSection> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController commentController = TextEditingController();
   User? loggedInUser;
@@ -37,9 +44,7 @@ class _CommentScreenState extends State<CommentScreen> {
   String getCensoredEmail(String email) {
     List<String> parts = email.split('@');
     parts[0] = parts[0].substring(0, parts[0].length ~/ 2) +
-        ('*' *
-            (parts[0].length -
-                (parts[0].length ~/ 2)));
+        ('*' * (parts[0].length - (parts[0].length ~/ 2)));
     return parts.join('@');
   }
 
@@ -57,8 +62,12 @@ class _CommentScreenState extends State<CommentScreen> {
         title: const Text('News Comment', textAlign: TextAlign.center),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream:
-            _firestore.collection('comment').orderBy('timestamp').snapshots(),
+        stream: _firestore
+            .collection(widget.category)
+            .doc(widget.title)
+            .collection('comments')
+            .orderBy('timestamp')
+            .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const CircularProgressIndicator();
@@ -155,7 +164,8 @@ class _CommentScreenState extends State<CommentScreen> {
                                                                               .currentState!
                                                                               .validate()) {
                                                                             try {
-                                                                              await _firestore.collection('comment').doc(document.id).update({
+                                                                              // _firestore.collection(widget.category).doc(widget.title).collection('comments').orderBy('timestamp').snapshots(),
+                                                                              await _firestore.collection(widget.category).doc(widget.title).collection('comments').doc(document.id).update({
                                                                                 'email': emailEdc.text,
                                                                                 'comment': commentEdc.text,
                                                                                 'timestamp': FieldValue.serverTimestamp(),
@@ -186,7 +196,9 @@ class _CommentScreenState extends State<CommentScreen> {
                                         } else if (value == 'delete') {
                                           String documentId = document.id;
                                           _firestore
-                                              .collection('comment')
+                                              .collection(widget.category)
+                                              .doc(widget.title)
+                                              .collection('comments')
                                               .doc(documentId)
                                               .delete();
                                         }
@@ -272,7 +284,9 @@ class _CommentScreenState extends State<CommentScreen> {
                                       if (_formKey.currentState!.validate()) {
                                         try {
                                           await _firestore
-                                              .collection('comment')
+                                              .collection(widget.category)
+                                              .doc(widget.title)
+                                              .collection('comments')
                                               .add({
                                             'email': getCensoredEmail(
                                                 loggedInUser!.email!),

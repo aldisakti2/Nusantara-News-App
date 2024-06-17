@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:nusantara_news_app/pages/comment.dart';
+//import 'package:nusantara_news_app/pages/comment.dart';
+import 'package:nusantara_news_app/pages/comment_page.dart';
 import 'package:nusantara_news_app/styles/colors.dart';
 
 class WebViewPage extends StatefulWidget {
   final String title;
   final String selectedUrl;
   final String filtering;
+  final String category;
 
   const WebViewPage({
     Key? key,
     required this.title,
     required this.selectedUrl,
     required this.filtering,
+    required this.category,
   }) : super(key: key);
 
   @override
@@ -35,10 +38,13 @@ class _WebViewPageState extends State<WebViewPage> {
             onPressed: () {
               // Define the action when the icon is pressed
               Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => CommentScreen()), // Example page
-              );
+                  context,
+                  MaterialPageRoute(
+                      //builder: (context) => CommentScreen()), // Example page
+                      builder: (context) => CommentSection(
+                            category: widget.category,
+                            title: widget.title,
+                          )));
             },
           ),
         ],
