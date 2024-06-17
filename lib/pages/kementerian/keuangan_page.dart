@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nusantara_news_app/bloc/visit_web/web_parser.dart';
-import 'package:nusantara_news_app/bloc/visit_web/web_state.dart';
 import 'package:nusantara_news_app/models/web_articles.dart';
 import 'package:nusantara_news_app/styles/colors.dart';
 import 'package:nusantara_news_app/styles/text_style.dart';
