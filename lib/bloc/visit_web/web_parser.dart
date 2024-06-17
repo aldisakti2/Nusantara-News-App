@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nusantara_news_app/bloc/visit_web/web_state.dart';
 import 'package:nusantara_news_app/models/web_articles.dart';
+import 'package:nusantara_news_app/styles/colors.dart';
 
 class ArticleListWidget extends StatelessWidget {
   final Future<List<Web_Article>> futureArticles;
@@ -20,7 +21,10 @@ class ArticleListWidget extends StatelessWidget {
       future: futureArticles,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(
+              child: CircularProgressIndicator(
+            color: kBlueRibbon,
+          ));
         } else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {

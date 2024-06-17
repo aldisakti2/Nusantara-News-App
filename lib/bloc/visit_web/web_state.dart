@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-//import 'package:nusantara_news_app/pages/comment.dart';
 import 'package:nusantara_news_app/pages/comment_page.dart';
 import 'package:nusantara_news_app/styles/colors.dart';
 
@@ -33,7 +32,8 @@ class _WebViewPageState extends State<WebViewPage> {
         title: Text(widget.title),
         actions: [
           IconButton(
-            icon: Icon(Icons.insert_comment_sharp), // Choose the icon you want
+            icon: const Icon(
+                Icons.insert_comment_sharp), // Choose the icon you want
             color: kBlack, // Set the color of the icon
             onPressed: () {
               // Define the action when the icon is pressed
@@ -57,21 +57,19 @@ class _WebViewPageState extends State<WebViewPage> {
               webViewController = controller;
             },
             onLoadStop: (controller, url) async {
-              // Execute your JavaScript here to get the data you need
               await controller.evaluateJavascript(
-                  source: "a = document.querySelectorAll('*');"
-                          "for (let i = 0; i < a.length; i++) {" +
-                      widget.filtering +
-                      "{"
-                          "a[i].style.display = 'none';"
-                          "}"
-                          "};");
+                  source:
+                      "a = document.querySelectorAll('*');for (let i = 0; i < a.length; i++) {${widget.filtering}{a[i].style.display = 'none';}};");
               setState(() {
                 isLoading = false;
               });
             },
           ),
-          if (isLoading) Center(child: CircularProgressIndicator()),
+          if (isLoading)
+            const Center(
+                child: CircularProgressIndicator(
+              color: kBlueRibbon,
+            )),
         ],
       ),
     );

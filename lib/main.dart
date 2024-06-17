@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         navigatorKey: NAV_KEY,
         onGenerateRoute: generateRoute,
-        home: AppInitializer(),
+        home: const AppInitializer(),
       ),
     );
   }
@@ -60,7 +60,18 @@ class _AppInitializerState extends State<AppInitializer> {
 
   @override
   Widget build(BuildContext context) {
-    return _showOnboarding ? OnBoardingPage() : AuthStateListener();
+    return Scaffold(
+      body: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 500),
+        transitionBuilder: (Widget child, Animation<double> animation) {
+          return FadeTransition(
+            opacity: animation,
+            child: child,
+          );
+        },
+        child: _showOnboarding ? OnBoardingPage() : AuthStateListener(),
+      ),
+    );
   }
 }
 
