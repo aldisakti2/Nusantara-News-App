@@ -125,116 +125,82 @@ class _HomePageState extends State<HomePage> {
                     ),
                     SizedBox(height: 5),
                     SizedBox(
-                        height: 150,
-                        child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: [
-                              _berita(
+                      height: 150,
+                      child: FutureBuilder<List<Web_Article>>(
+                        future: fetchLatestNews(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Center(
+                                child: CircularProgressIndicator(
+                              color: kBlueRibbon,
+                            ));
+                          } else if (snapshot.hasError) {
+                            return Center(
+                                child: Text('Error: ${snapshot.error}'));
+                          } else if (!snapshot.hasData ||
+                              snapshot.data!.isEmpty) {
+                            return Center(child: Text('No articles found.'));
+                          } else {
+                            List<Web_Article> articles = snapshot.data!;
+                            return ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: articles.length,
+                              itemBuilder: (context, index) {
+                                Web_Article article = articles[index];
+                                return _berita(
                                   _cardBeritaTerbaru(
-                                      Colors.blue,
-                                      Colors.blue.shade300,
-                                      'Pelayaran Muhibah Budaya ...',
-                                      'Kementerian Pendidikan dan Kebudayaan RI',
-                                      '11 Juni',
-                                      'Dilihat 69 kali'), () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => WebViewPage(
-                                            title: 'Kemendikbud',
-                                            selectedUrl:
-                                                'https://www.kemdikbud.go.id/main/blog/2024/06/pelayaran-muhibah-budaya-jalur-rempah-2024-singgah-di-belitung-timur',
-                                            filtering:
-                                                "if (a[i].classList.contains('navbar'))",
-                                            category: "Kemendikbud",
-                                          )),
+                                    Colors.blue,
+                                    Colors.blue.shade300,
+                                    truncateText(article.title, 4, " ..."),
+                                    article.category,
+                                    article.date,
+                                    article
+                                        .date, // Update with actual view count if available
+                                  ),
+                                  () {
+                                    String selectedUrl;
+                                    String filtering;
+
+                                    if (article.category == 'Kemendikbud') {
+                                      selectedUrl = article.link;
+                                      filtering =
+                                          "if (a[i].classList.contains('navbar'))";
+                                    } else if (article.category == 'Kemenkes') {
+                                      selectedUrl = 'https://www.kemkes.go.id' +
+                                          article.link;
+                                      filtering =
+                                          "if (a[i].classList.contains('header-bottom') || a[i].classList.contains('col-md-6') || a[i].classList.contains('col-md-4') || a[i].localName.includes('footer'))";
+                                    } else if (article.category ==
+                                        'Kemenaker') {
+                                      selectedUrl = 'https://kemnaker.go.id' +
+                                          article.link;
+                                      filtering =
+                                          "if (a[i].classList.contains('news-comment') || a[i].classList.contains('news-related') || a[i].localName.includes('navbar') || a[i].localName.includes('footer'))";
+                                    } else {
+                                      selectedUrl = article.link;
+                                      filtering = "";
+                                    }
+
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => WebViewPage(
+                                          title: article.title,
+                                          selectedUrl: selectedUrl,
+                                          filtering: filtering,
+                                          category: article.category,
+                                        ),
+                                      ),
+                                    );
+                                  },
                                 );
-                              }),
-                              _berita(
-                                  _cardBeritaTerbaru(
-                                      Colors.green,
-                                      Colors.green.shade300,
-                                      'Makna Program ADEM Bagi Generasi ...',
-                                      'Kementerian Pendidikan dan Kebudayaan RI',
-                                      '11 Juni',
-                                      'Dilihat 35 kali'), () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => WebViewPage(
-                                            title: 'Kemendikbud',
-                                            selectedUrl:
-                                                'https://www.kemdikbud.go.id/main/blog/2024/06/makna-program-adem-bagi-generasi-muda-yang-berasal-dari-wilayah-pelosok',
-                                            filtering:
-                                                "if (a[i].classList.contains('navbar'))",
-                                            category: "Kemendikbud",
-                                          )),
-                                );
-                              }),
-                              _berita(
-                                  _cardBeritaTerbaru(
-                                      Colors.orange,
-                                      Colors.orange.shade300,
-                                      'Kemendikbudristek dan Universitas Al-Azhar ...',
-                                      'Kementerian Pendidikan dan Kebudayaan RI',
-                                      '11 Juni',
-                                      'Dilihat 72 kali'), () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => WebViewPage(
-                                            title: 'Kemendikbud',
-                                            selectedUrl:
-                                                'https://www.kemdikbud.go.id/main/blog/2024/06/kemendikbudristek-dan-universitas-alazhar-kairo-perluas-jalinan-kerja-sama-bidang-kesehatan',
-                                            filtering:
-                                                "if (a[i].classList.contains('navbar'))",
-                                            category: "Kemendikbud",
-                                          )),
-                                );
-                              }),
-                              _berita(
-                                  _cardBeritaTerbaru(
-                                      Colors.red,
-                                      Colors.red.shade300,
-                                      'Berbudaya Asyik, Bermain Angklung di ...',
-                                      'Kementerian Pendidikan dan Kebudayaan RI',
-                                      '11 Juni',
-                                      'Dilihat 45 kali'), () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => WebViewPage(
-                                            title: 'Kemendikbud',
-                                            selectedUrl:
-                                                'https://www.kemdikbud.go.id/main/blog/2024/06/berbudaya-asyik-bermain-angklung-di-global-gathering-dan-festival-indonesia-week',
-                                            filtering:
-                                                "if (a[i].classList.contains('navbar'))",
-                                            category: "Kemendikbud",
-                                          )),
-                                );
-                              }),
-                              _berita(
-                                  _cardBeritaTerbaru(
-                                      Colors.purple,
-                                      Colors.purple.shade300,
-                                      'Program Magang Budaya Jadi Sarana ...',
-                                      'Kementerian Pendidikan dan Kebudayaan RI',
-                                      '11 Juni',
-                                      'Dilihat 49 kali'), () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => WebViewPage(
-                                            title: 'Kemendikbud',
-                                            selectedUrl:
-                                                'https://www.kemdikbud.go.id/main/blog/2024/06/program-magang-budaya-jadi-sarana-tumbuhkan-kecintaan-akan-indonesia-di-korea-selatan',
-                                            filtering:
-                                                "if (a[i].classList.contains('navbar'))",
-                                            category: "Kemendikbud",
-                                          )),
-                                );
-                              }),
-                            ])),
+                              },
+                            );
+                          }
+                        },
+                      ),
+                    ),
                     SizedBox(
                       height: 25,
                     ),
@@ -361,7 +327,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    date,
+                    truncateWords(date, 0, 1),
                     style: kHeading5.copyWith(
                         color: kWhite, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
@@ -415,10 +381,10 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  String truncateTitle(String title) {
+  String truncateText(String title, int max, String addition) {
     List<String> words = title.split(' ');
     if (words.length > 4) {
-      return '${words.sublist(0, 5).join(' ')} ...';
+      return '${words.sublist(0, max).join(' ')}${addition}';
     } else {
       return title;
     }

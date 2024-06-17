@@ -94,7 +94,7 @@ class SupportPage extends StatelessWidget {
                                         Align(
                                           alignment: Alignment.topCenter,
                                           child: Text(
-                                            'Menu Bantuan Rakyat Jelata',
+                                            'Menu Bantuan Rakyat',
                                             style: TextStyle(
                                               fontSize: 20,
                                               fontWeight: FontWeight.bold,
