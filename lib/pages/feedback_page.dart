@@ -22,7 +22,7 @@ class FeedbackPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
-                  color: Color.fromRGBO(150, 241, 222, 0.231),
+                  color: Color.fromRGBO(74, 233, 198, 0.224),
                   blurRadius: 5,
                   offset: Offset(0, 3),
                 ),
@@ -62,11 +62,11 @@ class FeedbackPage extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
             padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: Color.fromRGBO(199, 174, 237, 0.224),
+              color: Color.fromRGBO(63, 184, 158, 0.227),
               borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
-                  color: Color.fromRGBO(150, 241, 222, 0.231),
+                  color: Color.fromRGBO(74, 233, 198, 0.224),
                   offset: Offset(40, 30),
                   blurRadius: 70,
                 ),
@@ -92,7 +92,10 @@ class FeedbackPage extends StatelessWidget {
                     filled: true,
                     fillColor: kGrey.withOpacity(0.1),
                     hintText: 'Tulis kritik dan saran Anda di sini...',
-                    hintStyle: kSubtitlemid2.copyWith(color: kGrey),
+                    hintStyle: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                    ),
                     border: OutlineInputBorder(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(10),
@@ -112,7 +115,7 @@ class FeedbackPage extends StatelessWidget {
                 _submitFeedback(context);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: kWhite,
+                backgroundColor: kBgColor,
                 padding: EdgeInsets.symmetric(vertical: 15),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -123,6 +126,8 @@ class FeedbackPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
+                  color: const Color.fromARGB(
+                      255, 58, 178, 234), // Change text color to light blue
                 ),
               ),
             ),
