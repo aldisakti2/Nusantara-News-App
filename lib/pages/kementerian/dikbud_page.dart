@@ -14,7 +14,7 @@ class KemendikbudPage extends StatelessWidget {
         appBar: AppBar(
           title: Text(
             'Kemendikbud News',
-            style: kHeading6.copyWith(color: kBlack),
+            style: kHeading6.copyWith(color: kDarkBlue),
           ),
           leading: BackButton(
             color: kBlack,

@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                             Text(
                               'Nusantara News ',
                               style: kHeading6.copyWith(
-                                color: kBlack,
+                                color: kDarkBlue,
                               ),
                             ),
                           ],

@@ -13,7 +13,7 @@ class KemenakerPage extends StatelessWidget {
         appBar: AppBar(
           title: Text(
             'Kemenaker News',
-            style: kHeading6.copyWith(color: kBlack),
+            style: kHeading6.copyWith(color: kDarkBlue),
           ),
           leading: BackButton(
             color: kBlack,

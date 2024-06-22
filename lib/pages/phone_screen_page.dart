@@ -1,6 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:nusantara_news_app/pages/home_page.dart';
+import 'package:nusantara_news_app/styles/colors.dart';
 
 class PhoneAuthScreen extends StatefulWidget {
   @override
@@ -36,9 +37,10 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
         print(e.message);
       },
       codeSent: (String verificationId, int? resendToken) {
-        otpVisibility = true;
-        verificationID = verificationId;
-        setState(() {});
+        setState(() {
+          otpVisibility = true;
+          verificationID = verificationId;
+        });
       },
       codeAutoRetrievalTimeout: (String verificationId) {},
     );
@@ -84,28 +86,46 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
           children: [
             TextField(
               controller: _phoneController,
+              cursorColor: kBlueRibbon,
               decoration: InputDecoration(
                 hintText: 'Masukkan nomor telepon anda',
-                prefix: Padding(padding: EdgeInsets.all(4), child: Text('+62')),
+                prefix: Padding(
+                  padding: EdgeInsets.all(4),
+                  child: Text('+62'),
+                ),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.grey[300]!,
+                  ),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                    color: kBlueRibbon,
+                    width: 2.0,
+                  ),
+                ),
               ),
               keyboardType: TextInputType.phone,
             ),
             Visibility(
+              visible: otpVisibility,
               child: TextField(
                 controller: _otpController,
                 decoration: InputDecoration(
                   hintText: 'OTP',
-                  prefix: Padding(padding: EdgeInsets.all(4), child: Text('')),
+                  prefix: Padding(
+                    padding: EdgeInsets.all(4),
+                    child: Text(''),
+                  ),
                 ),
                 keyboardType: TextInputType.number,
               ),
-              visible: otpVisibility,
             ),
             SizedBox(
               height: 10,
             ),
             MaterialButton(
-              color: const Color(0xff3D4DE0),
+              color: kDarkBlue,
               onPressed: () {
                 if (otpVisibility) {
                   verifyOTP();
@@ -113,8 +133,10 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                   loginWithPhone();
                 }
               },
-              child: Text(otpVisibility ? "Verify" : "Login",
-                  style: TextStyle(color: Colors.white, fontSize: 20)),
+              child: Text(
+                otpVisibility ? "Verify" : "Login",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
             ),
           ],
         ),
