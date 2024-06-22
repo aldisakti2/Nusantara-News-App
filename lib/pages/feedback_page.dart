@@ -22,7 +22,7 @@ class FeedbackPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
-                  color: Color.fromRGBO(200, 173, 244, 0.224),
+                  color: Color.fromRGBO(150, 241, 222, 0.231),
                   blurRadius: 5,
                   offset: Offset(0, 3),
                 ),
@@ -32,24 +32,26 @@ class FeedbackPage extends StatelessWidget {
               children: [
                 Text(
                   'Kritik dan Saran',
-                  style: kHeading6.copyWith(
-                    color: kBlack,
-                    fontWeight: FontWeight.w600,
+                  style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 SizedBox(height: 20),
                 Text(
-                  'Form ini digunakan untuk menampung semua kritik dan saran dari Anda.',
-                  style: kSubtitlemid2.copyWith(
-                    color: kBlack,
+                  'Form ini digunakan untuk menampung semua kritik dan saran dari anda.',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
                   ),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 10),
                 Text(
                   'Form akan diterima oleh admin dan selalu di tampung kritik dan sarannya.',
-                  style: kSubtitlemid2.copyWith(
-                    color: kBlack,
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -60,11 +62,11 @@ class FeedbackPage extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
             padding: EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: Color.fromRGBO(77, 140, 248, 0.235),
+              color: Color.fromRGBO(199, 174, 237, 0.224),
               borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
-                  color: Color.fromRGBO(165, 10, 10, 0.239),
+                  color: Color.fromRGBO(150, 241, 222, 0.231),
                   offset: Offset(40, 30),
                   blurRadius: 70,
                 ),
@@ -75,7 +77,10 @@ class FeedbackPage extends StatelessWidget {
               children: [
                 Text(
                   'Ada Kritik dan Saran? Yuk Tuliskan',
-                  style: kHeading6.copyWith(color: kBlack),
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 10),
@@ -107,7 +112,7 @@ class FeedbackPage extends StatelessWidget {
                 _submitFeedback(context);
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color.fromRGBO(255, 255, 255, 1),
+                backgroundColor: kWhite,
                 padding: EdgeInsets.symmetric(vertical: 15),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
@@ -115,7 +120,10 @@ class FeedbackPage extends StatelessWidget {
               ),
               child: Text(
                 'Kirim',
-                style: kSubtitle1.copyWith(color: kBlack),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
