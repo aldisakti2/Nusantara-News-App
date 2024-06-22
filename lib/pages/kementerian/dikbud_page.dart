@@ -30,15 +30,8 @@ class KemendikbudPage extends StatelessWidget {
               child: Stack(
                 children: [
                   ArticleListWidget(
-                    futureArticles: fetchData(
-                        'https://www.kemdikbud.go.id/main/blog',
-                        'strong a',
-                        'small span',
-                        'strong a',
-                        'Kemendikbud'),
-                    filterTag: "if (a[i].classList.contains('navbar'))",
-                    optionalWeb: "",
-                  ),
+                      futureArticles: fetchNewsFromCollection('Kemendikbud'),
+                      filterTag: "if (a[i].classList.contains('navbar'))"),
                 ],
               ),
             ),

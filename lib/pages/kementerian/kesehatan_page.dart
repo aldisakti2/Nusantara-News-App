@@ -30,15 +30,9 @@ class KemenkesPage extends StatelessWidget {
               child: Stack(
                 children: [
                   ArticleListWidget(
-                    futureArticles: fetchData(
-                        'https://www.kemkes.go.id/id/category/artikel-kesehatan',
-                        'div h4',
-                        'time em',
-                        'a.link',
-                        'Kemenkes'),
+                    futureArticles: fetchNewsFromCollection('Kemenkes'),
                     filterTag:
                         "if (a[i].classList.contains('header-bottom') || a[i].classList.contains('col-md-6') || a[i].classList.contains('col-md-4') || a[i].localName.includes('footer'))",
-                    optionalWeb: "https://www.kemkes.go.id",
                   ),
                 ],
               ),

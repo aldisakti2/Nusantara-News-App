@@ -29,15 +29,9 @@ class KemenakerPage extends StatelessWidget {
               child: Stack(
                 children: [
                   ArticleListWidget(
-                    futureArticles: fetchData(
-                        'https://kemnaker.go.id/news/latest/all',
-                        'div h5',
-                        'div.news-date',
-                        'a[href ^= "/news/detail"]',
-                        'Kemenaker'),
+                    futureArticles: fetchNewsFromCollection('Kemenaker'),
                     filterTag:
                         "if (a[i].classList.contains('news-comment') || a[i].classList.contains('news-related') || a[i].localName.includes('navbar') || a[i].localName.includes('footer'))",
-                    optionalWeb: "https://kemnaker.go.id",
                   ),
                 ],
               ),

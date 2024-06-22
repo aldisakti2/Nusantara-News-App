@@ -77,10 +77,16 @@ Future<List<Web_Article>> fetchData(
         var date = dateElements.isNotEmpty && i < dateElements.length
             ? dateElements[i].text.trim()
             : 'No date found';
-        final link = linkElements[i].attributes['href'] ?? '';
+        var link = linkElements[i].attributes['href'] ?? '';
 
         if (category == "Kemenaker") {
+          link = "https://kemnaker.go.id" + link;
           date = truncateWords(date, 1, 3);
+        } else if (category == "Kemenkes") {
+          link = "https://www.kemkes.go.id" + link;
+          date = truncateWords(date, 0, 2);
+          DateTime parsedDate = DateFormat('dd MMM yyyy', 'en_US').parse(date);
+          date = DateFormat('d MMMM yyyy', 'id_ID').format(parsedDate);
         } else {
           date = truncateWords(date, 0, 2);
         }
@@ -88,6 +94,8 @@ Future<List<Web_Article>> fetchData(
         articles.add(Web_Article(
             title: title, date: date, link: link, category: category));
       }
+
+      saveArticles(articles); // Save articles to Firestore
 
       return articles;
     } else {
@@ -107,15 +115,47 @@ Future<List<Web_Article>> fetchNewsFromCollection(String collection) async {
       .toList();
 }
 
+Future<void> fetchAllNews() async {
+  List<Web_Article> news = [];
+
+  List<Web_Article> kemendikbud = await fetchData(
+      'https://www.kemdikbud.go.id/main/blog',
+      'strong a',
+      'small span',
+      'strong a',
+      'Kemendikbud');
+
+  List<Web_Article> kemenkes = await fetchData(
+      'https://www.kemkes.go.id/id/category/artikel-kesehatan',
+      'div h4',
+      'time em',
+      'a.link',
+      'Kemenkes');
+
+  List<Web_Article> kemenaker = await fetchData(
+      'https://kemnaker.go.id/news/latest/all',
+      'div h5',
+      'div.news-date',
+      'a[href^="/news/detail"]',
+      'Kemenaker');
+
+  news.addAll(kemendikbud);
+  news.addAll(kemenkes);
+  news.addAll(kemenaker);
+
+  sortingNewestNews(news);
+}
+
 Future<List<Web_Article>> fetchLatestNews() async {
   List<Web_Article> articles = [];
 
   List<Web_Article> kemendikbud = await fetchNewsFromCollection('Kemendikbud');
   List<Web_Article> kemenaker = await fetchNewsFromCollection('Kemenaker');
-  //List<Web_Article> kemenkes = await fetchNewsFromCollection('Kemenkes');
+  List<Web_Article> kemenkes = await fetchNewsFromCollection('Kemenkes');
 
   articles.addAll(kemendikbud);
   articles.addAll(kemenaker);
+  articles.addAll(kemenkes);
 
   sortingNewestNews(articles);
 

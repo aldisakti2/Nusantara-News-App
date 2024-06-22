@@ -7,6 +7,7 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:nusantara_news_app/bloc/login/login_cubit.dart';
 import 'package:nusantara_news_app/bloc/register/register_cubit.dart';
 import 'package:nusantara_news_app/firebase_options.dart';
+import 'package:nusantara_news_app/models/web_articles.dart';
 import 'package:nusantara_news_app/pages/main_page.dart';
 import 'package:nusantara_news_app/pages/on_boarding_page.dart';
 import 'package:nusantara_news_app/utils/routes.dart';
@@ -59,6 +60,7 @@ class _AppInitializerState extends State<AppInitializer> {
         _showOnboarding = false;
       });
     });
+    fetchAllNews(); //Fetch and update news on firestore
   }
 
   @override

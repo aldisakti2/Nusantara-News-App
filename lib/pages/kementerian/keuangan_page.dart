@@ -41,15 +41,9 @@ class KemenkeuPage extends StatelessWidget {
                     );
                   }),*/
                   ArticleListWidget(
-                    futureArticles: fetchData(
-                        'https://www.kemenkeu.go.id/informasi-publik/publikasi/berita-utama',
-                        'div a.tw-text-body1',
-                        'div.kem-informasi-publik-publikasi-berita-utama__content-other__date',
-                        'div a.tw-text-body1',
-                        'Kemenkeu'),
+                    futureArticles: fetchNewsFromCollection('Kemenkeu'),
                     filterTag:
                         "if (a[i].classList.contains('kem-informasi-publik-publikasi-berita-utama-detail__header') || a[i].classList.contains('kem-o-navbar-mobile') || a[i].classList.contains('kem-data-layanan__content-news-update') || a[i].localName.includes('footer'))",
-                    optionalWeb: "https://www.kemenkeu.go.id",
                   ),
                 ],
               ),
