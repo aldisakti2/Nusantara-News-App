@@ -1,9 +1,11 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:nusantara_news_app/styles/colors.dart';
 import 'package:nusantara_news_app/styles/text_style.dart';
+import 'dart:io';
 
 class ReportPage extends StatefulWidget {
   @override
@@ -16,8 +18,10 @@ class _ReportPageState extends State<ReportPage> {
   final TextEditingController _locationController = TextEditingController();
   final TextEditingController _ministryController = TextEditingController();
 
+  File? _image;
+  final picker = ImagePicker();
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  final GoogleSignIn googleSignIn = GoogleSignIn();
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   void _submitReport() async {
@@ -28,35 +32,96 @@ class _ReportPageState extends State<ReportPage> {
       String location = _locationController.text;
       String ministry = _ministryController.text;
 
-      // Add report to Firestore
-      await firestore.collection('reports').add({
-        'userId': user.uid,
-        'title': title,
-        'description': description,
-        'location': location,
-        'ministry': ministry,
-        'timestamp': DateTime.now(),
-      });
+      String? imageUrl;
+      if (title.isEmpty || description.isEmpty || location.isEmpty || ministry.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Please fill in all fields.'),
+          ),
+        );
+        return;
+      }
+      if (_image != null) {
+        imageUrl = await _uploadImage(user.uid);
+        if (imageUrl == null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Failed to upload image. Please try again.'),
+            ),
+          );
+          return;
+        }
+      }
 
-      // Clear text fields after submission
-      _titleController.clear();
-      _descriptionController.clear();
-      _locationController.clear();
-      _ministryController.clear();
+      try {
+        await firestore.collection('reports').add({
+          'userId': user.uid,
+          'title': title,
+          'description': description,
+          'location': location,
+          'ministry': ministry,
+          'timestamp': DateTime.now(),
+          'imageUrl': imageUrl,
+          'isRead': false,
+        });
 
-      // Show success message
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Report submitted successfully!'),
-        ),
-      );
+        _titleController.clear();
+        _descriptionController.clear();
+        _locationController.clear();
+        _ministryController.clear();
+        setState(() {
+          _image = null;
+        });
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Report submitted successfully!'),
+          ),
+        );
+      } catch (e) {
+        print('Error submitting report: $e');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Failed to submit report. Please try again.'),
+          ),
+        );
+      }
     } else {
-      // User is not signed in, handle this case
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Please sign in to submit a report.'),
         ),
       );
+    }
+  }
+
+  Future<void> _getImage() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+      });
+    }
+  }
+
+  Future<String?> _uploadImage(String userId) async {
+    try {
+      FirebaseStorage storage = FirebaseStorage.instance;
+      Reference ref = storage.ref().child('reports/$userId/${DateTime.now().millisecondsSinceEpoch}.jpg');
+      UploadTask uploadTask = ref.putFile(_image!);
+      TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() => null);
+      String imageUrl = await taskSnapshot.ref.getDownloadURL();
+      print('Image uploaded successfully: $imageUrl');  // Add logging
+      return imageUrl;
+    } catch (e) {
+      print('Error uploading image: $e');  // Improved error logging
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error uploading image: $e'),
+        ),
+      );
+      return null;
     }
   }
 
@@ -67,7 +132,7 @@ class _ReportPageState extends State<ReportPage> {
         child: SingleChildScrollView(
           child: Container(
             width: 375,
-            height: 1000,
+            height: 1100,
             decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
@@ -108,7 +173,7 @@ class _ReportPageState extends State<ReportPage> {
                       children: <Widget>[
                         Container(
                           width: 319,
-                          height: 800,
+                          height: 1100,
                           child: Stack(
                             children: <Widget>[
                               Positioned(
@@ -301,13 +366,35 @@ class _ReportPageState extends State<ReportPage> {
                                 ),
                               ),
                               Positioned(
-                                top: 700, // Adjust the top value as needed
+                                top: 640,
                                 left: 0,
                                 child: Container(
                                   width: 319,
-                                  height: 40, // Adjust the height as needed
+                                  height: _image == null ? 200 : 200, // Adjusted height based on image presence
+                                  child: GestureDetector(
+                                    onTap: _getImage,
+                                    child: _image == null
+                                        ? Icon(
+                                      Icons.add_a_photo,
+                                      color: Colors.blue,
+                                      size: 200, // Adjust the size of the icon
+                                    )
+                                        : Image.file(_image!, fit: BoxFit.cover),
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                top: 860,
+                                left: 0,
+                                child: Container(
+                                  width: 319,
+                                  height: 40,
                                   child: ElevatedButton(
                                     onPressed: _submitReport,
+                                    style: ButtonStyle(
+                                      backgroundColor: MaterialStateProperty.resolveWith((states) => Colors.lightBlue),
+                                      foregroundColor: MaterialStateProperty.resolveWith((states) => Colors.white),
+                                    ),
                                     child: Text('Submit Report'),
                                   ),
                                 ),

@@ -146,7 +146,7 @@ class SupportPage extends StatelessWidget {
                                 left: 0,
                                 child: InkWell(
                                   onTap: () {
-                                    Navigator.pushNamed(context, '/chat');
+                                    Navigator.pushNamed(context, '/viewreport');
                                     print("Button tapped");
                                   },
                                   child: Container(
@@ -186,7 +186,7 @@ class SupportPage extends StatelessWidget {
                                 left: 0,
                                 child: InkWell(
                                   onTap: () {
-                                    Navigator.pushNamed(context, '/chat');
+                                    Navigator.pushNamed(context, '/tos');
                                     print("Button tapped");
                                   },
                                   child: Container(
@@ -215,7 +215,7 @@ class SupportPage extends StatelessWidget {
                                     ),
                                     child: Center(
                                       child: Text(
-                                        'Tentang Aplikasi',
+                                        'Terms & Service',
                                         style: TextStyle(
                                           color: Colors.black,
                                           fontWeight: FontWeight.bold,
