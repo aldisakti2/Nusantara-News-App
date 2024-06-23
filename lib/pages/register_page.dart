@@ -25,7 +25,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         title: Text(
           'Nusantara News',
           style: kHeading6.copyWith(
-            color: kBlack,
+            color: kDarkBlue,
           ),
         ),
       ),
@@ -120,7 +120,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           email: emailEdc.text, password: passEdc.text);
                     },
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xff3D4DE0),
+                        backgroundColor: kBlueRibbon,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10))),
                     child: const Text(
@@ -144,8 +144,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         child: const Text(
                           "Login",
                           style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xff3D4DE0)),
+                              fontWeight: FontWeight.bold, color: kBlueRibbon),
                         ))
                   ],
                 )

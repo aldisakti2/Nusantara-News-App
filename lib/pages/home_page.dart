@@ -51,7 +51,7 @@ class _HomePageState extends State<HomePage> {
                             Text(
                               'Nusantara News ',
                               style: kHeading6.copyWith(
-                                color: kBlack,
+                                color: kDarkBlue,
                               ),
                             ),
                           ],
@@ -219,36 +219,18 @@ class _HomePageState extends State<HomePage> {
                       height: 5,
                     ),
                     ArticleListWidget(
-                      futureArticles: fetchData(
-                          'https://kemnaker.go.id/news/latest/all',
-                          'div h5',
-                          'div.news-date',
-                          'a[href ^= "/news/detail"]',
-                          'Kemenaker'),
+                      futureArticles: fetchNewsFromCollection('Kemenaker'),
                       filterTag:
                           "if (a[i].classList.contains('news-comment') || a[i].classList.contains('news-related') || a[i].localName.includes('navbar') || a[i].localName.includes('footer'))",
-                      optionalWeb: "https://kemnaker.go.id",
                     ),
                     ArticleListWidget(
-                      futureArticles: fetchData(
-                          'https://www.kemdikbud.go.id/main/blog',
-                          'strong a',
-                          'small span',
-                          'strong a',
-                          'Kemendikbud'),
+                      futureArticles: fetchNewsFromCollection('Kemendikbud'),
                       filterTag: "if (a[i].classList.contains('navbar'))",
-                      optionalWeb: "",
                     ),
                     ArticleListWidget(
-                      futureArticles: fetchData(
-                          'https://www.kemkes.go.id/id/category/artikel-kesehatan',
-                          'div h4',
-                          'time em',
-                          'a.link',
-                          'Kemenkes'),
+                      futureArticles: fetchNewsFromCollection('Kemenkes'),
                       filterTag:
                           "if (a[i].classList.contains('header-bottom') || a[i].classList.contains('col-md-6') || a[i].classList.contains('col-md-4') || a[i].localName.includes('footer'))",
-                      optionalWeb: "https://www.kemkes.go.id",
                     ),
                   ],
                 ),

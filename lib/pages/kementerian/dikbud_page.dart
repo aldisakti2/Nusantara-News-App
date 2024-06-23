@@ -14,7 +14,7 @@ class KemendikbudPage extends StatelessWidget {
         appBar: AppBar(
           title: Text(
             'Kemendikbud News',
-            style: kHeading6.copyWith(color: kBlack),
+            style: kHeading6.copyWith(color: kDarkBlue),
           ),
           leading: BackButton(
             color: kBlack,
@@ -30,15 +30,8 @@ class KemendikbudPage extends StatelessWidget {
               child: Stack(
                 children: [
                   ArticleListWidget(
-                    futureArticles: fetchData(
-                        'https://www.kemdikbud.go.id/main/blog',
-                        'strong a',
-                        'small span',
-                        'strong a',
-                        'Kemendikbud'),
-                    filterTag: "if (a[i].classList.contains('navbar'))",
-                    optionalWeb: "",
-                  ),
+                      futureArticles: fetchNewsFromCollection('Kemendikbud'),
+                      filterTag: "if (a[i].classList.contains('navbar'))"),
                 ],
               ),
             ),

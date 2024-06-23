@@ -29,7 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
         title: Text(
           'Nusantara News',
           style: kHeading6.copyWith(
-            color: kBlack,
+            color: kDarkBlue,
           ),
         ),
       ),
@@ -60,7 +60,8 @@ class _LoginScreenState extends State<LoginScreen> {
         },
         child: Center(
           child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 30), // Removed vertical margin
+            margin: const EdgeInsets.symmetric(
+                horizontal: 30), // Removed vertical margin
             child: ListView(
               shrinkWrap: true,
               padding: EdgeInsets.zero, // Removed padding
@@ -125,7 +126,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         .login(email: emailEdc.text, password: passEdc.text);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xff3D4DE0),
+                    backgroundColor: kBlueRibbon,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -149,9 +150,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       onTap: () async {
                         try {
                           final userController =
-                          UserController(context.read<LoginCubit>());
-                          final user =
-                          await userController.loginWithGoogle();
+                              UserController(context.read<LoginCubit>());
+                          final user = await userController.loginWithGoogle();
                           if (user != null && mounted) {
                             Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
@@ -220,7 +220,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         "Daftar",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Color(0xff3D4DE0),
+                          color: kBlueRibbon,
                         ),
                       ),
                     ),

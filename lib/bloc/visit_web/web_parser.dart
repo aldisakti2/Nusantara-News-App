@@ -6,13 +6,11 @@ import 'package:nusantara_news_app/styles/colors.dart';
 class ArticleListWidget extends StatelessWidget {
   final Future<List<Web_Article>> futureArticles;
   final String filterTag;
-  final String optionalWeb;
 
   const ArticleListWidget({
     super.key,
     required this.futureArticles,
     required this.filterTag,
-    required this.optionalWeb,
   });
 
   @override
@@ -31,7 +29,7 @@ class ArticleListWidget extends StatelessWidget {
           return const Center(child: Text('No articles found.'));
         } else {
           List<Web_Article> articles = snapshot.data!;
-          saveArticles(articles); // Save articles to Firestore
+          sortingNewestNews(articles);
           return Column(
             children: [
               for (var article in articles)
@@ -42,7 +40,7 @@ class ArticleListWidget extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (context) => WebViewPage(
                           title: article.title,
-                          selectedUrl: optionalWeb + article.link,
+                          selectedUrl: article.link,
                           filtering: filterTag,
                           category: article.category,
                         ),

@@ -60,7 +60,7 @@ class _CommentScreenSection extends State<CommentSection> {
       appBar: AppBar(
         leading: BackButton(),
         title: Text('News Comment',
-            style: kHeading6.copyWith(color: kBlack),
+            style: kHeading6.copyWith(color: kDarkBlue),
             textAlign: TextAlign.center),
       ),
       body: StreamBuilder<QuerySnapshot>(
@@ -270,6 +270,9 @@ class _CommentScreenSection extends State<CommentSection> {
                               text: getCensoredEmail(loggedInUser!.email!)),
                           readOnly: true,
                           decoration: const InputDecoration(
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: kBlueRibbon, width: 2.0)),
                             hintText: 'Email',
                           ),
                         ),
@@ -278,11 +281,15 @@ class _CommentScreenSection extends State<CommentSection> {
                             height: 300,
                             child: TextFormField(
                                 controller: commentController,
+                                cursorColor: kBlueRibbon,
                                 maxLines: null, // Set this
                                 expands: true, // and this
                                 keyboardType: TextInputType.multiline,
                                 decoration: const InputDecoration(
                                     hintText: 'Write a comment',
+                                    focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: kBlueRibbon, width: 2.0)),
                                     filled: true))),
                         Padding(
                             padding: EdgeInsets.only(

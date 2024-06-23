@@ -12,7 +12,7 @@ class KemenkeuPage extends StatelessWidget {
         appBar: AppBar(
           title: Text(
             'Kemenkeu News',
-            style: kHeading6.copyWith(color: kBlack),
+            style: kHeading6.copyWith(color: kDarkBlue),
           ),
           leading: BackButton(
             color: kBlack,
@@ -25,31 +25,10 @@ class KemenkeuPage extends StatelessWidget {
               margin: EdgeInsets.only(top: 20, left: 30, right: 30),
               child: Stack(
                 children: [
-                  /*
-                  _berita(
-                      'Perlambatan Pertumbuhan Ekonomi Global, Menkeu Waspadai Perlambatan Penerimaan Negara',
-                      '', () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => WebViewPage(
-                              title: 'Kemenkeu',
-                              selectedUrl:
-                                  'https://www.kemenkeu.go.id/informasi-publik/publikasi/berita-utama/Menkeu-Waspadai-Perlambatan-Penerimaan-Negara',
-                              filtering:
-                                  "if (a[i].classList.contains('kem-informasi-publik-publikasi-berita-utama-detail__header') || a[i].classList.contains('kem-o-navbar-mobile') || a[i].classList.contains('kem-data-layanan__content-news-update') || a[i].localName.includes('footer'))")),
-                    );
-                  }),*/
                   ArticleListWidget(
-                    futureArticles: fetchData(
-                        'https://www.kemenkeu.go.id/informasi-publik/publikasi/berita-utama',
-                        'div a.tw-text-body1',
-                        'div.kem-informasi-publik-publikasi-berita-utama__content-other__date',
-                        'div a.tw-text-body1',
-                        'Kemenkeu'),
+                    futureArticles: fetchNewsFromCollection('Kemenkeu'),
                     filterTag:
                         "if (a[i].classList.contains('kem-informasi-publik-publikasi-berita-utama-detail__header') || a[i].classList.contains('kem-o-navbar-mobile') || a[i].classList.contains('kem-data-layanan__content-news-update') || a[i].localName.includes('footer'))",
-                    optionalWeb: "https://www.kemenkeu.go.id",
                   ),
                 ],
               ),
