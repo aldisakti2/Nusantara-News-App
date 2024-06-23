@@ -1,20 +1,18 @@
-<<<<<<< HEAD
 # UAS_PPB_PWTech
-=======
+
 # nusantara_news_app
 
-A new Flutter project.
+Selamat Datang di Repository Project Nusantara News APP.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Project ini bertujuan untuk menyediakan akses layanan aplikasi pemberitaan semua kementerian Republik Indonesia dalam satu platform aplikasi.
 
-A few resources to get you started if this is your first Flutter project:
+Aplikasi ini menyediakan berbagai fitur sebagai berikut:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
->>>>>>> master
+- Real Time Pembaruan Berita
+- Fitur Komentar Berita antar User
+- Akses Berita Kementerian RI (sampel 3 Kementerian)
+- Form Pengaduan untuk melaporkan pelanggaran hukum ke Pemerintah
+- Kritik dan Saran terkait performa serta layanan pada aplikasi
+- Account Access (Email/Password, Google, Telephone) dan Register User
